@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.3.0
+Version: 1.3.1
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -32,7 +32,7 @@ background:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" wid
 
 /* Link-style buttons: red arrow, sliding on hover */
 .rcr-more .elementor-button-icon{color:var(--rcr-red);fill:var(--rcr-red);transition:transform .25s ease}
-.rcr-more .elementor-button-icon svg{fill:var(--rcr-red);width:.85em;height:.85em}
+.rcr-more .elementor-button-icon svg{width:.62em;height:auto;position:relative;top:.12em}
 .rcr-more-light .elementor-button-icon,.rcr-more-light .elementor-button-icon svg{color:#FF8A8D;fill:#FF8A8D}
 .rcr-more .elementor-button:hover .elementor-button-icon{transform:translateX(4px)}
 
