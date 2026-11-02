@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.2.0
+Version: 1.3.0
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -105,8 +105,9 @@ background:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" wid
 .rcr-cert-card:hover .e-con.rcr-ring::after{transform:rotate(120deg)}
 .rcr-ring-core{position:relative;z-index:1}
 @media (max-width:767px){
-.rcr-cert::before{background-image:linear-gradient(180deg,rgba(245,247,251,0) 0,rgba(245,247,251,0) 150px,#F5F7FB 250px)!important}
-.rcr-cert{padding-top:240px!important;background-size:auto 360px!important;background-position:center top!important}
+.rcr-cert{padding-top:240px!important}
+.rcr-cert-photo{width:100%!important;min-height:0!important;height:330px}
+.rcr-cert-photo::before{background-image:linear-gradient(180deg,rgba(245,247,251,0) 0,rgba(245,247,251,0) 45%,#F5F7FB 100%)!important}
 }
 
 /* 09 Blog: soft crosses */
@@ -118,13 +119,18 @@ url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"%3E%3Cpath d="M3.6 0H6.4V3.6H10V6.4H6.4V10H3.6V6.4H0V3.6H3.6Z" fill="%23CFE2F6"/%3E%3C/svg%3E') no-repeat 94% calc(100% - 90px)/34px,url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"%3E%3Cpath d="M3.6 0H6.4V3.6H10V6.4H6.4V10H3.6V6.4H0V3.6H3.6Z" fill="%23CFE2F6"/%3E%3C/svg%3E') no-repeat 88% calc(100% - 150px)/20px,url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"%3E%3Cpath d="M3.6 0H6.4V3.6H10V6.4H6.4V10H3.6V6.4H0V3.6H3.6Z" fill="%23CFE2F6"/%3E%3C/svg%3E') no-repeat 82% calc(100% - 60px)/24px,
 url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"%3E%3Cpath d="M3.6 0H6.4V3.6H10V6.4H6.4V10H3.6V6.4H0V3.6H3.6Z" fill="%23CFE2F6"/%3E%3C/svg%3E') no-repeat 97% 38%/28px,url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"%3E%3Cpath d="M3.6 0H6.4V3.6H10V6.4H6.4V10H3.6V6.4H0V3.6H3.6Z" fill="%23CFE2F6"/%3E%3C/svg%3E') no-repeat 91% 46%/16px,url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"%3E%3Cpath d="M3.6 0H6.4V3.6H10V6.4H6.4V10H3.6V6.4H0V3.6H3.6Z" fill="%23CFE2F6"/%3E%3C/svg%3E') no-repeat 3% 30%/18px}
 
+/* Photo layers (hero, quote) */
+.rcr-hero-photo,.rcr-cert-photo,.rcr-quote-photo{pointer-events:none}
+
 /* Hero / quote overlays: stronger wash on tablets and phones so text stays readable over the photo */
 @media (min-width:768px) and (max-width:1024px){
-.rcr-hero::before{background-image:linear-gradient(90deg,rgba(234,241,250,.97) 0%,rgba(234,241,250,.9) 55%,rgba(234,241,250,.25) 100%)!important}
+.rcr-hero-photo{width:100%!important}
+.rcr-hero-photo::before{background-image:linear-gradient(90deg,rgba(234,241,250,.97) 0%,rgba(234,241,250,.9) 55%,rgba(234,241,250,.25) 100%)!important}
 .rcr-quote::before{background-image:linear-gradient(90deg,rgba(234,241,250,.97) 0%,rgba(234,241,250,.92) 62%,rgba(234,241,250,.3) 100%)!important}
 }
 @media (max-width:767px){
-.rcr-hero::before{background-image:linear-gradient(180deg,rgba(234,241,250,.94) 0%,rgba(234,241,250,.86) 60%,rgba(234,241,250,.6) 100%)!important}
+.rcr-hero-photo{width:100%!important}
+.rcr-hero-photo::before{background-image:linear-gradient(180deg,rgba(234,241,250,.94) 0%,rgba(234,241,250,.86) 60%,rgba(234,241,250,.6) 100%)!important}
 .rcr-quote::before{background-image:linear-gradient(180deg,rgba(234,241,250,.95) 0%,rgba(234,241,250,.9) 100%)!important}
 .e-con.rcr-hero::after{width:200px;height:144px}
 .rcr-trainer::before,.e-con.rcr-trainer::after{width:240px;height:198px}
