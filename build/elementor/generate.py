@@ -752,7 +752,7 @@ def footer():
                      _element_width_mobile="inherit"),
                 button("Request a quote", BOOK, external=True, size=14, pad=(14, 22), radius=6, tt="none",
                        shadow_on=False, _margin=dims(10, 0, 0, 0)),
-            ], flex_gap=gap(20)),
+            ], flex_gap=gap(20), grid_column_tablet="custom", grid_column_custom_tablet="1 / -1"),
             con([col_head("Navigation"), links([
                 ("About us", "/#about", ""), ("Services", "/#courses", ""), ("Team", "/#team", ""),
                 ("Blog", "/#blog", ""), ("FAQ", "#", ""), ("Contact", "/#quote", "")])], flex_gap=gap(14)),
@@ -765,8 +765,9 @@ def footer():
                 ("(450) 693-0702", "", "footer-fax"),
                 ("rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com", "footer-email")], icons=True)],
                 flex_gap=gap(14)),
-        ], "minmax(200px,1.4fr) minmax(110px,.7fr) minmax(170px,1fr) minmax(200px,1fr)", cols_t="1fr 1fr",
-            g=28, row_g=40, width=px(100, "%")),
+        ], "minmax(200px,1.4fr) minmax(110px,.7fr) minmax(170px,1fr) minmax(200px,1fr)",
+            cols_t="minmax(0,.8fr) minmax(0,1.2fr) minmax(0,1.1fr)", g=28, row_g=40, width=px(100, "%"),
+            grid_gaps_tablet=gaps(24, 40)),
     ], padding=dims(80, 32, 48, 32), padding_mobile=dims(60, 20, 36, 20),
         background_background="classic", background_color=DEEP, css_classes="rcr-footer")
 
