@@ -646,18 +646,22 @@ def header():
         con([
             image("logo", width_pct=100, link="/", alt="RCR Rive-Sud", _element_width="initial",
                   _element_custom_width=px(76), _element_custom_width_mobile=px(54)),
-            heading("RCR Rive-Sud", "div", 24, NAVY, "800", MONT, lh=1, size_m=20, link="/"),
+            heading("RCR Rive-Sud", "div", 24, NAVY, "800", MONT, lh=1, size_t=20, size_m=20, link="/",
+                    _flex_size="none"),
         ], flex_direction="row", flex_align_items="center", flex_gap=gap(12), width=px(320),
-            width_mobile=px(100, "%")),
+            width_tablet=px(260), width_mobile=px(100, "%")),
         con([
             contact_box("header-phone", "Call us", "(450) 374-7995", "tel:4503747995", hide_m=True),
             contact_box("header-email", "Email us", "rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com",
                         hide_m=True),
         ], flex_direction="row", flex_wrap="wrap", flex_gap=gap(24), flex_align_items="center",
-            width=px(560), width_tablet=px(100, "%"), flex_justify_content="flex-end",
-            flex_justify_content_tablet="flex-start", hide_mobile="hidden-mobile"),
+            width=px(560), width_tablet=px(470), flex_justify_content="flex-end",
+            flex_justify_content_tablet="flex-end",
+            flex_gap_tablet={"column": "16", "row": "10", "isLinked": False, "unit": "px", "size": 16},
+            hide_mobile="hidden-mobile"),
     ], flex_direction="row", flex_justify_content="space-between", flex_align_items="center",
-        flex_wrap="wrap", flex_gap=gap(28), padding=dims(22, 32, 22, 32), padding_mobile=dims(16, 20, 16, 20),
+        flex_wrap="wrap", flex_wrap_tablet="nowrap", flex_gap=gap(28), flex_gap_tablet=gap(16),
+        padding=dims(22, 32, 22, 32), padding_mobile=dims(16, 20, 16, 20),
         background_background="classic", background_color="#FFFFFF", css_classes="rcr-header-top")
 
     nav = w("navigation-menu", {
