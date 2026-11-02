@@ -438,7 +438,19 @@ def learn():
 
 
 def quote():
-    return section([
+    iid, url = IMG["group"]
+    # Photo layer: right 58% of the section, full height, cropped 40%/50% with a fade into the sky colour,
+    # matching the reference (<img> absolutely positioned, width 58%, object-position 40% 50%).
+    photo = con([], position="absolute", _offset_orientation_h="end", _offset_x_end=px(0),
+                _offset_orientation_v="start", _offset_y=px(0), width=px(58, "%"), width_tablet=px(45, "%"),
+                min_height={"unit": "custom", "size": "100%", "sizes": []}, z_index=0,
+                background_background="classic",
+                background_image={"url": url, "id": iid, "size": "", "alt": "", "source": "library"},
+                background_position="initial", background_xpos=px(40, "%"), background_ypos=px(50, "%"),
+                background_repeat="no-repeat", background_size="cover",
+                **overlay_gradient(SKY, 3, "rgba(234,241,250,0)", 62),
+                hide_mobile="hidden-mobile", css_classes="rcr-quote-photo")
+    return section([photo, 
         con([
             h2("Request your quote"),
             text("For your business, your facility or a private group, contact us to check availability and get a "
@@ -446,11 +458,9 @@ def quote():
             # Free Elementor has no form widget: Contact Form 7 provides the working form.
             w("shortcode", {"shortcode": '[contact-form-7 id="14" title="Request a quote" html_class="rcr-form"]',
                             "_margin": dims(14, 0, 0, 0)}),
-        ], flex_gap=gap(20), width=px(520), width_mobile=px(100, "%"), **anim("fadeInUp", 0, True)),
+        ], flex_gap=gap(20), width=px(520), width_mobile=px(100, "%"), z_index=1, **anim("fadeInUp", 0, True)),
     ], _element_id="quote", padding=dims(100, 32, 110, 32), padding_mobile=dims(70, 20, 80, 20),
-        background_background="classic", background_color=SKY,
-        **bg_image("group", "center right"),
-        **overlay_gradient(SKY, 44, "rgba(234,241,250,0)", 78),
+        background_background="classic", background_color=SKY, overflow="hidden",
         css_classes="rcr-quote", html_tag="section")
 
 
