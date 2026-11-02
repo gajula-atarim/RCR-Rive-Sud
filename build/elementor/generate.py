@@ -186,7 +186,7 @@ def more(label="Read more", url="#", light=False, external=False, **extra):
     s = {
         "text": label,
         "link": {"url": url, "is_external": "on" if external else "", "nofollow": ""},
-        "selected_icon": {"value": "fas fa-arrow-right", "library": "fa-solid"},
+        "selected_icon": svg_icon("arrow-pink" if light else "arrow-red"),
         "icon_align": "row-reverse",
         "icon_indent": px(8),
         "background_color": "rgba(0,0,0,0)",
@@ -230,6 +230,7 @@ SVG = {  # custom icons from the design, uploaded via Safe SVG (attachment id, f
     "feature-on-site": 46, "feature-groups": 47, "feature-quote": 48, "course-heartsaver-a": 49,
     "course-heartsaver-c": 50, "course-bls": 51, "cert-heartsaver": 52, "cert-bls": 53,
     "header-phone": 44, "header-email": 45, "footer-phone": 54, "footer-fax": 55, "footer-email": 56,
+    "arrow-red": 68, "arrow-pink": 69,
 }
 
 
