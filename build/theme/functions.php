@@ -18,3 +18,15 @@ add_action( 'wp_enqueue_scripts', function () {
 		filemtime( get_stylesheet_directory() . '/style.css' )
 	);
 }, 20 );
+
+/**
+ * Allow SVG uploads on every upload route (including the REST/MCP route Atarim uses) for the
+ * roles enabled in Safe SVG (Settings > Media > Safe SVG > User Roles). Safe SVG still
+ * sanitizes each SVG on upload; without Safe SVG active this filter does nothing.
+ */
+add_filter( 'upload_mimes', function ( $mimes ) {
+	if ( class_exists( '\SafeSvg\Svg_Sanitizer' ) && \SafeSvg\Svg_Sanitizer::current_user_can_upload() ) {
+		$mimes['svg'] = 'image/svg+xml';
+	}
+	return $mimes;
+} );
