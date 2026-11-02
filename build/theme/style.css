@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.5.0
+Version: 1.5.1
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -87,7 +87,9 @@ box-shadow:0 10px 24px rgba(215,25,31,.28);transition:background .25s ease,trans
 .rcr-form .wpcf7-spinner{vertical-align:middle}
 .rcr-form .wpcf7-not-valid-tip{font-size:13px;margin-top:4px}
 .rcr-form .wpcf7-response-output{margin:20px 0 0!important;font-size:14px}
-@media (max-width:767px){.rcr-form .rcr-grid{grid-template-columns:1fr}.rcr-form .rcr-span2{grid-column:auto}}
+@media (max-width:767px){.rcr-form .rcr-grid{grid-template-columns:1fr}.rcr-form .rcr-span2{grid-column:auto}
+/* 16px stops iOS Safari zooming in when a field is tapped */
+.rcr-form input[type=text],.rcr-form input[type=tel],.rcr-form input[type=email],.rcr-form input[type=number],.rcr-form textarea{font-size:16px}}
 
 /* 07 Trainer: hex corners */
 .e-con.rcr-trainer::before{content:"";position:absolute;right:-30px;top:-20px;width:364px;height:300px;pointer-events:none;z-index:1;
