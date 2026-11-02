@@ -326,7 +326,7 @@ def hero():
     ],
         min_height=px(720), min_height_mobile=px(0),
         flex_justify_content="center", flex_align_items="flex-start", flex_gap=gap(24),
-        padding=dims(150, 32, 240, 32), padding_tablet=dims(120, 32, 200, 32), padding_mobile=dims(80, 20, 170, 20),
+        padding=dims(150, 32, 240, 32), padding_tablet=dims(120, 32, 200, 32), padding_mobile=dims(300, 20, 170, 20),
         background_background="classic", background_color=SKY, overflow="hidden",
         css_classes="rcr-hero", html_tag="section",
     )
@@ -357,10 +357,11 @@ def feature_cards():
 
 def about():
     left = grid([
-        image("heimlich", 400, height_m=280, alt="Responding to choking", _margin=dims(80, 0, 0, 0),
-              _margin_mobile=dims(40, 0, 0, 0)),
-        image("cpr", 400, height_m=280, alt="Chest compressions on a CPR manikin"),
+        image("heimlich", 400, height_m=300, alt="Responding to choking", _margin=dims(80, 0, 0, 0),
+              _margin_mobile=dims(30, 0, 0, 0)),
+        image("cpr", 400, height_m=300, alt="Chest compressions on a CPR manikin"),
     ], 2, cols_t=2, cols_m=2, g=22, row_g=22, grid_align_items="start", css_classes="rcr-dots",
+        grid_gaps_mobile={"column": "14", "row": "14", "isLinked": True, "unit": "px"},
         width=px(50, "%"), width_tablet=px(100, "%"), **anim("fadeInLeft", 0, True))
     right = con([
         eyebrow("RCR Rive-Sud"),
@@ -474,7 +475,7 @@ def quote():
                 background_position="initial", background_xpos=px(40, "%"), background_ypos=px(50, "%"),
                 background_repeat="no-repeat", background_size="cover",
                 **overlay_gradient(SKY, 3, "rgba(234,241,250,0)", 62),
-                hide_mobile="hidden-mobile", css_classes="rcr-quote-photo")
+                css_classes="rcr-quote-photo")
     return section([photo, 
         con([
             h2("Request your quote"),
@@ -484,7 +485,7 @@ def quote():
             w("shortcode", {"shortcode": '[contact-form-7 id="14" title="Request a quote" html_class="rcr-form"]',
                             "_margin": dims(14, 0, 0, 0)}),
         ], flex_gap=gap(20), width=px(520), width_mobile=px(100, "%"), z_index=1, **anim("fadeInUp", 0, True)),
-    ], _element_id="quote", padding=dims(100, 32, 110, 32), padding_mobile=dims(70, 20, 80, 20),
+    ], _element_id="quote", padding=dims(100, 32, 110, 32), padding_mobile=dims(250, 20, 80, 20),
         background_background="classic", background_color=SKY, overflow="hidden",
         css_classes="rcr-quote", html_tag="section")
 
