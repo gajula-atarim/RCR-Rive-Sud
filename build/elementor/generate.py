@@ -25,7 +25,7 @@ IMG = {
     "cpr": (10, UP + "rcr-rive-sud-cpr-instructor.webp"),
     "naloxone": (11, UP + "naloxone-overdose-response.webp"),
     "hexband": (12, UP + "hex-band.png"),
-    "logo": (13, UP + "rcr-logo-placeholder.png"),
+    "logo": (32, UP + "rcr-rive-sud-logo.png"),
 }
 
 # Design tokens
@@ -279,6 +279,19 @@ def overlay_gradient(c1, s1, c2, s2, angle=90):
             "background_overlay_gradient_angle": px(angle, "deg"), "background_overlay_opacity": px(1)}
 
 
+
+def photo_layer(key, side, width, xpos, ypos, ov, cls, **extra):
+    """Absolutely positioned photo container (reference: <img> covering part of the section)."""
+    iid, url = IMG[key]
+    pos = {"_offset_orientation_h": "end", "_offset_x_end": px(0)} if side == "right" else \
+        {"_offset_orientation_h": "start", "_offset_x": px(0)}
+    return con([], position="absolute", _offset_orientation_v="start", _offset_y=px(0), width=px(width, "%"),
+               min_height={"unit": "custom", "size": "100%", "sizes": []}, z_index=0,
+               background_background="classic",
+               background_image={"url": url, "id": iid, "size": "", "alt": "", "source": "library"},
+               background_position="initial", background_xpos=px(xpos, "%"), background_ypos=px(ypos, "%"),
+               background_repeat="no-repeat", background_size="cover", css_classes=cls, **pos, **ov, **extra)
+
 SECTION_PAD = {"padding": dims(110, 32, 110, 32), "padding_tablet": dims(90, 32, 90, 32),
                "padding_mobile": dims(70, 20, 70, 20)}
 
@@ -287,6 +300,7 @@ SECTION_PAD = {"padding": dims(110, 32, 110, 32), "padding_tablet": dims(90, 32,
 
 def hero():
     return section([
+        photo_layer("cpr", "right", 68, 70, 30, overlay_gradient(SKY, 3, "rgba(234,241,250,0)", 56), "rcr-hero-photo"),
         eyebrow("Cardiopulmonary resuscitation (CPR) training", **anim("fadeInUp", 0)),
         heading("Learn the right moves. Be ready to save a life.", "h1", 58, INK, "800", MONT, None, 1.1, -1.16,
                 size_t=46, size_m=36, _element_width="initial", _element_custom_width=px(560),
@@ -300,10 +314,8 @@ def hero():
         min_height=px(720), min_height_mobile=px(0),
         flex_justify_content="center", flex_align_items="flex-start", flex_gap=gap(24),
         padding=dims(150, 32, 240, 32), padding_tablet=dims(120, 32, 200, 32), padding_mobile=dims(80, 20, 170, 20),
-        background_background="classic", background_color=SKY,
-        **bg_image("cpr", "center right"),
-        **overlay_gradient(SKY, 34, "rgba(234,241,250,0)", 72),
-        css_classes="rcr-hero rcr-deco", html_tag="section",
+        background_background="classic", background_color=SKY, overflow="hidden",
+        css_classes="rcr-hero", html_tag="section",
     )
 
 
@@ -538,6 +550,8 @@ def certification():
             **anim("fadeInUp", delay, True))
 
     return section([
+        photo_layer("group", "left", 52, 40, 50, overlay_gradient("rgba(245,247,251,0)", 58, PALE, 100),
+                    "rcr-cert-photo"),
         con([
             h2("Certification", **anim("fadeInUp", 0)),
             grid([
@@ -550,9 +564,7 @@ def certification():
         ], flex_gap=gap(28), width=px(65, "%"), width_tablet=px(100, "%")),
     ], flex_direction="row", flex_justify_content="flex-end", padding=dims(100, 32, 100, 32),
         padding_mobile=dims(70, 20, 70, 20), background_background="classic", background_color=PALE,
-        **bg_image("group", "center left"),
-        **overlay_gradient("rgba(245,247,251,0)", 30, PALE, 60),
-        css_classes="rcr-cert", html_tag="section")
+        overflow="hidden", css_classes="rcr-cert", html_tag="section")
 
 
 def blog():
@@ -617,7 +629,7 @@ def header():
     top = section([
         con([
             image("logo", width_pct=100, link="/", alt="RCR Rive-Sud", _element_width="initial",
-                  _element_custom_width=px(64), _element_custom_width_mobile=px(48)),
+                  _element_custom_width=px(76), _element_custom_width_mobile=px(54)),
             heading("RCR Rive-Sud", "div", 24, NAVY, "800", MONT, lh=1, size_m=20, link="/"),
         ], flex_direction="row", flex_align_items="center", flex_gap=gap(12), width=px(320),
             width_mobile=px(100, "%")),
