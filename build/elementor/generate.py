@@ -226,8 +226,20 @@ def image(key, height=None, width_pct=100, radius=None, cls="", height_m=None, l
     return w("image", s)
 
 
+SVG = {  # custom icons from the design, uploaded via Safe SVG (attachment id, file)
+    "feature-on-site": 46, "feature-groups": 47, "feature-quote": 48, "course-heartsaver-a": 49,
+    "course-heartsaver-c": 50, "course-bls": 51, "cert-heartsaver": 52, "cert-bls": 53,
+    "header-phone": 44, "header-email": 45, "footer-phone": 54, "footer-fax": 55, "footer-email": 56,
+}
+
+
+def svg_icon(name):
+    return {"value": {"url": UP + f"rcr-icon-{name}.svg", "id": SVG[name]}, "library": "svg"}
+
+
 def icon(value, color=NAVY, size=34, library="fa-solid", stacked=False, bg=None, pad=None, **extra):
-    s = {"selected_icon": {"value": value, "library": library}, "primary_color": color, "size": px(size),
+    sel = svg_icon(value[4:]) if value.startswith("svg:") else {"value": value, "library": library}
+    s = {"selected_icon": sel, "primary_color": color, "size": px(size),
          "align": "left"}
     if stacked:
         s.update({"view": "stacked", "shape": "circle", "primary_color": bg, "secondary_color": color,
@@ -322,7 +334,7 @@ def hero():
 def feature_cards():
     def fcard(ic, title, body, url, ext, delay, corner=False):
         return card([
-            con([icon(ic, NAVY, 32), heading(title, "h3", 19, INK, "700", MONT, lh=1.3)],
+            con([icon(ic, NAVY, 40), heading(title, "h3", 19, INK, "700", MONT, lh=1.3)],
                 flex_direction="row", flex_align_items="center", flex_gap=gap(16)),
             text(body, 15, MUTED, 1.65, _flex_size="grow"),
             more("Read more", url, external=ext),
@@ -331,11 +343,11 @@ def feature_cards():
 
     return section([
         grid([
-            fcard("fas fa-home", "We come to you", "Private training at your location: offices, healthcare "
+            fcard("svg:feature-on-site", "We come to you", "Private training at your location: offices, healthcare "
                   "facilities, daycares, schools, community organizations or your home.", "#quote", False, 0, True),
-            fcard("fas fa-users", "Groups of 3 to 12", "Small groups encourage active participation, hands-on "
+            fcard("svg:feature-groups", "Groups of 3 to 12", "Small groups encourage active participation, hands-on "
                   "practice and coaching adapted to your group's needs.", "#quote", False, 150),
-            fcard("fas fa-file-alt", "Personalized quote", "Pricing depends on the type of training, the number of "
+            fcard("svg:feature-quote", "Personalized quote", "Pricing depends on the type of training, the number of "
                   "participants, the location and any travel costs.", BOOK, True, 300),
         ], 3, cols_t=3, g=28, grid_gaps_tablet=gaps(18, 18)),
     ], padding=dims(0, 32, 0, 32), padding_mobile=dims(0, 20, 0, 20),
@@ -379,7 +391,7 @@ def courses():
         return card([
             image(key, 240, height_m=220, alt=""),
             con([
-                icon(ic, RED, 22, stacked=True, bg="#FFFFFF", pad=15, _css_classes="rcr-iconbadge",
+                icon(ic, RED, 24, stacked=True, bg="#FFFFFF", pad=14, _css_classes="rcr-iconbadge",
                      **absolute(24, -26, width=52)),
                 heading(title, "h3", 19, INK, "700", MONT, lh=1.3),
                 text(body, 15, MUTED, 1.6, _flex_size="grow"),
@@ -397,11 +409,11 @@ def courses():
         ], flex_gap=gap(16), flex_align_items="center", width=px(720), width_mobile=px(100, "%"),
             **anim("fadeInUp", 0, True)),
         grid([
-            ccard("cpr", "fas fa-heartbeat", "Heartsaver · Level A", "CPR and interventions for adults. Suited to "
+            ccard("cpr", "svg:course-heartsaver-a", "Heartsaver · Level A", "CPR and interventions for adults. Suited to "
                   "offices, retail and some industrial settings. Approx. 2 h, 2-year certification.", 0),
-            ccard("mannequin", "fas fa-baby", "Heartsaver · Level C", "Adults, children and infants. Suited to "
+            ccard("mannequin", "svg:course-heartsaver-c", "Heartsaver · Level C", "Adults, children and infants. Suited to "
                   "parents, daycare and school staff, coaches and healthcare professionals. Approx. 3.5 h.", 150),
-            ccard("group", "fas fa-briefcase-medical", "Basic Life Support (BLS)", "For healthcare professionals, "
+            ccard("group", "svg:course-bls", "Basic Life Support (BLS)", "For healthcare professionals, "
                   "alone or within a resuscitation team. Theory, practice and simulations. Approx. 4–5 h, "
                   "1-year certification.", 300),
         ], 3, cols_t=3, g=28, width=px(100, "%"), grid_gaps_tablet=gaps(18, 18)),
@@ -540,7 +552,7 @@ def certification():
             css_classes="rcr-band")
         return card([
             con([
-                icon("fas fa-id-card", accent, 20, stacked=True, bg=ic_bg, pad=14),
+                icon("svg:cert-heartsaver" if accent == RED else "svg:cert-bls", accent, 22, stacked=True, bg=ic_bg, pad=13),
                 heading(title, "h3", 20, INK, "700", MONT, lh=1.3),
                 text(body, 15, MUTED, 1.65),
             ], padding=dims(30, 28, 24, 28), flex_gap=gap(12), _flex_size="grow"),
@@ -609,9 +621,9 @@ def home():
 
 def contact_box(ic, label, value, url, hide_m=False):
     s = {
-        "selected_icon": {"value": ic, "library": "fa-solid"},
+        "selected_icon": svg_icon(ic),
         "view": "stacked", "shape": "circle", "primary_color": PINK, "secondary_color": RED,
-        "icon_size": px(17), "icon_padding": px(14.5), "position": "inline-start", "position_mobile": "inline-start",
+        "icon_size": px(18), "icon_padding": px(14), "position": "inline-start", "position_mobile": "inline-start",
         "content_vertical_alignment": "middle", "icon_space": px(14), "text_align": "start",
         "title_text": label, "description_text": value, "title_size": "div",
         "link": {"url": url, "is_external": "", "nofollow": ""},
@@ -634,8 +646,8 @@ def header():
         ], flex_direction="row", flex_align_items="center", flex_gap=gap(12), width=px(320),
             width_mobile=px(100, "%")),
         con([
-            contact_box("fas fa-phone-alt", "Call us", "(450) 374-7995", "tel:4503747995", hide_m=True),
-            contact_box("fas fa-envelope", "Email us", "rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com",
+            contact_box("header-phone", "Call us", "(450) 374-7995", "tel:4503747995", hide_m=True),
+            contact_box("header-email", "Email us", "rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com",
                         hide_m=True),
         ], flex_direction="row", flex_wrap="wrap", flex_gap=gap(24), flex_align_items="center",
             width=px(560), width_tablet=px(100, "%"), flex_justify_content="flex-end",
@@ -709,12 +721,11 @@ def footer():
         lst = []
         for i, (label, url, ic) in enumerate(items):
             lst.append({"_id": uid("li"), "text": label,
-                        "selected_icon": {"value": ic, "library": "fa-solid" if ic.startswith("fas") else
-                                          ("fa-regular" if ic else "")},
+                        "selected_icon": svg_icon(ic) if ic else {"value": "", "library": ""},
                         "link": {"url": url, "is_external": "", "nofollow": ""} if url else {"url": ""}})
         s = {"icon_list": lst, "view": "traditional", "space_between": px(14),
              "text_color": "#FFFFFF" if icons else "#C9D3E5", "text_color_hover": "#FFFFFF",
-             "icon_color": "#FFFFFF", "icon_size": px(17), "text_indent": px(12 if icons else 0),
+             "icon_color": "#FFFFFF", "icon_size": px(18), "text_indent": px(12 if icons else 0),
              **typo("icon_typography", SANS, "400", 16, 1.4)}
         return w("icon-list", s)
 
@@ -742,9 +753,9 @@ def footer():
                  heading("Flexible schedule as needed", "div", 15, "#C9D3E5", "400", SANS, lh=1.4)],
                 flex_gap=gap(14)),
             con([col_head("Contact"), links([
-                ("(450) 374-7995", "tel:4503747995", "fas fa-phone-alt"),
-                ("(450) 693-0702", "", "fas fa-fax"),
-                ("rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com", "far fa-envelope")], icons=True)],
+                ("(450) 374-7995", "tel:4503747995", "footer-phone"),
+                ("(450) 693-0702", "", "footer-fax"),
+                ("rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com", "footer-email")], icons=True)],
                 flex_gap=gap(14)),
         ], "minmax(200px,1.4fr) minmax(110px,.7fr) minmax(170px,1fr) minmax(200px,1fr)", cols_t="1fr 1fr",
             g=28, row_g=40, width=px(100, "%")),
