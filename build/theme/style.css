@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.4.0
+Version: 1.5.0
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -124,9 +124,13 @@ url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 
 /* Hero / quote overlays: stronger wash on tablets and phones so text stays readable over the photo */
 @media (min-width:768px) and (max-width:1024px){
-.rcr-hero-photo{width:100%!important}
-.rcr-hero-photo::before{background-image:linear-gradient(90deg,rgba(234,241,250,.97) 0%,rgba(234,241,250,.9) 55%,rgba(234,241,250,.25) 100%)!important}
-.rcr-quote::before{background-image:linear-gradient(90deg,rgba(234,241,250,.97) 0%,rgba(234,241,250,.92) 62%,rgba(234,241,250,.3) 100%)!important}
+/* Tablets: hero, quote and certification photos become a banner at the top of the section */
+.rcr-hero-photo{width:100%!important;min-height:0!important;height:360px}
+.rcr-hero-photo::before{background-image:linear-gradient(180deg,rgba(234,241,250,0) 0,rgba(234,241,250,0) 55%,#EAF1FA 100%)!important}
+.rcr-quote-photo{width:100%!important;min-height:0!important;height:300px}
+.rcr-quote-photo::before{background-image:linear-gradient(180deg,rgba(234,241,250,0) 0,rgba(234,241,250,0) 50%,#EAF1FA 100%)!important}
+.rcr-cert-photo{width:100%!important;min-height:0!important;height:320px}
+.rcr-cert-photo::before{background-image:linear-gradient(180deg,rgba(245,247,251,0) 0,rgba(245,247,251,0) 50%,#F5F7FB 100%)!important}
 }
 @media (max-width:767px){
 /* Phones: hero and quote photos become a clear banner at the top of the section, fading into the sky colour */
