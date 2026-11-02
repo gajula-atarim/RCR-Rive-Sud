@@ -276,7 +276,7 @@ def overlay_gradient(c1, s1, c2, s2, angle=90):
     return {"background_overlay_background": "gradient", "background_overlay_color": c1,
             "background_overlay_color_stop": px(s1, "%"), "background_overlay_color_b": c2,
             "background_overlay_color_b_stop": px(s2, "%"), "background_overlay_gradient_type": "linear",
-            "background_overlay_gradient_angle": px(angle, "deg")}
+            "background_overlay_gradient_angle": px(angle, "deg"), "background_overlay_opacity": px(1)}
 
 
 SECTION_PAD = {"padding": dims(110, 32, 110, 32), "padding_tablet": dims(90, 32, 90, 32),
@@ -497,12 +497,12 @@ def certification():
             con([
                 heading(num, "div", 34, accent, "900", MONT, "center", 0.9),
                 heading(unit, "div", 10, INK, "800", MONT, "center", 1.2, 1.2, "uppercase"),
-            ], width=px(68), min_height=px(68), flex_justify_content="center", flex_align_items="center",
+            ], width=px(68), width_mobile=px(68), min_height=px(68), flex_justify_content="center", flex_align_items="center",
                 flex_gap=gap(2), background_background="classic", background_color="#FFFFFF",
                 border_radius=dims(50, 50, 50, 50, "%"), box_shadow_box_shadow_type="yes",
                 box_shadow_box_shadow=shadow(0, 8, 20, 0, "rgba(0,0,0,0.25)"), css_classes="rcr-ring-core"),
-        ], width=px(96), min_height=px(96), flex_justify_content="center", flex_align_items="center",
-            css_classes="rcr-ring", _flex_size="none")
+        ], width=px(96), width_mobile=px(96), min_height=px(96), flex_justify_content="center",
+            flex_align_items="center", css_classes="rcr-ring", _flex_size="none")
         band = con([
             ring,
             con([
@@ -654,10 +654,11 @@ def header():
         con([nav], width=px(60, "%"), width_tablet=px(20, "%"), width_mobile=px(15, "%")),
         con([
             con([lang("FR", False), lang("EN", True)], flex_direction="row", flex_gap=gap(2),
-                flex_align_items="center", width=px(80)),
+                flex_align_items="center", width=px(80), width_mobile=px(72), flex_wrap="nowrap"),
             button("Request a quote", BOOK, external=True, size=13, pad=(12, 20), shadow_on=False,
                    typography_font_size_mobile=px(12), text_padding_mobile=dims(11, 14, 11, 14)),
-        ], flex_direction="row", flex_align_items="center", flex_justify_content="flex-end", flex_gap=gap(16),
+        ], flex_direction="row", flex_wrap="nowrap", flex_align_items="center", flex_justify_content="flex-end",
+            flex_gap=gap(16),
             flex_gap_mobile=gap(10), width=px(40, "%"), width_tablet=px(80, "%"), width_mobile=px(85, "%")),
     ], flex_direction="row", flex_justify_content="space-between", flex_align_items="center",
         flex_wrap="nowrap", flex_gap=gap(20), padding=dims(0, 32, 0, 32), padding_tablet=dims(12, 32, 12, 32),
