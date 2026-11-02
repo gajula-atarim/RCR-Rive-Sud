@@ -484,7 +484,8 @@ def quote():
             # Free Elementor has no form widget: Contact Form 7 provides the working form.
             w("shortcode", {"shortcode": '[contact-form-7 id="14" title="Request a quote" html_class="rcr-form"]',
                             "_margin": dims(14, 0, 0, 0)}),
-        ], flex_gap=gap(20), width=px(520), width_mobile=px(100, "%"), z_index=1, **anim("fadeInUp", 0, True)),
+        ], flex_gap=gap(20), width=px(520), width_tablet=px(100, "%"), width_mobile=px(100, "%"), z_index=1,
+            **anim("fadeInUp", 0, True)),
     ], _element_id="quote", padding=dims(100, 32, 110, 32), padding_tablet=dims(330, 32, 100, 32),
         padding_mobile=dims(250, 20, 80, 20),
         background_background="classic", background_color=SKY, overflow="hidden",
