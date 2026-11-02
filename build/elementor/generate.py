@@ -350,7 +350,7 @@ def feature_cards():
                   "practice and coaching adapted to your group's needs.", "#quote", False, 150),
             fcard("svg:feature-quote", "Personalized quote", "Pricing depends on the type of training, the number of "
                   "participants, the location and any travel costs.", BOOK, True, 300),
-        ], 3, cols_t=3, g=28, grid_gaps_tablet=gaps(18, 18)),
+        ], 3, cols_t=1, g=28, grid_gaps_tablet=gaps(18, 18)),
     ], padding=dims(0, 32, 0, 32), padding_mobile=dims(0, 20, 0, 20),
         margin=dims(-110, 0, 0, 0), margin_mobile=dims(-110, 0, 0, 0), z_index=5, css_classes="rcr-features")
 
