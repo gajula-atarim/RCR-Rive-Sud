@@ -326,7 +326,7 @@ def hero():
     ],
         min_height=px(720), min_height_mobile=px(0),
         flex_justify_content="center", flex_align_items="flex-start", flex_gap=gap(24),
-        padding=dims(150, 32, 240, 32), padding_tablet=dims(120, 32, 200, 32), padding_mobile=dims(300, 20, 170, 20),
+        padding=dims(150, 32, 240, 32), padding_tablet=dims(390, 32, 200, 32), padding_mobile=dims(300, 20, 170, 20),
         background_background="classic", background_color=SKY, overflow="hidden",
         css_classes="rcr-hero", html_tag="section",
     )
@@ -485,7 +485,8 @@ def quote():
             w("shortcode", {"shortcode": '[contact-form-7 id="14" title="Request a quote" html_class="rcr-form"]',
                             "_margin": dims(14, 0, 0, 0)}),
         ], flex_gap=gap(20), width=px(520), width_mobile=px(100, "%"), z_index=1, **anim("fadeInUp", 0, True)),
-    ], _element_id="quote", padding=dims(100, 32, 110, 32), padding_mobile=dims(250, 20, 80, 20),
+    ], _element_id="quote", padding=dims(100, 32, 110, 32), padding_tablet=dims(330, 32, 100, 32),
+        padding_mobile=dims(250, 20, 80, 20),
         background_background="classic", background_color=SKY, overflow="hidden",
         css_classes="rcr-quote", html_tag="section")
 
@@ -577,6 +578,7 @@ def certification():
             ], 2, cols_t=2, g=24, grid_align_items="stretch"),
         ], flex_gap=gap(28), width=px(65, "%"), width_tablet=px(100, "%")),
     ], flex_direction="row", flex_justify_content="flex-end", padding=dims(100, 32, 100, 32),
+        padding_tablet=dims(350, 32, 90, 32),
         padding_mobile=dims(70, 20, 70, 20), background_background="classic", background_color=PALE,
         overflow="hidden", css_classes="rcr-cert", html_tag="section")
 
