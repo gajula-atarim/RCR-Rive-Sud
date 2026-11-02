@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.3.1
+Version: 1.4.0
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -129,8 +129,12 @@ url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 .rcr-quote::before{background-image:linear-gradient(90deg,rgba(234,241,250,.97) 0%,rgba(234,241,250,.92) 62%,rgba(234,241,250,.3) 100%)!important}
 }
 @media (max-width:767px){
-.rcr-hero-photo{width:100%!important}
-.rcr-hero-photo::before{background-image:linear-gradient(180deg,rgba(234,241,250,.94) 0%,rgba(234,241,250,.86) 60%,rgba(234,241,250,.6) 100%)!important}
+/* Phones: hero and quote photos become a clear banner at the top of the section, fading into the sky colour */
+.rcr-hero-photo{width:100%!important;min-height:0!important;height:270px}
+.rcr-hero-photo::before{background-image:linear-gradient(180deg,rgba(234,241,250,0) 0,rgba(234,241,250,0) 55%,#EAF1FA 100%)!important}
+.rcr-quote-photo{width:100%!important;min-height:0!important;height:230px}
+.rcr-quote-photo::before{background-image:linear-gradient(180deg,rgba(234,241,250,0) 0,rgba(234,241,250,0) 50%,#EAF1FA 100%)!important}
+.e-con.rcr-dots::before{left:44%;bottom:-16px;width:84px;height:112px}
 .rcr-quote::before{background-image:linear-gradient(180deg,rgba(234,241,250,.95) 0%,rgba(234,241,250,.9) 100%)!important}
 .e-con.rcr-hero::after{width:200px;height:144px}
 .rcr-trainer::before,.e-con.rcr-trainer::after{width:240px;height:198px}
