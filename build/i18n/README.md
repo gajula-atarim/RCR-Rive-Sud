@@ -13,7 +13,7 @@ The French home page is a separate WordPress page built from a copy of the Engli
 - `fr_home_strings.py` maps every English string on the home page to its French translation
   (no-break spaces ` ` are deliberate: French punctuation and number+unit pairs, and to avoid
   one-word last lines).
-- Header FR/EN buttons: FR → `/fr/`, EN → `/`. The active language is shown in navy.
+- Header FR/EN buttons: FR → `/fr/`, EN → `#` (placeholder, as requested). The active language is shown in navy.
 - Phone header on /fr/ uses a shorter "Soumission" button (phone-only widget) because
   "Demander une soumission" does not fit beside FR/EN at 360px.
 - `functions.php` sets `lang="fr-CA"` and a `rcr-lang-fr` body class on /fr/; `style.css` uses that
