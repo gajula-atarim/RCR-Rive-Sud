@@ -793,10 +793,7 @@ def footer():
                 text("Cardiopulmonary resuscitation (CPR) training. Essential skills to act when every second "
                      "counts.", 16, "#C9D3E5", 1.6, size_m=15, _element_width="initial", _element_custom_width=px(360),
                      _element_width_mobile="inherit", typography_line_height_mobile=px(1.55, "em")),
-                button("Request a quote", BOOK, external=True, size=14, pad=(14, 22), radius=6, tt="none",
-                       shadow_on=False, _margin=dims(10, 0, 0, 0), align_mobile="justify",
-                       _margin_mobile=dims(4, 0, 0, 0), hide_desktop="hidden-desktop"),
-                # Desktop only: Facebook takes the button's place (phone/tablet show it in the logo row)
+                # Desktop only: Facebook under the tagline (phone/tablet show it in the logo row)
                 facebook(icon_size=px(18), icon_padding=px(14), align="left", _margin=dims(6, 0, 0, 0),
                          hide_tablet="hidden-tablet", hide_mobile="hidden-mobile"),
             ], flex_gap=gap(20), flex_gap_mobile=gap(16), grid_column_tablet="custom", grid_column_custom_tablet="1 / -1",
