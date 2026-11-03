@@ -432,17 +432,21 @@ def learn():
     def step(key, num, title, body, offset, delay, pos="center center"):
         return con([
             con([
-                image(key, 230, height_m=210, radius=50, cls="rcr-step-img", alt="", **{"object-position": pos}),
+                image(key, 230, height_m=210, radius=50, cls="rcr-step-img", alt="", height_tablet=px(150),
+                      **{"object-position": pos}),
                 heading(num, "div", 14, "#FFFFFF", "700", MONT, "center", 1.43,
                         _background_background="classic", _background_color=RED,
                         _border_radius=dims(50, 50, 50, 50, "%"), _padding=dims(12, 0, 12, 0),
                         _box_shadow_box_shadow_type="yes", _box_shadow_box_shadow=shadow(0, 0, 0, 6, PINK),
                         **absolute(6, 6, "%", "%", 44)),
-            ], width=px(230), width_mobile=px(210), flex_align_items="center"),
-            heading(title, "h3", 18, INK, "700", MONT, "center", 1.3, _margin=dims(12, 0, 0, 0)),
-            text(body, 15, MUTED, 1.6, align="center"),
-        ], flex_align_items="center", flex_gap=gap(14),
-            padding=dims(offset, 0, 0, 0), padding_mobile=dims(0, 0, 0, 0), **anim("zoomIn", delay, True))
+            ], width=px(230), width_tablet=px(150), width_mobile=px(210), flex_align_items="center"),
+            heading(title, "h3", 18, INK, "700", MONT, "center", 1.3, size_t=15, _margin=dims(12, 0, 0, 0),
+                    _margin_tablet=dims(8, 0, 0, 0)),
+            text(body, 15, MUTED, 1.6, align="center", typography_font_size_tablet=px(13.5),
+                 typography_line_height_tablet=px(1.5, "em")),
+        ], flex_align_items="center", flex_gap=gap(14), flex_gap_tablet=gap(10),
+            padding=dims(offset, 0, 0, 0), padding_tablet=dims(24 if offset else 0, 0, 0, 0),
+            padding_mobile=dims(0, 0, 0, 0), **anim("zoomIn", delay, True))
 
     return section([
         con([
@@ -459,7 +463,8 @@ def learn():
             step("mannequin", "03", "Use an AED", "Use an automated external defibrillator safely.", 40, 300,
                  "center right"),
             step("heimlich", "04", "Respond to choking", "Apply the right airway obstruction techniques.", 0, 450),
-        ], 4, cols_t=2, g=28, row_g=48, width=px(100, "%"), css_classes="rcr-steps"),
+        ], 4, cols_t=4, g=28, row_g=48, width=px(100, "%"), css_classes="rcr-steps",
+            grid_gaps_tablet={"column": "16", "row": "16", "isLinked": False, "unit": "px"}),
     ], flex_gap=gap(64), flex_align_items="center", **SECTION_PAD, css_classes="rcr-learn", html_tag="section")
 
 
