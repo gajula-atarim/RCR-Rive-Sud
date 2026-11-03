@@ -731,9 +731,9 @@ def header():
 def footer():
     fh = dict(size=21, color="#FFFFFF", weight="700", lh=1.3)
 
-    def col_head(t):
+    def col_head(t, size_m=18, margin_m=4):
         return heading(t, "div", fh["size"], fh["color"], fh["weight"], MONT, lh=fh["lh"],
-                       _margin=dims(0, 0, 8, 0))
+                       _margin=dims(0, 0, 8, 0), size_m=size_m, _margin_mobile=dims(0, 0, margin_m, 0))
 
     def hours(day, time):
         return con([
@@ -741,7 +741,7 @@ def footer():
             heading(time, "div", 15, "#FFFFFF", "400", SANS, lh=1.4),
         ], flex_direction="row", flex_justify_content="space-between", flex_gap=gap(14))
 
-    def links(items, icons=False):
+    def links(items, icons=False, **extra):
         lst = []
         for i, (label, url, ic) in enumerate(items):
             lst.append({"_id": uid("li"), "text": label,
@@ -751,6 +751,7 @@ def footer():
              "text_color": "#FFFFFF" if icons else "#C9D3E5", "text_color_hover": "#FFFFFF",
              "icon_color": "#FFFFFF", "icon_size": px(18), "text_indent": px(12 if icons else 0),
              **typo("icon_typography", SANS, "400", 16, 1.4)}
+        s.update(extra)
         return w("icon-list", s)
 
     main = section([
@@ -758,40 +759,65 @@ def footer():
             con([
                 con([
                     image("logo", width_pct=100, link="/", alt="RCR Rive-Sud", radius=50, _element_width="initial",
-                          _element_custom_width=px(60), _background_background="classic",
+                          _element_custom_width=px(72), _element_custom_width_mobile=px(60), _background_background="classic",
                           _background_color="#FFFFFF", _border_radius=dims(50, 50, 50, 50, "%"),
-                          _padding=dims(6, 6, 6, 6)),
-                    heading("RCR Rive-Sud", "div", 26, "#FFFFFF", "800", MONT, lh=1.1, link="/"),
+                          _padding=dims(3, 3, 3, 3)),
+                    heading("RCR Rive-Sud", "div", 26, "#FFFFFF", "800", MONT, lh=1.1, link="/", size_m=23),
                 ], flex_direction="row", flex_align_items="center", flex_gap=gap(12)),
                 text("Cardiopulmonary resuscitation (CPR) training. Essential skills to act when every second "
-                     "counts.", 16, "#C9D3E5", 1.6, _element_width="initial", _element_custom_width=px(360),
-                     _element_width_mobile="inherit"),
+                     "counts.", 16, "#C9D3E5", 1.6, size_m=15, _element_width="initial", _element_custom_width=px(360),
+                     _element_width_mobile="inherit", typography_line_height_mobile=px(1.55, "em")),
                 button("Request a quote", BOOK, external=True, size=14, pad=(14, 22), radius=6, tt="none",
-                       shadow_on=False, _margin=dims(10, 0, 0, 0)),
-            ], flex_gap=gap(20), grid_column_tablet="custom", grid_column_custom_tablet="1 / -1"),
+                       shadow_on=False, _margin=dims(10, 0, 0, 0), align_mobile="justify",
+                       _margin_mobile=dims(4, 0, 0, 0)),
+            ], flex_gap=gap(20), flex_gap_mobile=gap(16), grid_column_tablet="custom", grid_column_custom_tablet="1 / -1",
+                grid_column_mobile="custom", grid_column_custom_mobile="1 / -1"),
             con([col_head("Navigation"), links([
                 ("About us", "/#about", ""), ("Services", "/#courses", ""), ("Team", "/#team", ""),
-                ("Blog", "/#blog", ""), ("FAQ", "#", ""), ("Contact", "/#quote", "")])], flex_gap=gap(14)),
-            con([col_head("Hours"), hours("Monday to Thursday", "9h to 19h"), hours("Friday", "9h to 12h"),
+                ("Blog", "/#blog", ""), ("FAQ", "#", ""), ("Contact", "/#quote", "")],
+                space_between_mobile=px(10), icon_typography_font_size_mobile=px(15))],
+                flex_gap=gap(14), flex_gap_mobile=gap(10), grid_column_mobile="custom", grid_column_custom_mobile="1",
+                grid_row_mobile="custom", grid_row_custom_mobile="2"),
+            con([col_head("Hours", 16, 0), hours("Monday to Thursday", "9h to 19h"), hours("Friday", "9h to 12h"),
                  hours("Saturday & Sunday", "9h to 15h"),
                  heading("Flexible schedule as needed", "div", 15, "#C9D3E5", "400", SANS, lh=1.4)],
-                flex_gap=gap(14)),
+                flex_gap=gap(14),
+                # Phones: full-width soft card on its own row (background colour lives in style.css)
+                flex_gap_mobile=gap(10), grid_column_mobile="custom", grid_column_custom_mobile="1 / -1",
+                grid_row_mobile="custom", grid_row_custom_mobile="3", padding_mobile=dims(18, 18, 18, 18),
+                border_border="solid", border_width=dims(0, 0, 0, 0), border_width_mobile=dims(1, 1, 1, 1),
+                border_color="rgba(255,255,255,0.08)", border_radius_mobile=dims(10, 10, 10, 10),
+                css_classes="rcr-foot-hours"),
             con([col_head("Contact"), links([
                 ("(450) 374-7995", "tel:4503747995", "footer-phone"),
                 ("(450) 693-0702", "", "footer-fax"),
-                ("rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com", "footer-email")], icons=True)],
-                flex_gap=gap(14)),
+                ("rcrrivesud@outlook.com", "mailto:rcrrivesud@outlook.com", "footer-email")], icons=True,
+                hide_mobile="hidden-mobile"),
+                # Phones: narrow column, so the email address becomes "Email us"
+                links([
+                    ("(450) 374-7995", "tel:4503747995", "footer-phone"),
+                    ("(450) 693-0702", "", "footer-fax"),
+                    ("Email us", "mailto:rcrrivesud@outlook.com", "footer-email")], icons=True,
+                    space_between=px(10), icon_size=px(17), text_indent=px(10),
+                    icon_typography_font_size=px(15), hide_desktop="hidden-desktop", hide_tablet="hidden-tablet",
+                    _css_classes="rcr-foot-contact-m")],
+                flex_gap=gap(14), flex_gap_mobile=gap(10), grid_column_mobile="custom", grid_column_custom_mobile="2",
+                grid_row_mobile="custom", grid_row_custom_mobile="2"),
         ], "minmax(200px,1.4fr) minmax(110px,.7fr) minmax(170px,1fr) minmax(200px,1fr)",
             cols_t="minmax(0,.8fr) minmax(0,1.2fr) minmax(0,1.1fr)", g=28, row_g=40, width=px(100, "%"),
-            grid_gaps_tablet=gaps(24, 40)),
+            grid_gaps_tablet=gaps(24, 40),
+            grid_columns_grid_mobile={"unit": "custom", "size": "minmax(0,1fr) minmax(0,1fr)", "sizes": []},
+            grid_gaps_mobile=gaps(20, 32)),
     ], padding=dims(80, 32, 48, 32), padding_mobile=dims(60, 20, 36, 20),
         background_background="classic", background_color=DEEP, css_classes="rcr-footer")
 
     bottom = section([
         con([
-            text('<p>2026 © RCR Rive-Sud | All Rights Reserved | <a href="/privacy-policy/">Privacy Policy</a> | '
-                 '<a href="#">Web Design by Delisoft</a></p>', 15, "#C9D3E5", 1.6, _css_classes="rcr-on-dark",
-                 width=None),
+            text('<p>2026 © RCR Rive-Sud | <span style="white-space:nowrap">All Rights Reserved |</span> '
+                 '<span style="white-space:nowrap"><a href="/privacy-policy/">Privacy Policy</a> | '
+                 '<a href="#">Web Design by Delisoft</a></span></p>', 15, "#C9D3E5", 1.6, _css_classes="rcr-on-dark",
+                 width=None, typography_font_size_mobile=px(13.5), typography_line_height_mobile=px(1.55, "em"),
+                 _flex_size_mobile="shrink"),
             w("social-icons", {
                 "social_icon_list": [{"_id": uid("s"), "social_icon": {"value": "fab fa-facebook-f",
                                                                        "library": "fa-brands"},
@@ -799,10 +825,13 @@ def footer():
                 "shape": "circle", "icon_color": "custom", "icon_primary_color": RED,
                 "icon_secondary_color": "#FFFFFF", "icon_size": px(18), "icon_padding": px(14),
                 "hover_primary_color": RED_D, "hover_secondary_color": "#FFFFFF", "hover_animation": "grow",
-                "_css_classes": "rcr-social",
+                "_css_classes": "rcr-social", "_flex_size_mobile": "none",
+                "icon_padding_mobile": px(11), "icon_size_mobile": px(17),
             }),
-        ], flex_direction="row", flex_direction_mobile="column", flex_justify_content="space-between",
-            flex_align_items="center", flex_align_items_mobile="flex-start", flex_gap=gap(16), flex_wrap="wrap",
+        ], flex_direction="row", flex_direction_mobile="row", flex_justify_content="space-between",
+            flex_justify_content_mobile="space-between", flex_wrap_mobile="nowrap",
+            padding_mobile=dims(20, 0, 26, 0),
+            flex_align_items="center", flex_align_items_mobile="center", flex_gap=gap(16), flex_wrap="wrap",
             padding=dims(22, 0, 30, 0), border_border="solid", border_width=dims(1, 0, 0, 0),
             border_color="rgba(255,255,255,0.1)"),
     ], padding=dims(0, 32, 0, 32), padding_mobile=dims(0, 20, 0, 20), background_background="classic",
