@@ -26,6 +26,7 @@ IMG = {
     "naloxone": (11, UP + "naloxone-overdose-response.webp"),
     "hexband": (12, UP + "hex-band.png"),
     "logo": (32, UP + "rcr-rive-sud-logo.png"),
+    "fethi": (116, UP + "fethi-boudebza-portrait.webp"),
 }
 
 # Design tokens
@@ -373,13 +374,15 @@ def about():
         text("Our approach focuses on practice, realistic scenarios and learning the essential skills that can make "
              "all the difference in an emergency."),
         con([
-            image(None, 64, url_override=PLACEHOLDER, alt="Fethi Boudebza", radius=50,
-                  width_pct=100, _element_width="initial", _element_custom_width=px(64)),
+            image("fethi", 64, alt="Fethi Boudebza", radius=50, width_pct=100, _element_width="initial",
+                  _element_custom_width=px(64), _flex_size="none", **{"object-position": "top center"}),
             con([
                 heading("Fethi Boudebza", "div", 16, INK, "700", MONT, lh=1.3),
                 heading("Our NP & Founder", "div", 14, RED, "400", SANS, lh=1.4),
-            ], flex_gap=gap(3), width=px(75, "%")),
-        ], flex_direction="row", flex_align_items="center", flex_gap=gap(16),
+            ], flex_gap=gap(3), width=px(75, "%"), _flex_size_mobile="grow"),
+        # Phones: keep photo | name side by side (Elementor wraps rows on mobile by default)
+        ], flex_direction="row", flex_align_items="center", flex_gap=gap(16), flex_wrap_mobile="nowrap",
+            flex_align_items_mobile="center",
             border_border="solid", border_width=dims(1, 0, 0, 0), border_color=LINE,
             padding=dims(24, 0, 0, 0), margin=dims(14, 0, 0, 0)),
     ], flex_gap=gap(20), width=px(50, "%"), width_tablet=px(100, "%"), **anim("fadeInRight", 150, True))
@@ -519,7 +522,8 @@ def trainer():
             ], flex_gap=gap(20), **anim("fadeInUp", 0, True)),
             grid([
                 con([
-                    image(None, 440, height_m=380, url_override=PLACEHOLDER, alt="Fethi Boudebza"),
+                    image("fethi", 440, height_m=380, alt="Fethi Boudebza, Nurse Practitioner and founder of RCR Rive-Sud",
+                          **{"object-position": "top center"}),
                     con([
                         heading("Fethi Boudebza", "div", 20, INK, "700", MONT, lh=1.3),
                         heading("Our NP & Founder", "div", 14, RED, "400",
