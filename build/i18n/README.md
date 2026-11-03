@@ -20,3 +20,14 @@ The French home page is a separate WordPress page built from a copy of the Engli
   class for `text-wrap: balance` on headings and `text-wrap: pretty` on paragraphs.
 - Course names: Heartsaver kept; BLS shown as "Soins immédiats (BLS)" (full name "Soins immédiats en
   réanimation" in the card text) to keep the client's Heartsaver/BLS naming.
+
+## Current state: French only (since 2026-11-03)
+
+- Home page (Settings → Reading) = **Accueil (203)**, served at `/`. `/fr/` 301-redirects to `/`.
+- English **Home (15)**, **Site Header (16)** and **Site Footer (17)** are drafts (kept, not deleted).
+- **En-tête (FR) (297)** and **Pied de page (FR) (298)** display site-wide (UAE rule: entire site).
+- French menu, footer links, logos and the FR button point to `/` and `/#about`, `/#courses`, … ; EN button = `#`.
+
+To bring English back: publish 15/16/17, give English its own address (e.g. keep 15 at `/en/` or
+make it the front page again), set 297/298 back to "specific page: 203" and 16/17 to exclude 203,
+then point the EN button to the English page.
