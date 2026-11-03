@@ -509,9 +509,9 @@ def quote():
 def trainer():
     exp = [("Heart and Stroke Foundation of Canada", "CPR instructor since 2017, teaching and training"),
            ("Douglas Hospital", "Code blue team leader"),
-           ("Institut Philippe-Pinel de Montréal", "CPR training for nursing staff"),
+           ("Institut <span style=\"white-space:nowrap\">Philippe-Pinel</span> de Montréal", "CPR training for nursing staff"),
            ("Jewish General Hospital", "Nurse Practitioner (NP), acute care"),
-           ("Cégep André-Laurendeau", "Nursing instructor")]
+           ("Cégep <span style=\"white-space:nowrap\">André-Laurendeau</span>", "Nursing instructor")]
     items = [con([
         heading(t, "div", 16, BODY, "700", MONT, lh=1.35),
         heading(s, "div", 14, MUTED, "400", SANS, lh=1.4),
@@ -674,8 +674,8 @@ def header():
     top = section([
         con([
             image("logo", width_pct=100, link="/", alt="RCR Rive-Sud", _element_width="initial",
-                  _element_custom_width=px(76), _element_custom_width_mobile=px(15, "vw")),
-            heading("RCR Rive-Sud", "div", 24, NAVY, "800", MONT, lh=1, size_t=20, link="/", typography_font_size_mobile=px(6, "vw"),
+                  _element_custom_width=px(76), _element_custom_width_mobile={"unit": "custom", "size": "clamp(54px, 15vw, 66px)", "sizes": []}),
+            heading("RCR Rive-Sud", "div", 24, NAVY, "800", MONT, lh=1, size_t=20, link="/", typography_font_size_mobile={"unit": "custom", "size": "clamp(20px, 6vw, 26px)", "sizes": []},
                     _flex_size="none"),
         ], flex_direction="row", flex_align_items="center", flex_gap=gap(12), width=px(320),
             width_tablet=px(260), width_mobile=px(100, "%")),
