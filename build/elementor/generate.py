@@ -593,7 +593,7 @@ def blog():
                 heading("Article title (migrated)", "h3", 20, INK, "700", MONT, lh=1.3, link="#"),
                 more(_margin=dims(6, 0, 0, 0)),
             ], padding=dims(28, 26, 30, 26), flex_gap=gap(12)),
-        ], box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), css_classes="rcr-hcard",
+        ], box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), css_classes="rcr-hcard rcr-noline",
             **anim("fadeInUp", delay, True))
 
     dark = card([
@@ -603,7 +603,7 @@ def blog():
     ], min_height=px(420), flex_justify_content="flex-end", flex_gap=gap(12), padding=dims(28, 26, 30, 26),
         background_color="#072553", **bg_image("group", "center center"),
         **overlay_gradient("rgba(7,37,83,0)", 30, "rgba(7,37,83,0.92)", 100, 180),
-        box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), css_classes="rcr-hcard",
+        box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), css_classes="rcr-hcard rcr-noline",
         **anim("fadeInUp", 150, True))
 
     return section([
