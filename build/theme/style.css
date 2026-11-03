@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.8.4
+Version: 1.8.5
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -183,3 +183,9 @@ url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 .rcr-social .elementor-social-icon{box-shadow:0 0 0 4px rgba(215,25,31,.25)}
 /* Phones: Hours sits in a soft card (Elementor background colour is not responsive) */
 @media (max-width:767px){.e-con.rcr-foot-hours{background-color:rgba(255,255,255,.05)}}
+
+
+/* French page: even line breaks in headings and no single-word last lines in paragraphs
+   (browsers without support simply wrap as before) */
+.rcr-lang-fr .elementor-heading-title{text-wrap:balance}
+.rcr-lang-fr .elementor-widget-text-editor p,.rcr-lang-fr .elementor-icon-box-description{text-wrap:pretty}

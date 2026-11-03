@@ -30,3 +30,24 @@ add_filter( 'upload_mimes', function ( $mimes ) {
 	}
 	return $mimes;
 } );
+
+/**
+ * French home page (/fr/): declare the page language as French (fr-CA) so browsers,
+ * screen readers and search engines read it correctly, and add an "rcr-lang-fr" body class
+ * used by style.css for French typography rules.
+ */
+function rcr_is_french_page() {
+	return is_page( 'fr' );
+}
+add_filter( 'language_attributes', function ( $output ) {
+	if ( rcr_is_french_page() ) {
+		$output = preg_replace( '/lang="[^"]*"/', 'lang="fr-CA"', $output );
+	}
+	return $output;
+} );
+add_filter( 'body_class', function ( $classes ) {
+	if ( rcr_is_french_page() ) {
+		$classes[] = 'rcr-lang-fr';
+	}
+	return $classes;
+} );
