@@ -86,6 +86,10 @@ def typo(prefix="typography", family=MONT, weight="700", size=None, lh=None, ls=
 def anim(kind="fadeInUp", delay=0, container=False):
     k = "" if container else "_"
     d = {f"{k}animation": kind}
+    if kind in ("fadeInLeft", "fadeInRight"):
+        # Sideways slides push content past the screen edge on stacked layouts; fade up instead.
+        d[f"{k}animation_tablet"] = "fadeInUp"
+        d[f"{k}animation_mobile"] = "fadeInUp"
     if delay:
         d[f"{k}animation_delay"] = delay
     return d
