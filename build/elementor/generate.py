@@ -742,7 +742,9 @@ def footer():
         return con([
             heading(day, "div", 15, "#C9D3E5", "400", SANS, lh=1.4),
             heading(time, "div", 15, "#FFFFFF", "400", SANS, lh=1.4),
-        ], flex_direction="row", flex_justify_content="space-between", flex_gap=gap(14))
+        ], flex_direction="row", flex_justify_content="space-between", flex_gap=gap(14),
+            # Desktop: keep the times close to the days instead of at the far edge of the column
+            width=px(225), width_tablet=px(100, "%"), width_mobile=px(100, "%"))
 
     def links(items, icons=False, **extra):
         lst = []
