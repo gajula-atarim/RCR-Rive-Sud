@@ -645,7 +645,10 @@ def contact_box(ic, label, value, url, hide_m=False):
         "view": "stacked", "shape": "circle", "primary_color": PINK, "secondary_color": RED,
         "icon_size": px(18), "icon_padding": px(14), "position": "inline-start", "position_mobile": "inline-start",
         "content_vertical_alignment": "middle", "icon_space": px(14), "text_align": "start",
-        "title_text": label, "description_text": value, "title_size": "div",
+        # Elementor only links the icon and title, so the number/address carries its own link too.
+        "title_text": label,
+        "description_text": f'<a href="{url}" style="color:inherit;text-decoration:none">{value}</a>',
+        "title_size": "div",
         "link": {"url": url, "is_external": "", "nofollow": ""},
         "title_color": MUTED, "description_color": BODY,
         "title_bottom_space": px(2),
