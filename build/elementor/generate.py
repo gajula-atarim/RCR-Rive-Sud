@@ -341,7 +341,9 @@ def feature_cards():
     def fcard(ic, title, body, url, ext, delay, corner=False):
         return card([
             con([icon(ic, NAVY, 40), heading(title, "h3", 19, INK, "700", MONT, lh=1.3)],
-                flex_direction="row", flex_align_items="center", flex_gap=gap(16)),
+                flex_direction="row", flex_align_items="center", flex_gap=gap(16),
+                # keep icon + title on one row when a (translated) title wraps
+                flex_wrap_tablet="nowrap", flex_wrap_mobile="nowrap"),
             text(body, 15, MUTED, 1.65, _flex_size="grow"),
             more("Read more", url, external=ext),
         ], padding=dims(36, 28, 32, 28), padding_tablet=dims(30, 22, 28, 22), flex_gap=gap(16),
