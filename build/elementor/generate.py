@@ -399,7 +399,7 @@ def courses():
                 text(body, 15, MUTED, 1.6, _flex_size="grow"),
                 more(),
             ], padding=dims(44, 26, 30, 26), flex_gap=gap(12), _flex_size="grow"),
-        ], **anim("fadeInUp", delay, True))
+        ], css_classes="rcr-hcard", **anim("fadeInUp", delay, True))
 
     return section([
         con([
@@ -593,7 +593,8 @@ def blog():
                 heading("Article title (migrated)", "h3", 20, INK, "700", MONT, lh=1.3, link="#"),
                 more(_margin=dims(6, 0, 0, 0)),
             ], padding=dims(28, 26, 30, 26), flex_gap=gap(12)),
-        ], box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), **anim("fadeInUp", delay, True))
+        ], box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), css_classes="rcr-hcard",
+            **anim("fadeInUp", delay, True))
 
     dark = card([
         heading("Date", "div", 13, "#D5DEEE", "400", SANS, lh=1.4),
@@ -602,7 +603,8 @@ def blog():
     ], min_height=px(420), flex_justify_content="flex-end", flex_gap=gap(12), padding=dims(28, 26, 30, 26),
         background_color="#072553", **bg_image("group", "center center"),
         **overlay_gradient("rgba(7,37,83,0)", 30, "rgba(7,37,83,0.92)", 100, 180),
-        box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), **anim("fadeInUp", 150, True))
+        box_shadow_box_shadow=shadow(0, 18, 40, 0, "rgba(11,52,112,0.08)"), css_classes="rcr-hcard",
+        **anim("fadeInUp", 150, True))
 
     return section([
         con([
