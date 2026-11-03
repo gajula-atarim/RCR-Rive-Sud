@@ -377,7 +377,7 @@ def about():
                   width_pct=100, _element_width="initial", _element_custom_width=px(64)),
             con([
                 heading("Fethi Boudebza", "div", 16, INK, "700", MONT, lh=1.3),
-                heading("Instructor · Nurse Practitioner (NP)", "div", 14, RED, "400", SANS, lh=1.4),
+                heading("Our NP & Founder", "div", 14, RED, "400", SANS, lh=1.4),
             ], flex_gap=gap(3), width=px(75, "%")),
         ], flex_direction="row", flex_align_items="center", flex_gap=gap(16),
             border_border="solid", border_width=dims(1, 0, 0, 0), border_color=LINE,
@@ -516,7 +516,7 @@ def trainer():
                     image(None, 440, height_m=380, url_override=PLACEHOLDER, alt="Fethi Boudebza"),
                     con([
                         heading("Fethi Boudebza", "div", 20, INK, "700", MONT, lh=1.3),
-                        heading("Heart and Stroke Foundation of Canada instructor since 2017", "div", 14, RED, "400",
+                        heading("Our NP & Founder", "div", 14, RED, "400",
                                 SANS, lh=1.4),
                     ], flex_gap=gap(4)),
                 ], flex_gap=gap(16), **anim("fadeInUp", 150, True)),
