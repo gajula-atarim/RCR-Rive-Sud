@@ -759,6 +759,16 @@ def footer():
         s.update(extra)
         return w("icon-list", s)
 
+    def facebook(**extra):
+        st = {"social_icon_list": [{"_id": uid("s"), "social_icon": {"value": "fab fa-facebook-f",
+                                                                  "library": "fa-brands"},
+                                    "link": {"url": "#", "is_external": "on", "nofollow": ""}}],
+              "shape": "circle", "icon_color": "custom", "icon_primary_color": RED,
+              "icon_secondary_color": "#FFFFFF", "hover_primary_color": RED_D, "hover_secondary_color": "#FFFFFF",
+              "hover_animation": "grow", "_css_classes": "rcr-social"}
+        st.update(extra)
+        return w("social-icons", st)
+
     main = section([
         grid([
             con([
@@ -767,7 +777,10 @@ def footer():
                           _element_custom_width=px(72), _element_custom_width_mobile=px(60), _background_background="classic",
                           _background_color="#FFFFFF", _border_radius=dims(50, 50, 50, 50, "%"),
                           _padding=dims(3, 3, 3, 3)),
-                    heading("RCR Rive-Sud", "div", 26, "#FFFFFF", "800", MONT, lh=1.1, link="/", size_m=23),
+                    heading("RCR Rive-Sud", "div", 26, "#FFFFFF", "800", MONT, lh=1.1, link="/", size_m=23,
+                            _flex_size_tablet="grow", _flex_size_mobile="grow"),
+                    # Phone + tablet: Facebook sits at the right of the logo row
+                    facebook(icon_size=px(17), icon_padding=px(11), _flex_size="none", hide_desktop="hidden-desktop"),
                 ], flex_direction="row", flex_align_items="center", flex_gap=gap(12)),
                 text("Cardiopulmonary resuscitation (CPR) training. Essential skills to act when every second "
                      "counts.", 16, "#C9D3E5", 1.6, size_m=15, _element_width="initial", _element_custom_width=px(360),
@@ -823,16 +836,9 @@ def footer():
                  '<a href="#">Web Design by Delisoft</a></span></p>', 15, "#C9D3E5", 1.6, _css_classes="rcr-on-dark",
                  width=None, typography_font_size_mobile=px(13.5), typography_line_height_mobile=px(1.55, "em"),
                  _flex_size_mobile="shrink"),
-            w("social-icons", {
-                "social_icon_list": [{"_id": uid("s"), "social_icon": {"value": "fab fa-facebook-f",
-                                                                       "library": "fa-brands"},
-                                      "link": {"url": "#", "is_external": "on", "nofollow": ""}}],
-                "shape": "circle", "icon_color": "custom", "icon_primary_color": RED,
-                "icon_secondary_color": "#FFFFFF", "icon_size": px(18), "icon_padding": px(14),
-                "hover_primary_color": RED_D, "hover_secondary_color": "#FFFFFF", "hover_animation": "grow",
-                "_css_classes": "rcr-social", "_flex_size_mobile": "none",
-                "icon_padding_mobile": px(11), "icon_size_mobile": px(17),
-            }),
+            # Desktop only: phone/tablet show the icon in the logo row instead
+            facebook(icon_size=px(18), icon_padding=px(14), _flex_size_mobile="none",
+                     hide_tablet="hidden-tablet", hide_mobile="hidden-mobile"),
         ], flex_direction="row", flex_direction_mobile="row", flex_justify_content="space-between",
             flex_justify_content_mobile="space-between", flex_wrap_mobile="nowrap",
             padding_mobile=dims(20, 0, 26, 0),
