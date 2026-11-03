@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.6.0
+Version: 1.6.1
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -28,11 +28,11 @@ background:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" wid
 /* 02 Feature cards: red corner on the first card */
 .e-con.rcr-corner::after{content:"";position:absolute;top:0;right:0;width:46px;height:46px;background:var(--rcr-red);clip-path:polygon(0 0,100% 0,100% 100%);pointer-events:none}
 .rcr-fcard .elementor-icon{transition:transform .35s ease}
-/* Feature cards: red line grows under "Read more" on card hover / keyboard focus */
-.rcr-fcard .rcr-more .elementor-button{position:relative}
-.rcr-fcard .rcr-more .elementor-button::after{content:"";position:absolute;left:0;bottom:-7px;height:2px;width:0;background:var(--rcr-red);transition:width .45s cubic-bezier(.16,1,.3,1)}
-.rcr-fcard:hover .rcr-more .elementor-button::after,.rcr-fcard .rcr-more .elementor-button:focus-visible::after{width:100%}
-@media (prefers-reduced-motion:reduce){.rcr-fcard .rcr-more .elementor-button::after{transition:none}}
+/* Feature cards: red line grows along the card's bottom edge on hover / keyboard focus inside the card */
+.e-con.rcr-fcard::before{content:"";display:block;position:absolute;top:auto;right:auto;bottom:0;left:0;width:0;height:3px;
+background:var(--rcr-red);opacity:1;mix-blend-mode:normal;border:0;border-radius:0;z-index:2;pointer-events:none;transition:width .5s cubic-bezier(.16,1,.3,1)}
+.e-con.rcr-fcard:hover::before,.e-con.rcr-fcard:focus-within::before{width:100%}
+@media (prefers-reduced-motion:reduce){.e-con.rcr-fcard::before{transition:none}}
 .rcr-fcard:hover .elementor-icon{transform:scale(1.1)}
 
 /* Link-style buttons: red arrow, sliding on hover */
