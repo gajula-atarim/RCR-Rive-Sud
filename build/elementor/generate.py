@@ -664,7 +664,7 @@ def header():
     top = section([
         con([
             image("logo", width_pct=100, link="/", alt="RCR Rive-Sud", _element_width="initial",
-                  _element_custom_width=px(76), _element_custom_width_mobile=px(54)),
+                  _element_custom_width=px(76), _element_custom_width_mobile=px(15, "vw")),
             heading("RCR Rive-Sud", "div", 24, NAVY, "800", MONT, lh=1, size_t=20, size_m=20, link="/",
                     _flex_size="none"),
         ], flex_direction="row", flex_align_items="center", flex_gap=gap(12), width=px(320),
