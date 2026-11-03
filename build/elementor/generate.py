@@ -583,7 +583,7 @@ def certification():
                       "Heart & Stroke course completion card", 0),
                 ccard(NAVY, "#04193A", SKY, "1", "Year", "Basic Life Support", "Certification according to the "
                       "requirements of the applicable BLS program.", "1 year", "Per the applicable BLS program", 150),
-            ], 2, cols_t=2, cols_m=2, g=24, grid_align_items="stretch",
+            ], 2, cols_t=2, cols_m=2, g=24, grid_align_items="stretch", css_classes="rcr-cert-grid",
                 grid_gaps_mobile={"column": "12", "row": "12", "isLinked": True, "unit": "px"}),
         ], flex_gap=gap(28), width=px(65, "%"), width_tablet=px(100, "%")),
     ], flex_direction="row", flex_justify_content="flex-end", padding=dims(100, 32, 100, 32),
