@@ -493,7 +493,8 @@ def quote():
 
 
 def trainer():
-    exp = [("Douglas Hospital", "Code blue team leader"),
+    exp = [("Heart and Stroke Foundation of Canada", "CPR instructor since 2017, teaching and training"),
+           ("Douglas Hospital", "Code blue team leader"),
            ("Institut Philippe-Pinel de Montréal", "CPR training for nursing staff"),
            ("Jewish General Hospital", "Nurse Practitioner (NP), acute care"),
            ("Cégep André-Laurendeau", "Nursing instructor")]
