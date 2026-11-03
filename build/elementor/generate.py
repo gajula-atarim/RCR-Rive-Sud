@@ -795,7 +795,10 @@ def footer():
                      _element_width_mobile="inherit", typography_line_height_mobile=px(1.55, "em")),
                 button("Request a quote", BOOK, external=True, size=14, pad=(14, 22), radius=6, tt="none",
                        shadow_on=False, _margin=dims(10, 0, 0, 0), align_mobile="justify",
-                       _margin_mobile=dims(4, 0, 0, 0)),
+                       _margin_mobile=dims(4, 0, 0, 0), hide_desktop="hidden-desktop"),
+                # Desktop only: Facebook takes the button's place (phone/tablet show it in the logo row)
+                facebook(icon_size=px(18), icon_padding=px(14), align="left", _margin=dims(6, 0, 0, 0),
+                         hide_tablet="hidden-tablet", hide_mobile="hidden-mobile"),
             ], flex_gap=gap(20), flex_gap_mobile=gap(16), grid_column_tablet="custom", grid_column_custom_tablet="1 / -1",
                 grid_column_mobile="custom", grid_column_custom_mobile="1 / -1"),
             con([col_head("Navigation"), links([
@@ -844,9 +847,6 @@ def footer():
                  '<a href="#">Web Design by Delisoft</a></span></p>', 15, "#C9D3E5", 1.6, _css_classes="rcr-on-dark",
                  width=None, typography_font_size_mobile=px(13.5), typography_line_height_mobile=px(1.55, "em"),
                  _flex_size_mobile="shrink"),
-            # Desktop only: phone/tablet show the icon in the logo row instead
-            facebook(icon_size=px(18), icon_padding=px(14), _flex_size_mobile="none",
-                     hide_tablet="hidden-tablet", hide_mobile="hidden-mobile"),
         ], flex_direction="row", flex_direction_mobile="row", flex_justify_content="space-between",
             flex_justify_content_mobile="space-between", flex_wrap_mobile="nowrap",
             padding_mobile=dims(20, 0, 26, 0),
