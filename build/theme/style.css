@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.9.0
+Version: 1.9.1
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -202,11 +202,11 @@ url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 .rcr-learn-toggle .elementor-tab-content p{margin:0 0 8px}
 .rcr-note{font-size:13px;line-height:1.5;color:var(--rcr-muted);margin:0!important}
 /* FAQ accordions */
-.rcr-faq .elementor-accordion-item{border-radius:6px;overflow:hidden;margin-bottom:10px}
-.rcr-faq .elementor-accordion-item+.elementor-accordion-item{border-top:1px solid #E3E8F1!important}
+.rcr-faq .elementor-toggle-item{border:1px solid #E3E8F1;border-radius:6px;overflow:hidden}
 .rcr-faq .elementor-tab-title{display:flex;align-items:center;gap:12px;transition:color .2s}
 .rcr-faq .elementor-tab-title a{flex:1;color:inherit}
-.rcr-faq .elementor-tab-title .elementor-accordion-icon{order:2;width:auto!important}
+.rcr-faq .elementor-tab-title{border:0!important}
+.rcr-faq .elementor-tab-title .elementor-toggle-icon{order:2;width:auto!important}
 .rcr-faq .elementor-tab-title.elementor-active{border-bottom:0}
 .rcr-faq .elementor-tab-content{border-top:0!important}
 .rcr-faq .elementor-tab-content p:last-child{margin-bottom:0}

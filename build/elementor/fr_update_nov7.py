@@ -83,7 +83,7 @@ def accordion(items, **extra):
          "selected_icon": {"value": "fas fa-plus", "library": "fa-solid"},
          "selected_active_icon": {"value": "fas fa-minus", "library": "fa-solid"},
          "title_html_tag": "h4", "faq_schema": "yes",
-         "border_width": px(1), "border_color": "#E3E8F1",
+         "space_between": px(10),
          "title_background": "#FFFFFF", "title_color": INK, "tab_active_color": RED,
          "icon_color": RED, "icon_active_color": RED, "icon_align": "right", "icon_space": px(12),
          "title_padding": dims(16, 20, 16, 20), "content_padding": dims(4, 20, 18, 20),
@@ -92,7 +92,7 @@ def accordion(items, **extra):
          **typo("title_typography", MONT, "600", 15, 1.4),
          **typo("content_typography", SANS, "400", 15, 1.65)}
     s.update(extra)
-    return w("accordion", s)
+    return w("toggle", s)  # Toggle (not Accordion): every question starts closed
 
 
 def page_hero(eyebrow_txt, title, subtitle, tagline, img_key, img_pos="center center"):
