@@ -772,7 +772,8 @@ def footer():
     def facebook(**extra):
         st = {"social_icon_list": [{"_id": uid("s"), "social_icon": {"value": "fab fa-facebook-f",
                                                                   "library": "fa-brands"},
-                                    "link": {"url": "#", "is_external": "on", "nofollow": ""}},
+                                    "link": {"url": "https://www.facebook.com/people/RCR-Rive-Sud/61596062079832/",
+                                             "is_external": "on", "nofollow": ""}},
                                    {"_id": uid("s"), "social_icon": {"value": "fab fa-linkedin-in",
                                                                   "library": "fa-brands"},
                                     "link": {"url": "https://www.linkedin.com/company/rcrrivesud.ca",
