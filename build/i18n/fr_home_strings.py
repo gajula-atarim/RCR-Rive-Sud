@@ -25,7 +25,7 @@ T = {
   "<p>Nos formations s’adressent au grand public, aux travailleurs, aux professionnels de la santé et aux étudiants du domaine de la santé.</p>",
 "<p>Our approach focuses on practice, realistic scenarios and learning the essential skills that can make all the difference in an emergency.</p>":
   "<p>Notre approche mise sur la pratique, des mises en situation réalistes et l’apprentissage des gestes essentiels qui peuvent faire toute la différence en situation d’urgence.</p>",
-"Our NP & Founder": "Notre IPS et fondateur",
+"Our NP & Founder": "Notre IPS et fondateur",  # About avatar (4a4265f) now: "Notre IPS, formateur et fondateur"
 "Our training": "Nos formations",
 "<p>We offer in-person training, mainly on Montreal's South Shore, with the option to travel to other areas on request.</p>":
   "<p>Nous offrons des formations en personne, principalement sur la Rive-Sud de Montréal, avec possibilité de déplacement dans d’autres régions sur demande.</p>",
