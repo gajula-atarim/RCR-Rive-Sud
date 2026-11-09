@@ -81,36 +81,3 @@ add_action( 'wp_footer', function () {
 	</script>
 	<?php
 }, 99 );
-
-/**
- * TEMPORARY one-shot importer for the 7 Nov 2026 update (removed right after it runs).
- * Loads the generated Elementor JSON for the home page (203) and the new pages (380, 381, 382).
- * The current home page data is backed up first in the option rcr_backup_203_nov7.
- */
-add_action( 'init', function () {
-	if ( get_option( 'rcr_import_nov7_done' ) || ! isset( $_GET['rcr_import_nov7'] ) ) {
-		return;
-	}
-	$base = 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/86d936a2a6c78fa19630fad57c6a35d77f9eb657/build/elementor/out/';
-	$map  = array( 203 => 'home_fr', 380 => 'page_cardio_secours', 381 => 'page_sir', 382 => 'page_confidentialite' );
-	$data = array();
-	foreach ( $map as $id => $file ) {
-		$res = wp_remote_get( $base . $file . '.json', array( 'timeout' => 30 ) );
-		$body = is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res );
-		$tree = json_decode( $body, true );
-		if ( ! is_array( $tree ) || empty( $tree ) ) {
-			update_option( 'rcr_import_nov7_error', $file, false );
-			return; // nothing is written unless every file loaded
-		}
-		$data[ $id ] = wp_json_encode( $tree );
-	}
-	add_option( 'rcr_backup_203_nov7', get_post_meta( 203, '_elementor_data', true ), '', false );
-	foreach ( $data as $id => $json ) {
-		update_post_meta( $id, '_elementor_data', wp_slash( $json ) );
-		update_post_meta( $id, '_elementor_edit_mode', 'builder' );
-	}
-	if ( class_exists( '\Elementor\Plugin' ) ) {
-		\Elementor\Plugin::$instance->files_manager->clear_cache();
-	}
-	update_option( 'rcr_import_nov7_done', current_time( 'mysql' ), false );
-}, 20 );
