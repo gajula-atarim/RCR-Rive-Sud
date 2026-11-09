@@ -850,7 +850,7 @@ def footer():
         con([
             text('<p>2026 © RCR Rive-Sud | <span style="white-space:nowrap">All Rights Reserved |</span> '
                  '<span style="white-space:nowrap"><a href="/privacy-policy/">Privacy Policy</a> | '
-                 '<a href="#">Web Design by Web Hosting Canada</a></span></p>', 15, "#C9D3E5", 1.6, _css_classes="rcr-on-dark",
+                 '<a href="https://whc.ca" target="_blank" rel="noopener">Web Design by Web Hosting Canada</a></span></p>', 15, "#C9D3E5", 1.6, _css_classes="rcr-on-dark",
                  width=None, typography_font_size_mobile=px(13.5), typography_line_height_mobile=px(1.55, "em"),
                  _flex_size_mobile="shrink"),
         ], flex_direction="row", flex_direction_mobile="row", flex_justify_content="space-between",
