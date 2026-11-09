@@ -51,3 +51,33 @@ add_filter( 'body_class', function ( $classes ) {
 	}
 	return $classes;
 } );
+
+/**
+ * "Ce que vous apprendrez" (home page): clicking or pressing Enter on a round image opens the
+ * "En savoir plus" toggle of the same column. The toggles themselves are Elementor Toggle widgets.
+ */
+add_action( 'wp_footer', function () {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	?>
+	<script>
+	(function () {
+		document.querySelectorAll('.rcr-step-trigger').forEach(function (el) {
+			var col = el.closest('.rcr-step');
+			var title = col && col.querySelector('.elementor-tab-title');
+			if (!title) { return; }
+			var label = (col.querySelector('h3') || {}).textContent || '';
+			el.setAttribute('role', 'button');
+			el.setAttribute('tabindex', '0');
+			el.setAttribute('aria-label', 'En savoir plus : ' + label.trim());
+			var open = function () { title.click(); };
+			el.addEventListener('click', open);
+			el.addEventListener('keydown', function (e) {
+				if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+			});
+		});
+	})();
+	</script>
+	<?php
+}, 99 );
