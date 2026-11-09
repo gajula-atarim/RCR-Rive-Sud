@@ -31,3 +31,9 @@ The French home page is a separate WordPress page built from a copy of the Engli
 To bring English back: publish 15/16/17, give English its own address (e.g. keep 15 at `/en/` or
 make it the front page again), set 297/298 back to "specific page: 203" and 16/17 to exclude 203,
 then point the EN button to the English page.
+
+## 7 Nov 2026 client update (applied 9 Nov)
+`build/elementor/fr_update_nov7.py` generated the first version of this update. On request, every element that
+was not explicitly asked for by the client was then removed directly on the live site (FAQ section, extra text,
+course-page hero photos/buttons/CTA bands, label/icon additions, footer phone sizes, extra anchors). The live
+site is the source of truth; the script output in `out/` reflects the first version, not the final one.
