@@ -772,8 +772,12 @@ def footer():
     def facebook(**extra):
         st = {"social_icon_list": [{"_id": uid("s"), "social_icon": {"value": "fab fa-facebook-f",
                                                                   "library": "fa-brands"},
-                                    "link": {"url": "#", "is_external": "on", "nofollow": ""}}],
-              "shape": "circle", "icon_color": "custom", "icon_primary_color": RED,
+                                    "link": {"url": "#", "is_external": "on", "nofollow": ""}},
+                                   {"_id": uid("s"), "social_icon": {"value": "fab fa-linkedin-in",
+                                                                  "library": "fa-brands"},
+                                    "link": {"url": "https://www.linkedin.com/company/rcrrivesud.ca",
+                                             "is_external": "on", "nofollow": ""}}],
+              "shape": "circle", "icon_spacing": px(12), "icon_color": "custom", "icon_primary_color": RED,
               "icon_secondary_color": "#FFFFFF", "hover_primary_color": RED_D, "hover_secondary_color": "#FFFFFF",
               "hover_animation": "grow", "_css_classes": "rcr-social"}
         st.update(extra)
@@ -790,8 +794,10 @@ def footer():
                     heading("RCR Rive-Sud", "div", 26, "#FFFFFF", "800", MONT, lh=1.1, link="/", size_m=23,
                             _flex_size_tablet="grow", _flex_size_mobile="grow"),
                     # Phone + tablet: Facebook sits at the right of the logo row
-                    facebook(icon_size=px(17), icon_padding=px(11), _flex_size="none", hide_desktop="hidden-desktop"),
-                ], flex_direction="row", flex_align_items="center", flex_gap=gap(12)),
+                    facebook(icon_size=px(17), icon_padding=px(11), _flex_size="none", hide_desktop="hidden-desktop",
+                             icon_size_mobile=px(15), icon_padding_mobile=px(9), icon_spacing_mobile=px(8)),
+                ], flex_direction="row", flex_align_items="center", flex_gap=gap(12),
+                    flex_wrap_mobile="nowrap", flex_wrap_tablet="nowrap", flex_gap_mobile=gap(10)),
                 text("Cardiopulmonary resuscitation (CPR) training. Essential skills to act when every second "
                      "counts.", 16, "#C9D3E5", 1.6, size_m=15, _element_width="initial", _element_custom_width=px(360),
                      _element_width_mobile="inherit", typography_line_height_mobile=px(1.55, "em")),
