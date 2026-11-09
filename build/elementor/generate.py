@@ -788,10 +788,10 @@ def footer():
             con([
                 con([
                     image("logo", width_pct=100, link="/", alt="RCR Rive-Sud", radius=50, _element_width="initial",
-                          _element_custom_width=px(72), _element_custom_width_mobile=px(60), _background_background="classic",
+                          _element_custom_width=px(72), _element_custom_width_mobile=px(54), _background_background="classic",
                           _background_color="#FFFFFF", _border_radius=dims(50, 50, 50, 50, "%"),
                           _padding=dims(3, 3, 3, 3)),
-                    heading("RCR Rive-Sud", "div", 26, "#FFFFFF", "800", MONT, lh=1.1, link="/", size_m=23,
+                    heading("RCR Rive-Sud", "div", 26, "#FFFFFF", "800", MONT, lh=1.1, link="/", size_m=21,
                             _flex_size_tablet="grow", _flex_size_mobile="grow"),
                     # Phone + tablet: Facebook sits at the right of the logo row
                     facebook(icon_size=px(17), icon_padding=px(11), _flex_size="none", hide_desktop="hidden-desktop",
