@@ -630,25 +630,36 @@ def page_team():
     return [banner("Notre équipe", [("Accueil", "/"), ("Équipe", None)],
                    "ballon", 50, 50),
             page_section([two_col(main, aside)]),
-            # Second team member (11 Nov 2026), bio word for word from the client's other site
-            # (cliniquesantementaleenligne.ca/equipe-sante-mentale/); title shortened to "Infirmière" on request.
+            # Second team member (option B, 11 Nov 2026): same structure as Fethi's profile, text left and pink
+            # profile card right. Bio word for word from the client's other site
+            # (cliniquesantementaleenligne.ca/equipe-sante-mentale/); title "Infirmière" on request.
             section([
-                image("lucie", alt="Lucie Bourassa, infirmière", radius=6, _element_width="initial",
-                      _element_custom_width=px(320), _element_custom_width_mobile=px(100, "%"), _flex_size="none",
-                      css_filters_css_filter="custom", css_filters_brightness=px(95)),
                 con([
-                    heading("Lucie Bourassa", "h2", 32, INK, "800", MONT, lh=1.2, size_m=26),
-                    heading("Infirmière", "div", 17, RED, "700", MONT, lh=1.4, _margin=dims(0, 0, 6, 0)),
+                    heading("Membre de l’équipe", "div", 13, RED, "700", MONT, lh=1.4, ls=1.8, tt="uppercase"),
+                    heading("Lucie Bourassa", "h2", 30, INK, "800", MONT, lh=1.2, size_m=26),
+                    heading("Infirmière", "div", 18, INK, "700", MONT, lh=1.5, typography_font_style="italic",
+                            _padding=dims(4, 0, 4, 22), _border_border="solid", _border_width=dims(0, 0, 0, 4),
+                            _border_color=RED),
                     p("Notre infirmière Lucie Bourassa a débuté sa profession initialement en soins physiques, "
                       "spécifiquement au Centre hospitalier de l’Université de Montréal (CHUM) ainsi qu’à Lausanne en "
                       "Suisse. De retour à Montréal, elle a orienté sa carrière vers la sphère de la santé mentale en "
                       "travaillant depuis plusieurs années, à date, à l’Institut universitaire en santé mentale de "
-                      "Montréal.", 16, TEXT2, 1.75),
-                ], flex_gap=gap(10), _flex_size="custom", _flex_grow=1, _flex_shrink=1, css_classes="rcr-shrink"),
-            ], flex_direction="row", flex_direction_mobile="column", flex_align_items="center",
-                flex_align_items_mobile="stretch", flex_gap=gap(56), padding=dims(80, 32, 80, 32),
-                padding_mobile=dims(60, 20, 60, 20), background_background="classic", background_color=PALE,
-                html_tag="section", _element_id="lucie-bourassa", **anim("fadeInUp", 0, True))]
+                      "Montréal.", 16, MUTED, 1.75),
+                ], flex_gap=gap(18), _flex_size="custom", _flex_grow=1, _flex_shrink=1, css_classes="rcr-shrink"),
+                con([
+                    image("lucie", alt="Lucie Bourassa, infirmière", cls="rcr-43", css_filters_css_filter="custom",
+                          css_filters_brightness=px(95)),
+                    con([
+                        h("Lucie Bourassa", "div", 20, weight="800"),
+                        p("Infirmière", 14, RED, 1.45),
+                        p("Membre de l’équipe RCR Rive-Sud", 14, TEXT2, 1.5, _margin=dims(6, 0, 0, 0)),
+                    ], padding=dims(22, 22, 24, 22), flex_gap=gap(6)),
+                ], background_background="classic", background_color=PINK, width=px(330), width_mobile=px(100, "%"),
+                    _flex_size="none"),
+            ], flex_direction="row", flex_direction_mobile="column", flex_align_items="flex-start", flex_gap=gap(48),
+                padding=dims(56, 32, 100, 32), padding_mobile=dims(48, 20, 80, 20), border_border="solid",
+                border_width=dims(1, 0, 0, 0), border_color="#E3E8F1", html_tag="section",
+                _element_id="lucie-bourassa", **anim("fadeInUp", 0, True))]
 
 
 # --------------------------------------------------------------------------- FAQ (client's Q&A, verbatim)

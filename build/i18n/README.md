@@ -59,7 +59,7 @@ Contact (510, /contact/). The Blog page was skipped on request.
   "Vous ne trouvez pas votre réponse ?" card, questions in Elementor Toggle widgets per theme (all closed on load).
   functions.php highlights the theme being read and prints one FAQPage JSON-LD built from the toggles
   (class rcr-faqtg), so the toggles' own faq_schema is off to avoid duplicates. Old layout kept in option rcr_backup_509_faq.
-- Équipe: Lucie Bourassa added (11 Nov 2026) below Fethi's profile. Bio copied word for word from the client's other site
+- Équipe: Lucie Bourassa added (11 Nov 2026) below Fethi's profile, laid out as option B (text left, pink profile card right). Bio copied word for word from the client's other site
   (cliniquesantementaleenligne.ca/equipe-sante-mentale/), title "Infirmière" (old site: "L'infirmière de notre clinique"),
   photo cropped from a screenshot of that page (347 x 372 px, the domain is blocked in this build environment).
   No booking links, per the client's 7 Nov request. Fethi's bio kept as the client's CPR-trainer text.
