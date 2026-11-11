@@ -83,23 +83,24 @@ def crumbs(*items):
     return text("<p>" + " / ".join(parts) + "</p>", 14, TEXT2, 1.5, _css_classes="rcr-crumbs")
 
 
-BANNER_LAYER = {"width": px(58, "%"), "width_tablet": px(70, "%"), "width_mobile": px(100, "%")}
+BANNER_LAYER = {"width": px(50, "%"), "width_tablet": px(70, "%"), "width_mobile": px(100, "%")}
 
 
 def banner_photo(img_key, xpos, ypos):
     """Photo panel on the right of a title banner: shows far more of the photo than a full-width strip."""
-    return photo_layer(img_key, "right", 58, xpos, ypos,
-                       overlay_gradient("#BFD9F2", 0, "rgba(191,217,242,0.15)", 55, 90), "rcr-banner-photo",
+    return photo_layer(img_key, "right", 50, xpos, ypos,
+                       overlay_gradient("#BFD9F2", 0, "rgba(191,217,242,0.15)", 45, 90), "rcr-banner-photo",
                        **{k: v for k, v in BANNER_LAYER.items() if k != "width"})
 
 
-def banner(title, crumb_items, img_key=None, xpos=50, ypos=50, height=240, h1_extra=None):
+def banner(title, crumb_items, img_key=None, xpos=50, ypos=50, height=300, h1_extra=None):
     kids = [banner_photo(img_key, xpos, ypos)] if img_key else []
     return section(kids + [
         heading(title, "h1", 46, INK, "800", MONT, lh=1.1, size_t=40, size_m=32, **(h1_extra or {})),
         crumbs(*crumb_items),
-    ], min_height=px(height), min_height_mobile=px(180), flex_justify_content="center", flex_gap=gap(10),
-        padding=dims(0, 32, 0, 32), padding_mobile=dims(0, 20, 0, 20), css_classes="rcr-banner", overflow="hidden",
+    ], min_height=px(height), min_height_tablet=px(260), min_height_mobile=px(200), flex_justify_content="center",
+        flex_gap=gap(10), padding=dims(0, 32, 0, 32), padding_mobile=dims(0, 20, 0, 20), css_classes="rcr-banner",
+        overflow="hidden",
         html_tag="section", background_background="classic", background_color="#BFD9F2")
 
 
@@ -272,7 +273,7 @@ def page_about():
         **bg_image("hexband", "center center", "initial", "fixed"), background_bg_width=px(1900),
         css_classes="rcr-courses", html_tag="section")
 
-    return [banner("À propos", [("Accueil", "/"), ("À propos", None)], "mannequin", 62, 55, 240),
+    return [banner("À propos", [("Accueil", "/"), ("À propos", None)], "mannequin", 50, 55),
             intro, who, training]
 
 
@@ -544,7 +545,7 @@ def page_services():
     ], flex_gap=gap(28), css_classes="rcr-sticky")
 
     return [banner("Nos formations", [("Accueil", "/"), ("Services", None), ("Cardio-secours", None)],
-                   "rcr_mannequin", 55, 45, 220),
+                   "rcr_mannequin", 50, 35),
             page_section([two_col(main, aside)], css_classes="rcr-svc")]
 
 
@@ -623,7 +624,7 @@ def page_team():
     ], flex_gap=gap(28), css_classes="rcr-sticky")
 
     return [banner("Notre formateur", [("Accueil", "/"), ("Équipe", None), ("Fethi Boudebza", None)],
-                   "ballon", 50, 50, 220),
+                   "ballon", 50, 50),
             page_section([two_col(main, aside)])]
 
 
@@ -770,7 +771,7 @@ def page_contact():
                  padding=dims(90, 32, 90, 32), padding_mobile=dims(70, 20, 70, 20), background_background="classic",
                  background_color=PALE, html_tag="section")
 
-    return [banner("Contactez-nous", [("Accueil", "/"), ("Contact", None)], "nourrisson", 55, 55, 220),
+    return [banner("Contactez-nous", [("Accueil", "/"), ("Contact", None)], "nourrisson", 55, 55),
             cards, mapform, hp]
 
 
@@ -846,7 +847,7 @@ def page_privacy():
     ], boxed_width=px(820), flex_gap=gap(28), padding=dims(80, 32, 100, 32), padding_mobile=dims(60, 20, 80, 20),
         html_tag="section")
     return [banner("Politique de confidentialité", [("Accueil", "/"), ("Politique de confidentialité", None)],
-                   "cpr", 50, 40, 220), body]
+                   "cpr", 50, 40), body]
 
 
 PAGES = {"a_propos": page_about, "services": page_services, "equipe": page_team, "faq": page_faq,
