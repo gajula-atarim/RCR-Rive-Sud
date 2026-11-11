@@ -75,7 +75,7 @@ def article(img_key, alt, title, intro, rest, delay):
 ARTICLES = [
     article(
         "art_epipen", "Soins d’anaphylaxie et administration d’EpiPen",
-        "EPIPEN : SAVEZ-VOUS UTILISER UN AUTO-INJECTEUR D'ÉPINÉPHRINE ?",
+        "EPIPEN : <span style=\"white-space:nowrap\">SAVEZ-VOUS</span> UTILISER UN AUTO-INJECTEUR D'ÉPINÉPHRINE ?",
         "En situation d'anaphylaxie, savoir utiliser rapidement un auto-injecteur d'épinéphrine est essentiel !",
         p("Un auto-injecteur comme EpiPen permet d'administrer rapidement l'épinéphrine lors d'une réaction "
           "allergique grave.")
@@ -115,7 +115,7 @@ ARTICLES = [
         100),
     article(
         "art_etouffement", "Étouffement et désobstruction : agissez vite",
-        "ÉTOUFFEMENT : SAUREZ-VOUS QUOI FAIRE ?",
+        "ÉTOUFFEMENT : <span style=\"white-space:nowrap\">SAUREZ-VOUS</span> QUOI FAIRE ?",
         "Une personne qui s'étouffe peut perdre rapidement sa capacité à respirer. Savez-vous reconnaître une "
         "obstruction des voies respiratoires ?",
         p("Les signes à reconnaître :", "Les signes à reconnaître :")
