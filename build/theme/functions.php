@@ -170,3 +170,70 @@ add_action( 'wp_footer', function () {
 	</script>
 	<?php
 }, 99 );
+
+/**
+ * FAQ page: highlight the theme being read in the left menu, and publish one FAQPage
+ * structured-data block (all questions of the page) for search engines.
+ */
+add_action( 'wp_footer', function () {
+	if ( ! is_page( 'faq' ) ) {
+		return;
+	}
+	?>
+	<script>
+	(function () {
+		var tabs = [].slice.call(document.querySelectorAll('.rcr-faq-tab'));
+		var map = tabs.map(function (t) {
+			var id = (t.getAttribute('href') || '').split('#')[1];
+			return { t: t, s: id ? document.getElementById(id) : null };
+		}).filter(function (m) { return m.s; });
+		if (!map.length) { return; }
+		var current = null, ticking = false;
+		var update = function () {
+			ticking = false;
+			var active = map[0];
+			map.forEach(function (m) { if (m.s.getBoundingClientRect().top <= 160) { active = m; } });
+			if (active !== current) {
+				map.forEach(function (m) { m.t.classList.toggle('is-active', m === active); });
+				current = active;
+			}
+		};
+		window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+		update();
+	})();
+	</script>
+	<?php
+}, 99 );
+
+add_action( 'wp_head', function () {
+	if ( ! is_page( 'faq' ) ) {
+		return;
+	}
+	$data = json_decode( (string) get_post_meta( get_queried_object_id(), '_elementor_data', true ), true );
+	if ( ! is_array( $data ) ) {
+		return;
+	}
+	$questions = array();
+	$walk      = function ( $elements ) use ( &$walk, &$questions ) {
+		foreach ( $elements as $el ) {
+			$type = isset( $el['widgetType'] ) ? $el['widgetType'] : '';
+			$cls  = isset( $el['settings']['_css_classes'] ) ? $el['settings']['_css_classes'] : '';
+			if ( 'toggle' === $type && false !== strpos( $cls, 'rcr-faqtg' ) && ! empty( $el['settings']['tabs'] ) ) {
+				foreach ( $el['settings']['tabs'] as $tab ) {
+					$questions[] = array(
+						'@type'          => 'Question',
+						'name'           => wp_strip_all_tags( $tab['tab_title'] ),
+						'acceptedAnswer' => array( '@type' => 'Answer', 'text' => trim( wp_strip_all_tags( str_replace( '</p><p>', '</p> <p>', $tab['tab_content'] ) ) ) ),
+					);
+				}
+			}
+			if ( ! empty( $el['elements'] ) ) {
+				$walk( $el['elements'] );
+			}
+		}
+	};
+	$walk( $data );
+	if ( $questions ) {
+		echo '<script type="application/ld+json">' . wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $questions ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . "</script>\n";
+	}
+} );

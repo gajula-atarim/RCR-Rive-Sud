@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.10.3
+Version: 1.11.0
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -345,3 +345,21 @@ box-shadow:0 10px 24px rgba(215,25,31,.28);transition:background .3s ease,transf
 .rcr-banner .elementor-widget{position:relative;z-index:1}
 .e-con.rcr-banner-photo{pointer-events:none}
 @media (max-width:767px){.e-con.rcr-banner-photo::before{background-image:linear-gradient(90deg,rgba(191,217,242,.94) 0%,rgba(191,217,242,.72) 100%)!important}}
+/* FAQ page (option B): theme menu + questions grouped by theme */
+.e-con.rcr-faq-theme{scroll-margin-top:24px}
+.e-con.rcr-faq-tab{border-left:3px solid transparent!important;text-decoration:none;transition:background .25s ease,border-color .25s ease}
+.e-con.rcr-faq-tab:hover{background:#F5F7FB}
+.e-con.rcr-faq-tab.is-active{background:#FDECEC;border-left-color:var(--rcr-red)!important}
+.rcr-faq-tab-label{flex:1 1 0!important;min-width:0}
+.rcr-faq-tab:hover .rcr-faq-tab-label .elementor-heading-title,.rcr-faq-tab.is-active .rcr-faq-tab-label .elementor-heading-title{color:var(--rcr-red)}
+@media (max-width:767px){.e-con.rcr-faq-tablist{display:grid!important;grid-template-columns:1fr 1fr}.e-con.rcr-faq-tablist>.e-con.rcr-faq-tab{border-right:1px solid #EEF1F6!important;padding:12px!important}}
+.rcr-faqtg .elementor-toggle-item{border:1px solid #D9E0EC!important;background:#fff;transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+.rcr-faqtg .elementor-toggle-item:hover{border-color:var(--rcr-red)!important;box-shadow:0 12px 28px rgba(11,52,112,.08)}
+.rcr-faqtg .elementor-toggle-item:has(.elementor-active){background:#F5F7FB}
+.rcr-faqtg .elementor-tab-title{display:flex;align-items:center;gap:20px;border:0!important}
+.rcr-faqtg .elementor-toggle-title{flex:1}
+.rcr-faqtg .elementor-toggle-icon{order:2;flex:none;float:none!important;width:32px!important;height:32px;border-radius:50%;background:var(--rcr-navy);display:flex!important;align-items:center;justify-content:center;transition:background .35s ease}
+.rcr-faqtg .elementor-tab-title.elementor-active .elementor-toggle-icon{background:var(--rcr-red)}
+.rcr-faqtg .elementor-toggle-icon>span{display:flex;align-items:center;justify-content:center}
+.rcr-faqtg .elementor-toggle-icon svg{width:13px!important;height:13px!important;fill:#fff}
+.rcr-faqtg .elementor-tab-content{border:0!important}

@@ -29,7 +29,8 @@ _g._counter[0] = 900000  # new ids stay clear of the ids on the live pages
 _g.IMG.update({"nourrisson": (533, _g.UP + "photo-rcr-nourrisson.webp"),
                "rcr_mannequin": (534, _g.UP + "photo-rcr-mannequin.webp"),
                "fethi_clinique": (580, _g.UP + "fethi-boudebza-clinique.webp")})
-_g.SVG.update({"anaphylaxis": 511, "pin": 512, "heart": 513, "pulse": 514, "cap": 515, "people": 516})
+_g.SVG.update({"anaphylaxis": 511, "pin": 512, "heart": 513, "pulse": 514, "cap": 515, "people": 516,
+               "bolt": 582, "lungs": 583, "pill": 584, "child": 585})
 
 OUT = os.path.join(os.path.dirname(__file__), "out")
 N = " "
@@ -676,26 +677,82 @@ def page_faq():
             crumbs(("Accueil", "/"), ("FAQ", None)),
             heading("Foire aux questions", "h1", 56, INK, "800", MONT, lh=1.1, size_t=46, size_m=36),
             p("Pour vous aider à mieux comprendre nos formations", 18, TEXT2, 1.6, _css_classes="rcr-maxw480"),
-        ], flex_gap=gap(16), z_index=1, padding=dims(100, 0, 100, 0), padding_mobile=dims(70, 0, 70, 0)),
+        ], flex_gap=gap(16), z_index=1, padding=dims(100, 0, 100, 0), padding_mobile=dims(70, 0, 70, 0),
+            **anim("fadeInUp", 0, True)),
     ], padding=dims(0, 32, 0, 32), padding_mobile=dims(0, 20, 0, 20), background_background="classic",
         background_color=SKY, overflow="hidden", css_classes="rcr-faq-hero", html_tag="section")
 
-    acc_w = w("accordion", {
-        "tabs": [{"_id": uid("q"), "tab_title": fr(q), "tab_content": fr(f"<p>{a}</p>")} for q, a in FAQ],
-        "selected_icon": {"value": "fas fa-plus", "library": "fa-solid"},
-        "selected_active_icon": {"value": "fas fa-minus", "library": "fa-solid"},
-        "title_html_tag": "h2", "faq_schema": "yes", "icon_align": "right", "border_width": px(0),
-        "title_background": "rgba(0,0,0,0)", "title_color": INK, "tab_active_color": INK,
-        "icon_color": "#FFFFFF", "icon_active_color": "#FFFFFF", "icon_space": px(20),
-        "title_padding": dims(22, 26, 22, 26), "title_padding_mobile": dims(18, 18, 18, 18),
-        "content_padding": dims(0, 26, 24, 26), "content_padding_mobile": dims(0, 18, 20, 18),
-        "content_background_color": "rgba(0,0,0,0)", "content_color": TEXT2, "_css_classes": "rcr-faqacc",
-        **typo("title_typography", MONT, "700", 17, 1.4, size_m=16),
-        **typo("content_typography", SANS, "400", 16, 1.7),
-    })
-    body = section([acc_w], boxed_width=px(880), padding=dims(100, 32, 100, 32),
-                   padding_mobile=dims(70, 20, 70, 20), html_tag="section")
+    # Option B (chosen 11 Nov 2026): theme menu on the left, questions grouped by theme on the right.
+    # The questions and answers are the client's, in the client's order; only the theme names are ours.
+    def faq_toggle(items):
+        return w("toggle", {
+            "tabs": [{"_id": uid("q"), "tab_title": fr(q), "tab_content": fr(f"<p>{a}</p>")} for q, a in items],
+            "selected_icon": {"value": "fas fa-plus", "library": "fa-solid"},
+            "selected_active_icon": {"value": "fas fa-minus", "library": "fa-solid"},
+            "title_html_tag": "h3", "icon_align": "right", "border_width": px(0), "space_between": px(12),
+            "title_background": "rgba(0,0,0,0)", "title_color": INK, "tab_active_color": INK,
+            "icon_color": "#FFFFFF", "icon_active_color": "#FFFFFF", "icon_space": px(20),
+            "title_padding": dims(20, 24, 20, 24), "title_padding_mobile": dims(16, 16, 16, 16),
+            "content_padding": dims(0, 24, 22, 24), "content_padding_mobile": dims(0, 16, 18, 16),
+            "content_background_color": "rgba(0,0,0,0)", "content_color": TEXT2, "_css_classes": "rcr-faqtg",
+            **typo("title_typography", MONT, "700", 16, 1.4, size_m=15),
+            **typo("content_typography", SANS, "400", 16, 1.7),
+        })
+
+    themes = [con([
+        heading(f"Thème {k + 1:02d}", "div", 13, RED, "700", MONT, lh=1.4, ls=1.8, tt="uppercase"),
+        heading(name, "h2", 30, INK, "800", MONT, lh=1.2, size_m=26, _margin=dims(0, 0, 10, 0)),
+        faq_toggle(FAQ[a:b]),
+    ], _element_id=anchor, flex_gap=gap(6), css_classes="rcr-faq-theme") for k, (anchor, name, ic, a, b) in enumerate(FAQ_THEMES)]
+
+    def tab(anchor, name, ic, n):
+        return link_con([
+            icon("svg:" + ic, RED, 20, _flex_size="none"),
+            heading(name, "div", 14, INK, "700", MONT, lh=1.35, _css_classes="rcr-faq-tab-label"),
+            heading(str(n), "div", 12, "#8A94A8", "600", MONT, lh=1, _flex_size="none"),
+        ], "#" + anchor, flex_direction="row", flex_align_items="center", flex_gap=gap(12),
+            padding=dims(15, 18, 15, 18), border_border="solid", border_width=dims(0, 0, 1, 0), border_color=LINE,
+            css_classes="rcr-faq-tab")
+
+    def cta(cls, **extra):
+        return con([
+            h("Vous ne trouvez pas votre réponse ?", "div", 22, "#FFFFFF", "800", lh=1.25),
+            p("Communiquez avec nous par téléphone ou par courriel.", 15, BODY_TXT, 1.55),
+            heading("(450) 374-7995", "div", 20, "#FFFFFF", "800", MONT, lh=1.3, link=TEL,
+                    _css_classes="rcr-light-link"),
+            button("Nous joindre", U["contact"], size=13, pad=(13, 20), shadow_on=False, _margin=dims(4, 0, 0, 0)),
+        ], background_background="classic", background_color=DEEP, padding=dims(28, 28, 28, 28), flex_gap=gap(10),
+            css_classes=cls, **extra)
+
+    menu = con([
+        con([
+            con([h("Thèmes", "div", 17, "#FFFFFF", "800")], background_background="classic", background_color=DEEP,
+                padding=dims(18, 18, 18, 18)),
+            con([tab(a_, n_, i_, b - a) for a_, n_, i_, a, b in FAQ_THEMES], css_classes="rcr-faq-tablist"),
+        ], background_background="classic", background_color="#FFFFFF", box_shadow_box_shadow_type="yes",
+            box_shadow_box_shadow=shadow(0, 14, 36, 0, "rgba(11,52,112,0.1)")),
+        cta("rcr-faq-cta", hide_tablet="hidden-tablet", hide_mobile="hidden-mobile"),
+    ], flex_gap=gap(24), css_classes="rcr-sticky", **anim("fadeInUp", 0, True))
+
+    body = section([
+        grid([menu, con(themes + [cta("rcr-faq-cta-bottom", hide_desktop="hidden-desktop",
+                                      _margin=dims(10, 0, 0, 0))], flex_gap=gap(44), **anim("fadeInUp", 150, True))],
+             "300px minmax(0,1fr)", cols_t="1fr", cols_m=1, g=48, grid_align_items="start", width=px(100, "%")),
+    ], padding=dims(80, 32, 100, 32), padding_mobile=dims(60, 20, 80, 20), css_classes="rcr-faq-body",
+        html_tag="section")
     return [hero, body]
+
+
+FAQ_THEMES = [  # anchor, theme name, icon, first and last+1 index in FAQ (client order)
+    ("faq-rcr", "RCR", "heart", 0, 4),
+    ("faq-dea", "DEA", "bolt", 4, 8),
+    ("faq-etouffement", "Étouffement", "lungs", 8, 12),
+    ("faq-anaphylaxie", "Anaphylaxie et EpiPen", "anaphylaxis", 12, 20),
+    ("faq-naloxone", "Naloxone", "pill", 20, 25),
+    ("faq-sir", "SIR", "course-bls", 25, 28),
+    ("faq-pediatrique", "RCR pédiatrique", "child", 28, 31),
+    ("faq-formation", "Formation", "cap", 31, 32),
+]
 
 
 # --------------------------------------------------------------------------- Contact
