@@ -769,8 +769,83 @@ def page_contact():
             cards, mapform, hp]
 
 
+# --------------------------------------------------------------------------- Politique de confidentialité
+def page_privacy():
+    """Privacy policy (page 382): client's text of 7 Nov 2026, laid out like the Privacy Policy design."""
+    def sec(title, html, extra=None):
+        kids = [h(title, "h2", 22, weight="800", lh=1.3), p(html, 16, TEXT2, 1.75, _css_classes="rcr-legal")]
+        return con(kids + (extra or []), flex_gap=gap(10), padding=dims(24, 0, 0, 0), border_border="solid",
+                   border_width=dims(1, 0, 0, 0), border_color=LINE)
+
+    def ul(items):
+        return "<ul>" + "".join(f"<li>{i}</li>" for i in items) + "</ul>"
+
+    body = section([
+        heading(fr("Dernière mise à jour : 7 novembre 2026"), "div", 13, RED, "700", MONT, lh=1.4, ls=1.8,
+                tt="uppercase"),
+        p("La protection de votre vie privée est importante pour nous. Cette politique explique comment notre site Web "
+          "recueille, utilise, conserve et protège vos renseignements personnels lorsque vous le consultez ou "
+          "communiquez avec nous.", 18, INK, 1.7),
+        sec("1. Renseignements recueillis",
+            "<p>Selon les services utilisés, nous pouvons recueillir certains renseignements, notamment :</p>"
+            + ul(["Votre nom et prénom ;", "Votre adresse courriel ;", "Votre numéro de téléphone ;",
+                  "Les renseignements nécessaires à une inscription ou à une demande d’information ;",
+                  "Certaines données relatives à votre navigation sur notre site Web."])
+            + "<p>Nous recueillons uniquement les renseignements nécessaires au fonctionnement de nos services et à "
+              "nos communications avec vous.</p>"),
+        sec("2. Utilisation des renseignements",
+            "<p>Vos renseignements personnels peuvent être utilisés pour :</p>"
+            + ul(["Répondre à vos questions et demandes ;", "Gérer les inscriptions aux formations ;",
+                  "Communiquer avec vous concernant nos activités ;",
+                  "Améliorer le contenu et le fonctionnement de notre site Web ;",
+                  "Respecter nos obligations légales."])
+            + "<p>Nous ne vendons ni ne louons vos renseignements personnels à des tiers.</p>"),
+        sec("3. Protection et conservation des renseignements",
+            "<p>Nous prenons des mesures raisonnables pour protéger vos renseignements personnels contre l’accès non "
+            "autorisé, la perte, la divulgation ou l’utilisation inappropriée.</p><p>Vos renseignements sont conservés "
+            "uniquement pendant la période nécessaire aux fins pour lesquelles ils ont été recueillis, sous réserve des "
+            "obligations légales applicables.</p>"),
+        sec("4. Témoins de connexion (cookies)",
+            "<p>Notre site Web peut utiliser des témoins de connexion afin d’améliorer votre expérience de navigation, "
+            "de faciliter certaines fonctionnalités et, le cas échéant, de mesurer l’achalandage du site.</p><p>Vous "
+            "pouvez modifier les paramètres de votre navigateur pour limiter ou désactiver les témoins de "
+            "connexion.</p>"),
+        sec("5. Partage des renseignements",
+            "<p>Vos renseignements personnels ne sont communiqués à des tiers que lorsque cela est nécessaire à la "
+            "prestation de nos services, avec votre consentement ou lorsque la loi l’autorise.</p><p>Certains "
+            "fournisseurs technologiques peuvent également traiter des renseignements pour notre compte, notamment "
+            "pour l’hébergement du site Web ou la gestion des inscriptions.</p>"),
+        sec("6. Vos droits",
+            "<p>Conformément aux lois applicables, vous pouvez notamment demander :</p>"
+            + ul(["L’accès aux renseignements personnels que nous détenons à votre sujet ;",
+                  "La rectification de renseignements inexacts ou incomplets ;",
+                  "Le retrait de votre consentement lorsque celui-ci constitue le fondement de leur utilisation."])
+            + "<p>Pour exercer vos droits ou poser une question concernant cette politique, vous pouvez communiquer "
+              "avec nous.</p>"),
+        sec("7. Responsable de la protection des renseignements personnels",
+            "<p>Pour toute question, demande ou préoccupation concernant la confidentialité de vos renseignements "
+            "personnels, veuillez communiquer avec notre responsable :</p>",
+            [con([p("<p><strong>Nom :</strong> Fethi Boudebza<br><strong>Titre :</strong> Instructeur de la Fondation "
+                    "des maladies du cœur et de l’AVC du Canada depuis 2017<br><strong>Courriel :</strong> "
+                    '<a href="mailto:rcrrivesud@outlook.com">rcrrivesud@outlook.com</a><br><strong>Organisation :'
+                    "</strong> RCR Rive-Sud</p>", 16, INK, 1.75, _css_classes="rcr-legal")],
+                 background_background="classic", background_color=PALE, padding=dims(20, 24, 20, 24))]),
+        sec("8. Modifications de la politique",
+            "<p>Nous nous réservons le droit de modifier cette politique afin de tenir compte de l’évolution de nos "
+            "pratiques ou des exigences légales.</p><p>Toute modification sera publiée sur cette page avec sa date de "
+            "mise à jour.</p>"),
+        con([p("<p><strong>Votre confiance est importante pour nous.</strong> Merci de visiter notre site et de "
+               "contribuer à une communauté mieux informée et mieux préparée à intervenir en situation "
+               "d’urgence.</p>", 16, "#FFFFFF", 1.7)],
+            background_background="classic", background_color=DEEP, padding=dims(24, 28, 24, 28)),
+    ], boxed_width=px(820), flex_gap=gap(28), padding=dims(80, 32, 100, 32), padding_mobile=dims(60, 20, 80, 20),
+        html_tag="section")
+    return [banner("Politique de confidentialité", [("Accueil", "/"), ("Politique de confidentialité", None)],
+                   "cpr", 70, 40, 220), body]
+
+
 PAGES = {"a_propos": page_about, "services": page_services, "equipe": page_team, "faq": page_faq,
-         "contact": page_contact}
+         "contact": page_contact, "confidentialite": page_privacy}
 
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
