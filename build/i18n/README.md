@@ -37,3 +37,18 @@ then point the EN button to the English page.
 was not explicitly asked for by the client was then removed directly on the live site (FAQ section, extra text,
 course-page hero photos/buttons/CTA bands, label/icon additions, footer phone sizes, extra anchors). The live
 site is the source of truth; the script output in `out/` reflects the first version, not the final one.
+
+## Inner pages (11 Nov 2026)
+Built from the English designs (About, Services, Team, FAQ, Contact) by `build/elementor/pages_fr.py`, all native
+Elementor blocks: À propos (506, /a-propos/), Services (507, /services/), Équipe (508, /equipe/), FAQ (509, /faq/),
+Contact (510, /contact/). The Blog page was skipped on request.
+- Text: client's own French where it exists (Cardio-secours/SIR pages, trainer paragraphs, the docx Q&A for the FAQ),
+  home-page French strings, otherwise a translation of the design copy.
+- Contact form: CF7 505 "Contact (FR)" (copy of 202; fields name, phone, email, training type, participants, message;
+  mail to the site admin address with Reply-To the visitor).
+- Services shows one service at a time (pills, sidebar, previous/next) through a small script in functions.php;
+  each service is a container with its own anchor (#cardio-secours, #sir, #anaphylaxie, #sur-place, #tarifs).
+- Menu 3, footer navigation and the header quote buttons now point to these pages.
+- `functions.php` now marks every front-end page as French (lang fr-CA + rcr-lang-fr), not only the home page.
+- Waiting on photos (placeholders until then): photo-rcr-nourrisson.png (À propos small photo, Services > Formation
+  sur place, Contact banner) and photo-rcr-mannequin.png (Services banner and Cardio-secours photo).
