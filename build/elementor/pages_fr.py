@@ -27,7 +27,8 @@ import generate as _g  # noqa: E402
 
 _g._counter[0] = 900000  # new ids stay clear of the ids on the live pages
 _g.IMG.update({"nourrisson": (533, _g.UP + "photo-rcr-nourrisson.webp"),
-               "rcr_mannequin": (534, _g.UP + "photo-rcr-mannequin.webp")})
+               "rcr_mannequin": (534, _g.UP + "photo-rcr-mannequin.webp"),
+               "fethi_clinique": (580, _g.UP + "fethi-boudebza-clinique.webp")})
 _g.SVG.update({"anaphylaxis": 511, "pin": 512, "heart": 513, "pulse": 514, "cap": 515, "people": 516})
 
 OUT = os.path.join(os.path.dirname(__file__), "out")
@@ -604,7 +605,8 @@ def page_team():
 
     aside = con([
         con([
-            image("fethi", alt="Fethi Boudebza", cls="rcr-43", css_filters_css_filter="custom",
+            image("fethi_clinique", alt="Fethi Boudebza, infirmier praticien spécialisé, dans une salle d’examen clinique",
+                  cls="rcr-43", css_filters_css_filter="custom",
                   css_filters_brightness=px(85), css_filters_contrast=px(105)),
             con([
                 h("Fethi Boudebza", "div", 20, weight="800"),
