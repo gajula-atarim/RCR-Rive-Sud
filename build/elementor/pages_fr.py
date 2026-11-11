@@ -627,7 +627,7 @@ def page_team():
         question_card(with_button=True),
     ], flex_gap=gap(28), css_classes="rcr-sticky")
 
-    return [banner("Notre formateur", [("Accueil", "/"), ("Équipe", None), ("Fethi Boudebza", None)],
+    return [banner("Notre équipe", [("Accueil", "/"), ("Équipe", None)],
                    "ballon", 50, 50),
             page_section([two_col(main, aside)]),
             # Second team member (11 Nov 2026), bio word for word from the client's other site
