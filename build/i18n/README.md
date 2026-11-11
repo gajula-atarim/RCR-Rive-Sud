@@ -55,3 +55,7 @@ Contact (510, /contact/). The Blog page was skipped on request.
   Équipe (three text blocks, three sidebar cards), FAQ (hero text, accordion) and Contact (info cards, map, form,
   hours, pricing), matching Home and À propos. `pages_fr.py` does not set these; re-add them if a page is regenerated.
 - Banners were reworked live too (photo panel on the right half, 300/260/200 px tall); `pages_fr.py` matches.
+- FAQ page rebuilt as option B (11 Nov 2026): sticky "Thèmes" menu (8 themes, client's question order) with a
+  "Vous ne trouvez pas votre réponse ?" card, questions in Elementor Toggle widgets per theme (all closed on load).
+  functions.php highlights the theme being read and prints one FAQPage JSON-LD built from the toggles
+  (class rcr-faqtg), so the toggles' own faq_schema is off to avoid duplicates. Old layout kept in option rcr_backup_509_faq.
