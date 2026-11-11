@@ -237,22 +237,3 @@ add_action( 'wp_head', function () {
 		echo '<script type="application/ld+json">' . wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $questions ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . "</script>\n";
 	}
 } );
-
-/** TEMPORARY one-shot importer for the FAQ page (removed right after it runs). */
-add_action( 'init', function () {
-	if ( get_option( 'rcr_import_faq_done' ) || ! isset( $_GET['rcr_import_faq'] ) ) {
-		return;
-	}
-	$res  = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/383d806db973d343f2b9b5a6995b3fafe4a07c51/build/elementor/out/page_faq.json', array( 'timeout' => 30 ) );
-	$tree = json_decode( is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res ), true );
-	if ( ! is_array( $tree ) || empty( $tree ) ) {
-		update_option( 'rcr_import_faq_error', 'load', false );
-		return;
-	}
-	add_option( 'rcr_backup_509_faq', get_post_meta( 509, '_elementor_data', true ), '', false );
-	update_post_meta( 509, '_elementor_data', wp_slash( wp_json_encode( $tree ) ) );
-	if ( class_exists( '\Elementor\Plugin' ) ) {
-		\Elementor\Plugin::$instance->files_manager->clear_cache();
-	}
-	update_option( 'rcr_import_faq_done', current_time( 'mysql' ), false );
-}, 20 );
