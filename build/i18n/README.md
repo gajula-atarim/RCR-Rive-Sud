@@ -51,3 +51,7 @@ Contact (510, /contact/). The Blog page was skipped on request.
 - Menu 3, footer navigation and the header quote buttons now point to these pages.
 - `functions.php` now marks every front-end page as French (lang fr-CA + rcr-lang-fr), not only the home page.
 - Photos photo-rcr-nourrisson (533) and photo-rcr-mannequin (534) added on 11 Nov 2026 (no placeholders left).
+- Scroll fade-ins (fadeInUp, Elementor Motion Effects) were added live on 11 Nov 2026 to Services (main column, sidebar),
+  Équipe (three text blocks, three sidebar cards), FAQ (hero text, accordion) and Contact (info cards, map, form,
+  hours, pricing), matching Home and À propos. `pages_fr.py` does not set these; re-add them if a page is regenerated.
+- Banners were reworked live too (photo panel on the right half, 300/260/200 px tall); `pages_fr.py` matches.
