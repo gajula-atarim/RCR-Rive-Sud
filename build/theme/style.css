@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.9.2
+Version: 1.10.0
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -230,3 +230,102 @@ url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 .rcr-art-toggle .elementor-tab-content li{margin:3px 0}
 /* while an article is open, the other cards in the row keep their own height */
 .e-con.rcr-art-grid:has(.elementor-tab-title.elementor-active){align-items:start}
+
+/* ==== Inner pages: À propos, Services, Équipe, FAQ, Contact ==== */
+/* Title banners and breadcrumbs */
+.rcr-crumbs a{color:inherit;text-decoration:none;transition:color .2s}
+.rcr-crumbs a:hover{color:var(--rcr-red)}
+.rcr-crumbs .rcr-cur{color:var(--rcr-red)}
+@media (max-width:767px){.e-con.rcr-banner::before{background-image:linear-gradient(90deg,rgba(191,217,242,.95) 0%,rgba(191,217,242,.75) 100%)!important}}
+/* Photo ratios set in CSS (Elementor's image widget has no aspect-ratio control) */
+.rcr-sq img,.rcr-43 img,.rcr-169 img{width:100%;height:auto;object-fit:cover;display:block}
+.rcr-sq img{aspect-ratio:1/1}.rcr-43 img{aspect-ratio:4/3}.rcr-169 img{aspect-ratio:16/9}
+.rcr-zoom1 img{transition:transform .5s ease}.rcr-zoom1:hover img{transform:scale(1.02)}
+.rcr-zoom{overflow:hidden}.rcr-zoom img{transition:transform .6s ease}.rcr-zoom:hover img{transform:scale(1.08)}
+.rcr-inset img{border:10px solid #fff;box-shadow:0 24px 50px rgba(11,52,112,.2);transition:transform .5s ease}
+.rcr-inset:hover img{transform:translateY(-8px)}
+@media (max-width:767px){.rcr-inset img{border-width:6px}}
+.rcr-ph img{background:#E6EDF8;object-fit:contain!important}
+.rcr-avatar img{width:60px;height:60px}
+/* About intro: dotted pattern behind the photos */
+.e-con.rcr-adots{position:relative;isolation:isolate}
+.e-con.rcr-adots::after{content:"";position:absolute;left:-18px;bottom:8%;width:96px;height:120px;background-image:radial-gradient(#B8C6DE 1.6px,transparent 1.6px);background-size:14px 14px;z-index:-1;pointer-events:none}
+@media (max-width:767px){.e-con.rcr-adots::after{left:-10px;width:60px;height:90px}}
+/* Two-column check lists */
+.rcr-check2 .elementor-icon-list-items{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 28px}
+.rcr-check2 .elementor-icon-list-item{margin:0!important;padding:0!important}
+@media (max-width:767px){.rcr-check2 .elementor-icon-list-items{grid-template-columns:1fr;gap:10px}}
+/* "Nos formations" cards (whole card is a link) */
+.e-con.rcr-tcard{color:inherit;text-decoration:none}
+.rcr-pill{margin-top:auto!important;padding-top:10px}
+.rcr-pill .elementor-heading-title{display:inline-block;padding:10px 18px;border:1.5px solid #D9E0EC;border-radius:999px;
+background-image:linear-gradient(90deg,#D7191F,#0B3470);background-repeat:no-repeat;background-position:left center;background-size:0% 100%;
+transition:background-size .55s cubic-bezier(.16,1,.3,1),color .35s ease,border-color .35s ease,letter-spacing .35s ease}
+.rcr-tcard:is(:hover,:focus-visible) .rcr-pill .elementor-heading-title{background-size:100% 100%;color:#fff!important;border-color:transparent;letter-spacing:.1em}
+/* Light links on dark cards */
+.rcr-light-link a{color:inherit!important}.rcr-light-link a:hover{color:#FF8A8D!important}
+/* Sidebar sticks on desktop */
+@media (min-width:1025px){.e-con.rcr-sticky{position:sticky;top:24px}}
+/* Services: one service shown at a time (script in functions.php); without the script every service stays visible */
+.rcr-svc-js .rcr-svc-panel:not(.is-active){display:none!important}
+.rcr-svc-panels{transition:opacity .35s ease,transform .35s ease}
+.rcr-svc-panels.is-fading{opacity:0;transform:translateY(10px)}
+.rcr-svc-pill .elementor-button{border:1px solid #D9E0EC;transition:all .25s ease}
+.rcr-svc-pill .elementor-button:hover{border-color:var(--rcr-red);transform:translateY(-1px)}
+.rcr-svc-pill.is-active .elementor-button{background:var(--rcr-navy)!important;color:#fff!important;border-color:var(--rcr-navy)}
+.e-con.rcr-svc-tab{border-left:3px solid transparent!important;text-decoration:none;transition:background .25s ease,border-color .25s ease}
+.e-con.rcr-svc-tab:hover{background:#F5F7FB}
+.rcr-svc-tab:hover .rcr-svc-tab-label .elementor-heading-title,.rcr-svc-tab.is-active .rcr-svc-tab-label .elementor-heading-title{color:var(--rcr-red)}
+.e-con.rcr-svc-tab.is-active{background:#FDECEC;border-left-color:var(--rcr-red)!important}
+.rcr-svc-num .elementor-heading-title{width:30px;height:30px;border-radius:50%;background:var(--rcr-navy);display:flex;align-items:center;justify-content:center}
+.rcr-svc-tab.is-active .rcr-svc-num .elementor-heading-title{background:var(--rcr-red)}
+.rcr-svc-tab.is-active .rcr-svc-arrow .elementor-heading-title{color:var(--rcr-red)}
+.rcr-svc-tab.is-active .rcr-svc-arrow .elementor-heading-title::before{content:"Affiché";font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-right:10px;vertical-align:middle}
+.e-con.rcr-svc-prev,.e-con.rcr-svc-next{border:1px solid #D9E0EC;text-decoration:none;transition:border-color .25s ease,transform .25s ease}
+.e-con.rcr-svc-prev:hover{border-color:var(--rcr-red);transform:translateX(-4px)}
+.e-con.rcr-svc-next:hover{border-color:var(--rcr-red);transform:translateX(4px)}
+.rcr-svc-nav .is-hidden{visibility:hidden}
+@media (max-width:767px){.rcr-svc-nav .is-hidden{display:none}}
+.e-con.rcr-svc-panel{scroll-margin-top:20px}
+/* Accordions (Services) */
+.rcr-acc .elementor-accordion-item{border:0!important;background:#FAFBFD;margin-bottom:12px;transition:background .3s ease}
+.rcr-acc .elementor-accordion-item:has(.elementor-active){background:#F5F7FB}
+.rcr-acc .elementor-tab-title,.rcr-acc .elementor-tab-content{border:0!important}
+/* FAQ page */
+.rcr-maxw480{max-width:480px}
+.rcr-faqacc .elementor-accordion-item{border:1px solid #D9E0EC!important;background:#fff;margin-bottom:14px;transition:background .35s ease,border-color .35s ease,box-shadow .35s ease}
+.rcr-faqacc .elementor-accordion-item:hover{border-color:var(--rcr-red)!important;box-shadow:0 12px 28px rgba(11,52,112,.08)}
+.rcr-faqacc .elementor-accordion-item:has(.elementor-active){background:#F5F7FB}
+.rcr-faqacc .elementor-tab-title{display:flex;align-items:center;gap:20px;border:0!important}
+.rcr-faqacc .elementor-accordion-title{flex:1}
+.rcr-faqacc .elementor-accordion-icon{order:2;flex:none;float:none!important;width:32px!important;height:32px;border-radius:50%;background:var(--rcr-navy);display:flex!important;align-items:center;justify-content:center;transition:background .35s ease}
+.rcr-faqacc .elementor-active .elementor-accordion-icon{background:var(--rcr-red)}
+.rcr-faqacc .elementor-accordion-icon svg{width:13px;height:13px}
+.rcr-faqacc .elementor-tab-content{border:0!important}
+@media (max-width:767px){.e-con.rcr-faq-photo::before{background-image:linear-gradient(90deg,rgba(234,241,250,.95) 0%,rgba(234,241,250,.8) 100%)!important}}
+/* Team: experience cards */
+.e-con.rcr-xcard{transition:border-color .35s ease,transform .35s ease,box-shadow .35s ease}
+.e-con.rcr-xcard:hover{border-color:var(--rcr-red);transform:translateY(-4px);box-shadow:0 16px 32px rgba(11,52,112,.1)}
+@media (min-width:768px){.e-con.rcr-span2{grid-column:span 2}}
+/* Contact: map and form */
+.rcr-map iframe{filter:grayscale(1) contrast(1.05);display:block}
+.e-con.rcr-maplabel{pointer-events:none}
+.e-con.rcr-pricebox .elementor-widget-button{margin-top:auto}
+.rcr-cform .rcr-cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.rcr-cform .rcr-cgrid>p{display:contents}
+.rcr-cform .rcr-cgrid br{display:none}
+.rcr-cform label{display:flex;flex-direction:column;gap:6px;font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:700;color:var(--rcr-ink)}
+.rcr-cform .rcr-span2{grid-column:span 2}
+.rcr-cform .wpcf7-form-control-wrap{display:block}
+.rcr-cform input[type=text],.rcr-cform input[type=tel],.rcr-cform input[type=email],.rcr-cform select,.rcr-cform textarea{
+width:100%;background:#F3F5F8;border:1px solid transparent;border-radius:0;padding:13px 14px;font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:400;color:var(--rcr-ink);outline:none;box-shadow:none;transition:border-color .25s ease,background .25s ease}
+.rcr-cform input:focus,.rcr-cform select:focus,.rcr-cform textarea:focus{border-color:var(--rcr-red);background:#fff}
+.rcr-cform textarea{resize:vertical;height:auto}
+.rcr-cform ::placeholder{color:#5B6780;opacity:1}
+.rcr-cform .wpcf7-submit{margin-top:22px;font-family:Montserrat,sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;background:var(--rcr-red);color:#fff;border:0;padding:16px 28px;border-radius:3px;cursor:pointer;
+box-shadow:0 10px 24px rgba(215,25,31,.28);transition:background .3s ease,transform .3s ease}
+.rcr-cform .wpcf7-submit:hover,.rcr-cform .wpcf7-submit:focus{background:var(--rcr-red-dark);transform:translateY(-2px)}
+.rcr-cform .wpcf7-spinner{vertical-align:middle}
+.rcr-cform .wpcf7-not-valid-tip{font-size:13px;font-weight:400;margin-top:4px}
+.rcr-cform .wpcf7-response-output{margin:20px 0 0!important;font-size:14px}
+@media (max-width:767px){.rcr-cform .rcr-cgrid{grid-template-columns:1fr}.rcr-cform .rcr-span2{grid-column:auto}}
