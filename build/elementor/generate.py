@@ -27,6 +27,7 @@ IMG = {
     "hexband": (12, UP + "hex-band.png"),
     "logo": (32, UP + "rcr-rive-sud-logo.png"),
     "fethi": (116, UP + "fethi-boudebza-portrait.webp"),
+    "ballon": (459, UP + "photo-rcr-ballon-masque.webp"),  # design: photo-rcr-ballon-masque.png
 }
 
 # Design tokens
@@ -588,7 +589,7 @@ def certification():
             **anim("fadeInUp", delay, True))
 
     return section([
-        photo_layer("group", "left", 52, 40, 50, overlay_gradient("rgba(245,247,251,0)", 58, PALE, 100),
+        photo_layer("ballon", "left", 52, 40, 50, overlay_gradient("rgba(245,247,251,0)", 58, PALE, 100),
                     "rcr-cert-photo"),
         con([
             h2("Certification", **anim("fadeInUp", 0)),
