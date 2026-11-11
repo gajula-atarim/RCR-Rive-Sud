@@ -50,5 +50,4 @@ Contact (510, /contact/). The Blog page was skipped on request.
   each service is a container with its own anchor (#cardio-secours, #sir, #anaphylaxie, #sur-place, #tarifs).
 - Menu 3, footer navigation and the header quote buttons now point to these pages.
 - `functions.php` now marks every front-end page as French (lang fr-CA + rcr-lang-fr), not only the home page.
-- Waiting on photos (placeholders until then): photo-rcr-nourrisson.png (À propos small photo, Services > Formation
-  sur place, Contact banner) and photo-rcr-mannequin.png (Services banner and Cardio-secours photo).
+- Photos photo-rcr-nourrisson (533) and photo-rcr-mannequin (534) added on 11 Nov 2026 (no placeholders left).

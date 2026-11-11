@@ -26,6 +26,8 @@ from generate import (  # noqa: E402
 import generate as _g  # noqa: E402
 
 _g._counter[0] = 900000  # new ids stay clear of the ids on the live pages
+_g.IMG.update({"nourrisson": (533, _g.UP + "photo-rcr-nourrisson.webp"),
+               "rcr_mannequin": (534, _g.UP + "photo-rcr-mannequin.webp")})
 _g.SVG.update({"anaphylaxis": 511, "pin": 512, "heart": 513, "pulse": 514, "cap": 515, "people": 516})
 
 OUT = os.path.join(os.path.dirname(__file__), "out")
@@ -166,7 +168,7 @@ def page_about():
         grid([
             con([
                 image("cpr", alt="Formateur démontrant les compressions thoraciques", cls="rcr-sq rcr-zoom1"),
-                ph_image("Pratique de la RCR chez le nourrisson", "rcr-sq rcr-inset",
+                image("nourrisson", alt="Pratique de la RCR chez le nourrisson", cls="rcr-sq rcr-inset",
                          _position="absolute", _offset_orientation_h="end", _offset_x_end=px(0),
                          _offset_orientation_v="end", _offset_y_end=px(0), _element_width="initial",
                          _element_custom_width=px(56, "%")),
@@ -322,7 +324,7 @@ def page_services():
           "La formation Cardio-secours de Cœur + AVC vous apprend à reconnaître un arrêt cardiaque et à intervenir "
           "rapidement grâce aux techniques de réanimation cardiorespiratoire (RCR), à l’utilisation d’un "
           "défibrillateur externe automatisé (DEA) et aux manœuvres de désobstruction des voies respiratoires.</p>"),
-        ph_image("Compressions thoraciques sur un mannequin de RCR", "rcr-169"),
+        image("rcr_mannequin", alt="Compressions thoraciques sur un mannequin de RCR", cls="rcr-169"),
         h("Aperçu", "h3", 24, weight="800"),
         p("<p><strong>Devenez un maillon fort de la chaîne de survie.</strong> Accessible sans prérequis médical, "
           "cette formation s’adresse aux personnes qui souhaitent acquérir les compétences essentielles pour "
@@ -443,7 +445,7 @@ def page_services():
         p("<p><strong>Nous nous déplaçons.</strong> Vous souhaitez former votre équipe sans vous déplacer ? "
           "RCR Rive-Sud offre des formations privées directement sur place, principalement sur la Rive-Sud de "
           "Montréal. Des déplacements dans d’autres régions peuvent également être organisés sur demande.</p>"),
-        ph_image("Pratique de la RCR chez le nourrisson", "rcr-169"),
+        image("nourrisson", alt="Pratique de la RCR chez le nourrisson", cls="rcr-169"),
         h("Où pouvons-nous nous déplacer ?", "h3", 24, weight="800"),
         p("Selon le type de formation et les modalités convenues, nous pouvons nous déplacer :",
           _margin=dims(-12, 0, 0, 0)),
@@ -538,8 +540,8 @@ def page_services():
             box_shadow_box_shadow=shadow(0, 14, 36, 0, "rgba(11,52,112,0.1)")),
     ], flex_gap=gap(28), css_classes="rcr-sticky")
 
-    return [banner("Nos formations", [("Accueil", "/"), ("Services", None), ("Cardio-secours", None)], None,
-                   height=220),
+    return [banner("Nos formations", [("Accueil", "/"), ("Services", None), ("Cardio-secours", None)],
+                   "rcr_mannequin", 70, 50, 220),
             page_section([two_col(main, aside)], css_classes="rcr-svc")]
 
 
@@ -765,7 +767,7 @@ def page_contact():
                  padding=dims(90, 32, 90, 32), padding_mobile=dims(70, 20, 70, 20), background_background="classic",
                  background_color=PALE, html_tag="section")
 
-    return [banner("Contactez-nous", [("Accueil", "/"), ("Contact", None)], None, height=220),
+    return [banner("Contactez-nous", [("Accueil", "/"), ("Contact", None)], "nourrisson", 70, 40, 220),
             cards, mapform, hp]
 
 
