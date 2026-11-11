@@ -1,0 +1,1194 @@
+{
+ "id": "715de04",
+ "elType": "container",
+ "isInner": false,
+ "settings": {
+  "flex_direction": "column",
+  "flex_gap": {
+   "column": "48",
+   "row": "48",
+   "isLinked": true,
+   "unit": "px",
+   "size": 48
+  },
+  "padding": {
+   "unit": "px",
+   "top": "110",
+   "right": "32",
+   "bottom": "150",
+   "left": "32",
+   "isLinked": false
+  },
+  "content_width": "boxed",
+  "boxed_width": {
+   "unit": "px",
+   "size": 1200,
+   "sizes": []
+  },
+  "_element_id": "articles",
+  "flex_align_items": "center",
+  "padding_mobile": {
+   "unit": "px",
+   "top": "70",
+   "right": "20",
+   "bottom": "90",
+   "left": "20",
+   "isLinked": false
+  },
+  "background_background": "gradient",
+  "background_color": "#FFFFFF",
+  "background_color_stop": {
+   "unit": "%",
+   "size": 60,
+   "sizes": []
+  },
+  "background_color_b": "#F3F7FC",
+  "background_color_b_stop": {
+   "unit": "%",
+   "size": 100,
+   "sizes": []
+  },
+  "background_gradient_angle": {
+   "unit": "deg",
+   "size": 180,
+   "sizes": []
+  },
+  "css_classes": "rcr-articles",
+  "html_tag": "section"
+ },
+ "elements": [
+  {
+   "id": "ebe2971",
+   "elType": "widget",
+   "widgetType": "heading",
+   "settings": {
+    "title": "Savez-vous que…",
+    "header_size": "h2",
+    "title_color": "#0E1B33",
+    "typography_typography": "custom",
+    "typography_font_family": "Montserrat",
+    "typography_font_weight": "800",
+    "typography_font_size": {
+     "unit": "px",
+     "size": 44,
+     "sizes": []
+    },
+    "typography_font_size_tablet": {
+     "unit": "px",
+     "size": 38,
+     "sizes": []
+    },
+    "typography_font_size_mobile": {
+     "unit": "px",
+     "size": 30,
+     "sizes": []
+    },
+    "typography_line_height": {
+     "unit": "em",
+     "size": 1.15,
+     "sizes": []
+    },
+    "typography_letter_spacing": {
+     "unit": "px",
+     "size": -0.44,
+     "sizes": []
+    },
+    "align": "center",
+    "_animation": "fadeInUp"
+   },
+   "elements": []
+  },
+  {
+   "id": "c78f52b",
+   "elType": "container",
+   "isInner": true,
+   "settings": {
+    "flex_direction": "column",
+    "flex_gap": {
+     "column": "0",
+     "row": "0",
+     "isLinked": true,
+     "unit": "px",
+     "size": 0
+    },
+    "padding": {
+     "unit": "px",
+     "top": "0",
+     "right": "0",
+     "bottom": "0",
+     "left": "0",
+     "isLinked": false
+    },
+    "content_width": "full",
+    "container_type": "grid",
+    "grid_columns_grid": {
+     "unit": "fr",
+     "size": 4,
+     "sizes": []
+    },
+    "grid_rows_grid": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_auto_flow": "row",
+    "grid_gaps": {
+     "column": "24",
+     "row": "24",
+     "isLinked": false,
+     "unit": "px"
+    },
+    "grid_columns_grid_mobile": {
+     "unit": "fr",
+     "size": 1,
+     "sizes": []
+    },
+    "grid_columns_grid_tablet": {
+     "unit": "fr",
+     "size": 2,
+     "sizes": []
+    },
+    "width": {
+     "unit": "%",
+     "size": 100,
+     "sizes": []
+    },
+    "grid_align_items": "stretch",
+    "css_classes": "rcr-art-grid"
+   },
+   "elements": [
+    {
+     "id": "46ca463",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_gap": {
+       "column": "0",
+       "row": "0",
+       "isLinked": true,
+       "unit": "px",
+       "size": 0
+      },
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "content_width": "full",
+      "background_background": "classic",
+      "background_color": "#FFFFFF",
+      "overflow": "hidden",
+      "box_shadow_box_shadow_type": "yes",
+      "box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 18,
+       "blur": 40,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.10)"
+      },
+      "box_shadow_hover_box_shadow_type": "yes",
+      "box_shadow_hover_box_shadow": {
+       "horizontal": 0,
+       "vertical": 28,
+       "blur": 54,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.16)"
+      },
+      "_transform_translateY_effect_hover": {
+       "unit": "px",
+       "size": -6,
+       "sizes": []
+      },
+      "_transform_transition_hover": {
+       "unit": "ms",
+       "size": 350,
+       "sizes": []
+      },
+      "border_hover_transition": {
+       "unit": "s",
+       "size": 0.35,
+       "sizes": []
+      },
+      "css_classes": "rcr-hcard rcr-noline rcr-art-card",
+      "animation": "fadeInUp"
+     },
+     "elements": [
+      {
+       "id": "a405360",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "https://rcr-rive-sud.wsdfy.com/wp-content/uploads/2026/11/article-epipen.webp",
+         "id": 472,
+         "alt": "Soins d’anaphylaxie et administration d’EpiPen",
+         "source": "library"
+        },
+        "image_size": "full",
+        "width": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "align": "start",
+        "height": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "object-fit": "cover",
+        "height_mobile": {
+         "unit": "px",
+         "size": 220,
+         "sizes": []
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "17ef8ad",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_gap": {
+         "column": "12",
+         "row": "12",
+         "isLinked": true,
+         "unit": "px",
+         "size": 12
+        },
+        "padding": {
+         "unit": "px",
+         "top": "24",
+         "right": "24",
+         "bottom": "26",
+         "left": "24",
+         "isLinked": false
+        },
+        "content_width": "full",
+        "css_classes": "rcr-art-body"
+       },
+       "elements": [
+        {
+         "id": "9ee82ef",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "EPIPEN : SAVEZ-VOUS UTILISER UN AUTO-INJECTEUR D'ÉPINÉPHRINE ?",
+          "header_size": "h3",
+          "title_color": "#0E1B33",
+          "typography_typography": "custom",
+          "typography_font_family": "Montserrat",
+          "typography_font_weight": "700",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.35,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "3d9dff3",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>En situation d'anaphylaxie, savoir utiliser rapidement un auto-injecteur d'épinéphrine est essentiel !</p>",
+          "text_color": "#5B6780",
+          "typography_typography": "custom",
+          "typography_font_family": "Source Sans 3",
+          "typography_font_weight": "400",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "9e32e61",
+         "elType": "widget",
+         "widgetType": "toggle",
+         "settings": {
+          "tabs": [
+           {
+            "_id": "d3045d9",
+            "tab_title": "Lire la suite",
+            "tab_content": "<p>Un auto-injecteur comme EpiPen permet d'administrer rapidement l'épinéphrine lors d'une réaction allergique grave.</p><p><strong>Les étapes essentielles :</strong></p><ul><li>Reconnaître les signes d'une réaction anaphylactique.</li><li>Retirer le dispositif de son emballage et suivre les instructions du fabricant.</li><li>Positionner l'auto-injecteur contre la face externe de la cuisse.</li><li>Activer le dispositif selon les instructions propres au modèle.</li><li>Composer immédiatement le 911 et suivre les recommandations des secours.</li></ul><p><strong>À retenir :</strong> L'administration de l'épinéphrine ne doit pas être retardée. Une deuxième dose peut être nécessaire selon les recommandations et le protocole applicable.</p><p>💉 La pratique sur un dispositif d'entraînement permet de développer confiance et précision.</p><p>Apprenez à utiliser correctement un auto-injecteur d'épinéphrine grâce à notre formation !</p>"
+           }
+          ],
+          "selected_icon": {
+           "value": "fas fa-plus",
+           "library": "fa-solid"
+          },
+          "selected_active_icon": {
+           "value": "fas fa-minus",
+           "library": "fa-solid"
+          },
+          "title_html_tag": "div",
+          "border_width": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "title_color": "#0E1B33",
+          "tab_active_color": "#D7191F",
+          "icon_color": "#D7191F",
+          "icon_active_color": "#D7191F",
+          "icon_align": "right",
+          "icon_space": {
+           "unit": "px",
+           "size": 10,
+           "sizes": []
+          },
+          "title_padding": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "4",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_padding": {
+           "unit": "px",
+           "top": "14",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_color": "#3F4B63",
+          "_css_classes": "rcr-art-toggle",
+          "title_typography_typography": "custom",
+          "title_typography_font_family": "Montserrat",
+          "title_typography_font_weight": "700",
+          "title_typography_font_size": {
+           "unit": "px",
+           "size": 13,
+           "sizes": []
+          },
+          "title_typography_line_height": {
+           "unit": "em",
+           "size": 1.3,
+           "sizes": []
+          },
+          "title_typography_letter_spacing": {
+           "unit": "px",
+           "size": 0.4,
+           "sizes": []
+          },
+          "title_typography_text_transform": "uppercase",
+          "content_typography_typography": "custom",
+          "content_typography_font_family": "Source Sans 3",
+          "content_typography_font_weight": "400",
+          "content_typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "content_typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "d35e4c1",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_gap": {
+       "column": "0",
+       "row": "0",
+       "isLinked": true,
+       "unit": "px",
+       "size": 0
+      },
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "content_width": "full",
+      "background_background": "classic",
+      "background_color": "#FFFFFF",
+      "overflow": "hidden",
+      "box_shadow_box_shadow_type": "yes",
+      "box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 18,
+       "blur": 40,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.10)"
+      },
+      "box_shadow_hover_box_shadow_type": "yes",
+      "box_shadow_hover_box_shadow": {
+       "horizontal": 0,
+       "vertical": 28,
+       "blur": 54,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.16)"
+      },
+      "_transform_translateY_effect_hover": {
+       "unit": "px",
+       "size": -6,
+       "sizes": []
+      },
+      "_transform_transition_hover": {
+       "unit": "ms",
+       "size": 350,
+       "sizes": []
+      },
+      "border_hover_transition": {
+       "unit": "s",
+       "size": 0.35,
+       "sizes": []
+      },
+      "css_classes": "rcr-hcard rcr-noline rcr-art-card",
+      "animation": "fadeInUp",
+      "animation_delay": 100
+     },
+     "elements": [
+      {
+       "id": "465a483",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "https://rcr-rive-sud.wsdfy.com/wp-content/uploads/2026/11/article-naloxone.webp",
+         "id": 473,
+         "alt": "Naloxone : une intervention rapide peut sauver une vie",
+         "source": "library"
+        },
+        "image_size": "full",
+        "width": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "align": "start",
+        "height": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "object-fit": "cover",
+        "height_mobile": {
+         "unit": "px",
+         "size": 220,
+         "sizes": []
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "4289f4f",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_gap": {
+         "column": "12",
+         "row": "12",
+         "isLinked": true,
+         "unit": "px",
+         "size": 12
+        },
+        "padding": {
+         "unit": "px",
+         "top": "24",
+         "right": "24",
+         "bottom": "26",
+         "left": "24",
+         "isLinked": false
+        },
+        "content_width": "full",
+        "css_classes": "rcr-art-body"
+       },
+       "elements": [
+        {
+         "id": "f7da1c1",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "SURDOSE AUX OPIOÏDES : LA NALOXONE PEUT SAUVER UNE VIE !",
+          "header_size": "h3",
+          "title_color": "#0E1B33",
+          "typography_typography": "custom",
+          "typography_font_family": "Montserrat",
+          "typography_font_weight": "700",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.35,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "ee3a9dc",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Saviez-vous que la naloxone peut temporairement renverser les effets d'une surdose aux opioïdes ?</p>",
+          "text_color": "#5B6780",
+          "typography_typography": "custom",
+          "typography_font_family": "Source Sans 3",
+          "typography_font_weight": "400",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "a561fc2",
+         "elType": "widget",
+         "widgetType": "toggle",
+         "settings": {
+          "tabs": [
+           {
+            "_id": "c8eaadc",
+            "tab_title": "Lire la suite",
+            "tab_content": "<p>La naloxone est un médicament qui peut rétablir temporairement la respiration d'une personne victime d'une surdose aux opioïdes.</p><p><strong>Comment reconnaître une possible surdose ?</strong></p><ul><li>Personne inconsciente ou difficile à réveiller.</li><li>Respiration lente, irrégulière ou absente.</li><li>Ronflements inhabituels ou gargouillements.</li><li>Lèvres ou ongles bleutés ou grisâtres.</li></ul><p><strong>Les bons réflexes :</strong></p><ul><li>Appelez immédiatement le 911.</li><li>Administrez la naloxone disponible selon les instructions du dispositif.</li><li>Assurez le soutien respiratoire et commencez la RCR si nécessaire, selon votre formation.</li><li>Si la personne ne reprend pas une respiration adéquate, administrez une autre dose après 2 à 3 minutes selon les instructions du produit.</li><li>Restez auprès de la personne jusqu'à l'arrivée des secours.</li></ul><p>⚠️ La naloxone peut avoir un effet temporaire. Une surveillance et une prise en charge médicale demeurent indispensables.</p><p>Apprenez à reconnaître une surdose et à administrer la naloxone. Une intervention rapide peut sauver une vie !</p>"
+           }
+          ],
+          "selected_icon": {
+           "value": "fas fa-plus",
+           "library": "fa-solid"
+          },
+          "selected_active_icon": {
+           "value": "fas fa-minus",
+           "library": "fa-solid"
+          },
+          "title_html_tag": "div",
+          "border_width": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "title_color": "#0E1B33",
+          "tab_active_color": "#D7191F",
+          "icon_color": "#D7191F",
+          "icon_active_color": "#D7191F",
+          "icon_align": "right",
+          "icon_space": {
+           "unit": "px",
+           "size": 10,
+           "sizes": []
+          },
+          "title_padding": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "4",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_padding": {
+           "unit": "px",
+           "top": "14",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_color": "#3F4B63",
+          "_css_classes": "rcr-art-toggle",
+          "title_typography_typography": "custom",
+          "title_typography_font_family": "Montserrat",
+          "title_typography_font_weight": "700",
+          "title_typography_font_size": {
+           "unit": "px",
+           "size": 13,
+           "sizes": []
+          },
+          "title_typography_line_height": {
+           "unit": "em",
+           "size": 1.3,
+           "sizes": []
+          },
+          "title_typography_letter_spacing": {
+           "unit": "px",
+           "size": 0.4,
+           "sizes": []
+          },
+          "title_typography_text_transform": "uppercase",
+          "content_typography_typography": "custom",
+          "content_typography_font_family": "Source Sans 3",
+          "content_typography_font_weight": "400",
+          "content_typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "content_typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "abd1dba",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_gap": {
+       "column": "0",
+       "row": "0",
+       "isLinked": true,
+       "unit": "px",
+       "size": 0
+      },
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "content_width": "full",
+      "background_background": "classic",
+      "background_color": "#FFFFFF",
+      "overflow": "hidden",
+      "box_shadow_box_shadow_type": "yes",
+      "box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 18,
+       "blur": 40,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.10)"
+      },
+      "box_shadow_hover_box_shadow_type": "yes",
+      "box_shadow_hover_box_shadow": {
+       "horizontal": 0,
+       "vertical": 28,
+       "blur": 54,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.16)"
+      },
+      "_transform_translateY_effect_hover": {
+       "unit": "px",
+       "size": -6,
+       "sizes": []
+      },
+      "_transform_transition_hover": {
+       "unit": "ms",
+       "size": 350,
+       "sizes": []
+      },
+      "border_hover_transition": {
+       "unit": "s",
+       "size": 0.35,
+       "sizes": []
+      },
+      "css_classes": "rcr-hcard rcr-noline rcr-art-card",
+      "animation": "fadeInUp",
+      "animation_delay": 200
+     },
+     "elements": [
+      {
+       "id": "74b2480",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "https://rcr-rive-sud.wsdfy.com/wp-content/uploads/2026/11/article-etouffement.webp",
+         "id": 474,
+         "alt": "Étouffement et désobstruction : agissez vite",
+         "source": "library"
+        },
+        "image_size": "full",
+        "width": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "align": "start",
+        "height": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "object-fit": "cover",
+        "height_mobile": {
+         "unit": "px",
+         "size": 220,
+         "sizes": []
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "23afd20",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_gap": {
+         "column": "12",
+         "row": "12",
+         "isLinked": true,
+         "unit": "px",
+         "size": 12
+        },
+        "padding": {
+         "unit": "px",
+         "top": "24",
+         "right": "24",
+         "bottom": "26",
+         "left": "24",
+         "isLinked": false
+        },
+        "content_width": "full",
+        "css_classes": "rcr-art-body"
+       },
+       "elements": [
+        {
+         "id": "783105e",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "ÉTOUFFEMENT : SAUREZ-VOUS QUOI FAIRE ?",
+          "header_size": "h3",
+          "title_color": "#0E1B33",
+          "typography_typography": "custom",
+          "typography_font_family": "Montserrat",
+          "typography_font_weight": "700",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.35,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "dd4953a",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Une personne qui s'étouffe peut perdre rapidement sa capacité à respirer. Savez-vous reconnaître une obstruction des voies respiratoires ?</p>",
+          "text_color": "#5B6780",
+          "typography_typography": "custom",
+          "typography_font_family": "Source Sans 3",
+          "typography_font_weight": "400",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "d683b17",
+         "elType": "widget",
+         "widgetType": "toggle",
+         "settings": {
+          "tabs": [
+           {
+            "_id": "4d2494f",
+            "tab_title": "Lire la suite",
+            "tab_content": "<p><strong>Les signes à reconnaître :</strong></p><ul><li>Difficulté ou incapacité à parler.</li><li>Toux inefficace ou absente.</li><li>Difficulté importante à respirer.</li><li>Panique et parfois coloration bleutée.</li></ul><p><strong>Que faire ?</strong></p><ul><li>Si la personne tousse efficacement, encouragez-la à continuer de tousser.</li><li>Si l'obstruction est grave, appliquez les manœuvres de désobstruction adaptées à son âge et à sa condition.</li><li>Si elle perd connaissance, faites appeler le 911 et commencez la RCR selon les recommandations de premiers secours.</li></ul><p>⚠️ Attention : les techniques diffèrent chez l'adulte, l'enfant et le nourrisson.</p><p>Une formation pratique vous permet d'acquérir les bons réflexes pour intervenir sans hésitation !</p>"
+           }
+          ],
+          "selected_icon": {
+           "value": "fas fa-plus",
+           "library": "fa-solid"
+          },
+          "selected_active_icon": {
+           "value": "fas fa-minus",
+           "library": "fa-solid"
+          },
+          "title_html_tag": "div",
+          "border_width": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "title_color": "#0E1B33",
+          "tab_active_color": "#D7191F",
+          "icon_color": "#D7191F",
+          "icon_active_color": "#D7191F",
+          "icon_align": "right",
+          "icon_space": {
+           "unit": "px",
+           "size": 10,
+           "sizes": []
+          },
+          "title_padding": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "4",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_padding": {
+           "unit": "px",
+           "top": "14",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_color": "#3F4B63",
+          "_css_classes": "rcr-art-toggle",
+          "title_typography_typography": "custom",
+          "title_typography_font_family": "Montserrat",
+          "title_typography_font_weight": "700",
+          "title_typography_font_size": {
+           "unit": "px",
+           "size": 13,
+           "sizes": []
+          },
+          "title_typography_line_height": {
+           "unit": "em",
+           "size": 1.3,
+           "sizes": []
+          },
+          "title_typography_letter_spacing": {
+           "unit": "px",
+           "size": 0.4,
+           "sizes": []
+          },
+          "title_typography_text_transform": "uppercase",
+          "content_typography_typography": "custom",
+          "content_typography_font_family": "Source Sans 3",
+          "content_typography_font_weight": "400",
+          "content_typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "content_typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "95ce424",
+     "elType": "container",
+     "isInner": true,
+     "settings": {
+      "flex_direction": "column",
+      "flex_gap": {
+       "column": "0",
+       "row": "0",
+       "isLinked": true,
+       "unit": "px",
+       "size": 0
+      },
+      "padding": {
+       "unit": "px",
+       "top": "0",
+       "right": "0",
+       "bottom": "0",
+       "left": "0",
+       "isLinked": false
+      },
+      "content_width": "full",
+      "background_background": "classic",
+      "background_color": "#FFFFFF",
+      "overflow": "hidden",
+      "box_shadow_box_shadow_type": "yes",
+      "box_shadow_box_shadow": {
+       "horizontal": 0,
+       "vertical": 18,
+       "blur": 40,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.10)"
+      },
+      "box_shadow_hover_box_shadow_type": "yes",
+      "box_shadow_hover_box_shadow": {
+       "horizontal": 0,
+       "vertical": 28,
+       "blur": 54,
+       "spread": 0,
+       "color": "rgba(11,52,112,0.16)"
+      },
+      "_transform_translateY_effect_hover": {
+       "unit": "px",
+       "size": -6,
+       "sizes": []
+      },
+      "_transform_transition_hover": {
+       "unit": "ms",
+       "size": 350,
+       "sizes": []
+      },
+      "border_hover_transition": {
+       "unit": "s",
+       "size": 0.35,
+       "sizes": []
+      },
+      "css_classes": "rcr-hcard rcr-noline rcr-art-card",
+      "animation": "fadeInUp",
+      "animation_delay": 300
+     },
+     "elements": [
+      {
+       "id": "acd26e6",
+       "elType": "widget",
+       "widgetType": "image",
+       "settings": {
+        "image": {
+         "url": "https://rcr-rive-sud.wsdfy.com/wp-content/uploads/2026/11/article-arret-cardiaque.webp",
+         "id": 475,
+         "alt": "RCR et DEA : chaque seconde compte",
+         "source": "library"
+        },
+        "image_size": "full",
+        "width": {
+         "unit": "%",
+         "size": 100,
+         "sizes": []
+        },
+        "align": "start",
+        "height": {
+         "unit": "px",
+         "size": 190,
+         "sizes": []
+        },
+        "object-fit": "cover",
+        "height_mobile": {
+         "unit": "px",
+         "size": 220,
+         "sizes": []
+        }
+       },
+       "elements": []
+      },
+      {
+       "id": "6caf95b",
+       "elType": "container",
+       "isInner": true,
+       "settings": {
+        "flex_direction": "column",
+        "flex_gap": {
+         "column": "12",
+         "row": "12",
+         "isLinked": true,
+         "unit": "px",
+         "size": 12
+        },
+        "padding": {
+         "unit": "px",
+         "top": "24",
+         "right": "24",
+         "bottom": "26",
+         "left": "24",
+         "isLinked": false
+        },
+        "content_width": "full",
+        "css_classes": "rcr-art-body"
+       },
+       "elements": [
+        {
+         "id": "edb7b1f",
+         "elType": "widget",
+         "widgetType": "heading",
+         "settings": {
+          "title": "ARRÊT CARDIAQUE : CHAQUE SECONDE COMPTE !",
+          "header_size": "h3",
+          "title_color": "#0E1B33",
+          "typography_typography": "custom",
+          "typography_font_family": "Montserrat",
+          "typography_font_weight": "700",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 17,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.35,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "3b23ffb",
+         "elType": "widget",
+         "widgetType": "text-editor",
+         "settings": {
+          "editor": "<p>Saviez-vous qu'un arrêt cardiaque peut survenir à tout moment, même chez une personne qui semble en parfaite santé ?</p>",
+          "text_color": "#5B6780",
+          "typography_typography": "custom",
+          "typography_font_family": "Source Sans 3",
+          "typography_font_weight": "400",
+          "typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        },
+        {
+         "id": "d0f5aa6",
+         "elType": "widget",
+         "widgetType": "toggle",
+         "settings": {
+          "tabs": [
+           {
+            "_id": "9473fa8",
+            "tab_title": "Lire la suite",
+            "tab_content": "<p>Lorsqu'une personne s'effondre, ne répond plus et ne respire pas normalement, chaque seconde est précieuse.</p><p><strong>Les bons réflexes :</strong></p><ul><li>Vérifiez la sécurité des lieux.</li><li>Vérifiez si la personne réagit et respire normalement.</li><li>Appelez le 911 ou demandez à quelqu'un de le faire.</li><li>Commencez immédiatement les compressions thoraciques.</li><li>Demandez un DEA et utilisez-le dès que possible.</li></ul><p>❤️ Le saviez-vous ? Une RCR précoce peut augmenter considérablement les chances de survie.</p><p>Apprenez à intervenir : inscrivez-vous à notre formation RCR/DEA !</p>"
+           }
+          ],
+          "selected_icon": {
+           "value": "fas fa-plus",
+           "library": "fa-solid"
+          },
+          "selected_active_icon": {
+           "value": "fas fa-minus",
+           "library": "fa-solid"
+          },
+          "title_html_tag": "div",
+          "border_width": {
+           "unit": "px",
+           "size": 0,
+           "sizes": []
+          },
+          "title_color": "#0E1B33",
+          "tab_active_color": "#D7191F",
+          "icon_color": "#D7191F",
+          "icon_active_color": "#D7191F",
+          "icon_align": "right",
+          "icon_space": {
+           "unit": "px",
+           "size": 10,
+           "sizes": []
+          },
+          "title_padding": {
+           "unit": "px",
+           "top": "4",
+           "right": "0",
+           "bottom": "4",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_padding": {
+           "unit": "px",
+           "top": "14",
+           "right": "0",
+           "bottom": "0",
+           "left": "0",
+           "isLinked": false
+          },
+          "content_color": "#3F4B63",
+          "_css_classes": "rcr-art-toggle",
+          "title_typography_typography": "custom",
+          "title_typography_font_family": "Montserrat",
+          "title_typography_font_weight": "700",
+          "title_typography_font_size": {
+           "unit": "px",
+           "size": 13,
+           "sizes": []
+          },
+          "title_typography_line_height": {
+           "unit": "em",
+           "size": 1.3,
+           "sizes": []
+          },
+          "title_typography_letter_spacing": {
+           "unit": "px",
+           "size": 0.4,
+           "sizes": []
+          },
+          "title_typography_text_transform": "uppercase",
+          "content_typography_typography": "custom",
+          "content_typography_font_family": "Source Sans 3",
+          "content_typography_font_weight": "400",
+          "content_typography_font_size": {
+           "unit": "px",
+           "size": 15,
+           "sizes": []
+          },
+          "content_typography_line_height": {
+           "unit": "em",
+           "size": 1.6,
+           "sizes": []
+          }
+         },
+         "elements": []
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
