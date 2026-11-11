@@ -172,8 +172,9 @@ add_action( 'wp_footer', function () {
 }, 99 );
 
 /**
- * FAQ page: highlight the theme being read in the left menu, and publish one FAQPage
- * structured-data block (all questions of the page) for search engines.
+ * FAQ page: clicking a theme in the left menu brings that theme's questions to the top of the list
+ * (the other themes stay below, in the client's order) and highlights it in the menu.
+ * Also publishes one FAQPage structured-data block (all questions of the page) for search engines.
  */
 add_action( 'wp_footer', function () {
 	if ( ! is_page( 'faq' ) ) {
@@ -183,23 +184,49 @@ add_action( 'wp_footer', function () {
 	<script>
 	(function () {
 		var tabs = [].slice.call(document.querySelectorAll('.rcr-faq-tab'));
-		var map = tabs.map(function (t) {
-			var id = (t.getAttribute('href') || '').split('#')[1];
-			return { t: t, s: id ? document.getElementById(id) : null };
-		}).filter(function (m) { return m.s; });
-		if (!map.length) { return; }
-		var current = null, ticking = false;
-		var update = function () {
-			ticking = false;
-			var active = map[0];
-			map.forEach(function (m) { if (m.s.getBoundingClientRect().top <= 160) { active = m; } });
-			if (active !== current) {
-				map.forEach(function (m) { m.t.classList.toggle('is-active', m === active); });
-				current = active;
+		var themes = [].slice.call(document.querySelectorAll('.rcr-faq-theme'));
+		if (!tabs.length || !themes.length) { return; }
+		var col = themes[0].parentElement;
+		var bottom = col.querySelector('.rcr-faq-cta-bottom');
+		if (bottom) { bottom.style.order = '99'; }
+		col.style.transition = 'opacity .25s ease, transform .25s ease';
+		var idOf = function (t) { return ((t.getAttribute('href') || '').split('#')[1]) || ''; };
+		var mark = function (id) { tabs.forEach(function (t) { t.classList.toggle('is-active', idOf(t) === id); }); };
+		var toTop = function () {
+			var y = col.getBoundingClientRect().top + window.pageYOffset - 24;
+			if (Math.abs(window.pageYOffset - y) > 4) { window.scrollTo({ top: y, behavior: 'smooth' }); }
+		};
+		var select = function (id, animate) {
+			var target = document.getElementById(id);
+			if (!target || themes.indexOf(target) < 0) { return; }
+			mark(id);
+			var apply = function () {
+				themes.forEach(function (s, i) { s.style.order = (s === target) ? '-1' : String(i); });
+				col.style.opacity = '1';
+				col.style.transform = 'none';
+				toTop();
+			};
+			if (animate) {
+				col.style.opacity = '0';
+				col.style.transform = 'translateY(10px)';
+				setTimeout(apply, 200);
+			} else {
+				apply();
 			}
 		};
-		window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-		update();
+		mark(idOf(tabs[0]));
+		document.addEventListener('click', function (e) {
+			var a = e.target.closest('.rcr-faq-tab');
+			if (!a) { return; }
+			var id = idOf(a);
+			if (!id) { return; }
+			e.preventDefault();
+			e.stopPropagation();
+			if (history.replaceState) { history.replaceState(null, '', '#' + id); }
+			select(id, true);
+		}, true);
+		var start = (location.hash || '').slice(1);
+		if (start) { window.addEventListener('load', function () { select(start, false); }); }
 	})();
 	</script>
 	<?php
