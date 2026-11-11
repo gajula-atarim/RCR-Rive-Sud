@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.10.0
+Version: 1.10.1
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -329,3 +329,14 @@ box-shadow:0 10px 24px rgba(215,25,31,.28);transition:background .3s ease,transf
 .rcr-cform .wpcf7-not-valid-tip{font-size:13px;font-weight:400;margin-top:4px}
 .rcr-cform .wpcf7-response-output{margin:20px 0 0!important;font-size:14px}
 @media (max-width:767px){.rcr-cform .rcr-cgrid{grid-template-columns:1fr}.rcr-cform .rcr-span2{grid-column:auto}}
+/* Inner pages: fixes after the first check */
+.e-con.rcr-shrink,.rcr-svc-tab-label{flex:1 1 0!important;min-width:0}
+.rcr-xcard .elementor-heading-title,.rcr-svc-tab-label .elementor-heading-title{line-height:1.35}
+.rcr-acc .elementor-tab-title{display:flex;align-items:center}
+.rcr-acc .elementor-accordion-title{flex:1}
+.rcr-acc .elementor-accordion-icon{order:2;float:none!important}
+.rcr-faqacc .elementor-accordion-icon svg,.rcr-faqacc .elementor-accordion-icon i{width:13px!important;height:13px!important;font-size:13px!important;fill:#fff;color:#fff}
+.rcr-faqacc .elementor-accordion-icon>span{display:flex;align-items:center;justify-content:center}
+.e-con.rcr-mapbox{position:relative}
+.e-con.rcr-mapbox>.rcr-map{position:absolute!important;inset:0;width:100%!important;height:100%;margin:0!important}
+.rcr-mapbox .rcr-map .elementor-widget-container,.rcr-mapbox .rcr-map .elementor-custom-embed,.rcr-mapbox .rcr-map iframe{height:100%!important}

@@ -173,7 +173,7 @@ def page_about():
             ], padding=dims(0, 18, 22, 0, "%"), css_classes="rcr-adots", **anim("fadeInLeft", 0, True)),
             con([
                 eyebrow("RCR Rive-Sud"),
-                heading(f"Apprenez les bons gestes.<br>Soyez prêt à sauver une vie.", "h2", 44, INK, "800", MONT,
+                heading(f"Apprenez les bons gestes.<br>Soyez prêt à sauver une{N}vie.", "h2", 40, INK, "800", MONT,
                         lh=1.15, size_t=38, size_m=30),
                 p("RCR Rive-Sud est une entreprise privée spécialisée en formation en RCR. Notre mission est de "
                   "transmettre des connaissances pratiques et de développer les habiletés nécessaires pour intervenir "
@@ -191,7 +191,7 @@ def page_about():
                         heading("Fethi Boudebza", "div", 16, INK, "700", MONT, lh=1.3),
                         heading("Instructeur · Fondation des maladies du cœur et de l’AVC du Canada", "div", 14,
                                 RED, "400", SANS, lh=1.4),
-                    ], flex_gap=gap(3), _flex_size="grow", width={"unit": "custom", "size": "auto", "sizes": []}),
+                    ], flex_gap=gap(3), _flex_size="custom", _flex_grow=1, _flex_shrink=1, css_classes="rcr-shrink"),
                     more("Voir l’équipe", U["team"], _flex_size="none"),
                 ], flex_direction="row", flex_align_items="center", flex_gap=gap(16), flex_wrap_mobile="wrap",
                     padding=dims(24, 0, 0, 0), margin=dims(10, 0, 0, 0), border_border="solid",
@@ -721,7 +721,7 @@ def page_contact():
             box_shadow_box_shadow_type="yes", box_shadow_box_shadow=shadow(0, 8, 20, 0, "rgba(0,0,0,0.12)"),
             css_classes="rcr-maplabel"),
     ], background_background="classic", background_color="#E6EAF0", overflow="hidden", min_height=px(480),
-        min_height_mobile=px(360))
+        min_height_mobile=px(360), css_classes="rcr-mapbox")
 
     form = con([
         heading("Communiquez avec nous", "h2", 38, INK, "800", MONT, lh=1.2, size_t=34, size_m=28),
