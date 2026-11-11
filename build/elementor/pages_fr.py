@@ -28,7 +28,8 @@ import generate as _g  # noqa: E402
 _g._counter[0] = 900000  # new ids stay clear of the ids on the live pages
 _g.IMG.update({"nourrisson": (533, _g.UP + "photo-rcr-nourrisson.webp"),
                "rcr_mannequin": (534, _g.UP + "photo-rcr-mannequin.webp"),
-               "fethi_clinique": (580, _g.UP + "fethi-boudebza-clinique.webp")})
+               "fethi_clinique": (580, _g.UP + "fethi-boudebza-clinique.webp"),
+               "lucie": (586, _g.UP + "lucie-bourassa.webp")})
 _g.SVG.update({"anaphylaxis": 511, "pin": 512, "heart": 513, "pulse": 514, "cap": 515, "people": 516,
                "bolt": 582, "lungs": 583, "pill": 584, "child": 585})
 
@@ -628,7 +629,26 @@ def page_team():
 
     return [banner("Notre formateur", [("Accueil", "/"), ("Équipe", None), ("Fethi Boudebza", None)],
                    "ballon", 50, 50),
-            page_section([two_col(main, aside)])]
+            page_section([two_col(main, aside)]),
+            # Second team member (11 Nov 2026), bio word for word from the client's other site
+            # (cliniquesantementaleenligne.ca/equipe-sante-mentale/); title shortened to "Infirmière" on request.
+            section([
+                image("lucie", alt="Lucie Bourassa, infirmière", radius=6, _element_width="initial",
+                      _element_custom_width=px(320), _element_custom_width_mobile=px(100, "%"), _flex_size="none",
+                      css_filters_css_filter="custom", css_filters_brightness=px(95)),
+                con([
+                    heading("Lucie Bourassa", "h2", 32, INK, "800", MONT, lh=1.2, size_m=26),
+                    heading("Infirmière", "div", 17, RED, "700", MONT, lh=1.4, _margin=dims(0, 0, 6, 0)),
+                    p("Notre infirmière Lucie Bourassa a débuté sa profession initialement en soins physiques, "
+                      "spécifiquement au Centre hospitalier de l’Université de Montréal (CHUM) ainsi qu’à Lausanne en "
+                      "Suisse. De retour à Montréal, elle a orienté sa carrière vers la sphère de la santé mentale en "
+                      "travaillant depuis plusieurs années, à date, à l’Institut universitaire en santé mentale de "
+                      "Montréal.", 16, TEXT2, 1.75),
+                ], flex_gap=gap(10), _flex_size="custom", _flex_grow=1, _flex_shrink=1, css_classes="rcr-shrink"),
+            ], flex_direction="row", flex_direction_mobile="column", flex_align_items="center",
+                flex_align_items_mobile="stretch", flex_gap=gap(56), padding=dims(80, 32, 80, 32),
+                padding_mobile=dims(60, 20, 60, 20), background_background="classic", background_color=PALE,
+                html_tag="section", _element_id="lucie-bourassa", **anim("fadeInUp", 0, True))]
 
 
 # --------------------------------------------------------------------------- FAQ (client's Q&A, verbatim)
