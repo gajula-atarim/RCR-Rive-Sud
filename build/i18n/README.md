@@ -70,4 +70,5 @@ Contact (510, /contact/). The Blog page was skipped on request.
 - Home "Savez-vous que…" (12 Nov 2026): "Lire la suite" opens the article in a pop-up (functions.php, front page only;
   styles in style.css v1.13.0). The article text still lives in each card's Elementor Toggle (edit it there); the
   pop-up copies the card's image, label, title, intro and toggle text. Closes with ×, a click outside or Esc;
-  keyboard accessible; on phones it rises from the bottom and fills most of the screen.
+  keyboard accessible. Layout option B (12 Nov 2026, style.css v1.14.0): navy left column with image, label and title,
+  text on the right; on phones it stacks (image, red line, text) and rises from the bottom.
