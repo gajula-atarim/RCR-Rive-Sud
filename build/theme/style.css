@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.14.2
+Version: 1.14.3
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -430,3 +430,8 @@ html.rcr-modal-open{overflow:hidden}
 .rcr-faqtg .elementor-toggle-icon::after{transform:translate(-50%,-50%) rotate(90deg)}
 .rcr-faqtg .elementor-tab-title.elementor-active .elementor-toggle-icon::after{transform:translate(-50%,-50%) rotate(0deg);opacity:0}
 @media (max-width:767px){.rcr-faqtg .elementor-toggle-icon{width:30px!important;height:30px;min-width:30px}}
+/* Équipe experience cards: icon and text stay side by side on every screen (the text dropped under the icon on phones) */
+.e-con.rcr-xcard{flex-direction:row!important;flex-wrap:nowrap!important;align-items:flex-start!important}
+.e-con.rcr-xcard>.elementor-widget-icon{flex:0 0 auto!important;width:auto!important}
+.e-con.rcr-xcard>.e-con{flex:1 1 0!important;min-width:0!important;width:auto!important}
+@media (max-width:767px){.e-con.rcr-xcard{gap:14px!important;padding:18px!important}}
