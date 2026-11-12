@@ -740,7 +740,6 @@ def page_faq():
         return link_con([
             icon("svg:" + ic, RED, 20, _flex_size="none"),
             heading(name, "div", 14, INK, "700", MONT, lh=1.35, _css_classes="rcr-faq-tab-label"),
-            heading(str(n), "div", 12, "#8A94A8", "600", MONT, lh=1, _flex_size="none"),
         ], "#" + anchor, flex_direction="row", flex_align_items="center", flex_gap=gap(12),
             padding=dims(15, 18, 15, 18), border_border="solid", border_width=dims(0, 0, 1, 0), border_color=LINE,
             css_classes="rcr-faq-tab")
