@@ -72,3 +72,7 @@ Contact (510, /contact/). The Blog page was skipped on request.
   pop-up copies the card's image, label, title, intro and toggle text. Closes with ×, a click outside or Esc;
   keyboard accessible. Layout option B (12 Nov 2026, style.css v1.14.0): navy left column with image, label and title,
   text on the right; on phones it stacks (image, red line, text) and rises from the bottom.
+
+## Contact map (12 Nov 2026)
+- The map address was "Rive-Sud, Montréal, QC". That is not a place, so Google ran a search and pinned random businesses with "Rive Sud" in their names. It now reads "Longueuil, QC" at zoom 11, chosen by the client team. Google outlines Longueuil and shows its own card with "Open in Maps".
+- Removed our white "RCR Rive-Sud" label (062c1b4). It covered Google's card and button.

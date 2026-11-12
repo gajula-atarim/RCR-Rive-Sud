@@ -805,16 +805,10 @@ def page_contact():
     ], padding=dims(80, 32, 40, 32), padding_mobile=dims(60, 20, 30, 20), html_tag="section")
 
     mapbox = con([
-        w("google_maps", {"address": "Rive-Sud, Montréal, QC", "zoom": px(10), "height": px(480),
+        # "Longueuil, QC" is a real place: Google outlines it and shows its own card ("Ouvrir dans Maps").
+        # The old "Rive-Sud, Montréal, QC" was a search, so Google pinned random businesses.
+        w("google_maps", {"address": "Longueuil, QC", "zoom": px(11), "height": px(480),
                           "height_mobile": px(360), "_css_classes": "rcr-map"}),
-        con([
-            heading("RCR Rive-Sud", "div", 14, INK, "700", MONT, lh=1.3),
-            heading("Rive-Sud de Montréal, QC", "div", 13, MUTED, "400", SANS, lh=1.4),
-        ], position="absolute", _offset_orientation_h="start", _offset_x=px(16), _offset_orientation_v="start",
-            _offset_y=px(16), z_index=2, background_background="classic", background_color="#FFFFFF",
-            padding=dims(14, 16, 14, 16), flex_gap=gap(2), width={"unit": "custom", "size": "auto", "sizes": []},
-            box_shadow_box_shadow_type="yes", box_shadow_box_shadow=shadow(0, 8, 20, 0, "rgba(0,0,0,0.12)"),
-            css_classes="rcr-maplabel"),
     ], background_background="classic", background_color="#E6EAF0", overflow="hidden", min_height=px(480),
         min_height_mobile=px(360), css_classes="rcr-mapbox")
 
