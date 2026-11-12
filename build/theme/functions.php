@@ -278,11 +278,14 @@ add_action( 'wp_footer', function () {
 		<div class="rcr-modal-backdrop" data-close></div>
 		<div class="rcr-modal-box" role="dialog" aria-modal="true" aria-labelledby="rcr-modal-title" tabindex="-1">
 			<button type="button" class="rcr-modal-close" data-close aria-label="Fermer">&times;</button>
-			<div class="rcr-modal-media"></div>
-			<div class="rcr-modal-body">
+			<div class="rcr-modal-side">
+				<div class="rcr-modal-media"></div>
 				<div class="rcr-modal-eyebrow"></div>
 				<h2 class="rcr-modal-title" id="rcr-modal-title"></h2>
+			</div>
+			<div class="rcr-modal-body">
 				<div class="rcr-modal-intro"></div>
+				<div class="rcr-modal-rule"></div>
 				<div class="rcr-modal-text"></div>
 			</div>
 		</div>
@@ -311,6 +314,7 @@ add_action( 'wp_footer', function () {
 			document.documentElement.classList.add('rcr-modal-open');
 			requestAnimationFrame(function () { modal.classList.add('is-open'); });
 			box.scrollTop = 0;
+			var b = q('.rcr-modal-body'); if (b) { b.scrollTop = 0; }
 			box.focus();
 		};
 		var close = function () {
