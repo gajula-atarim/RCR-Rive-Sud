@@ -63,3 +63,7 @@ Contact (510, /contact/). The Blog page was skipped on request.
   (cliniquesantementaleenligne.ca/equipe-sante-mentale/), title "Infirmière" (old site: "L'infirmière de notre clinique"),
   photo cropped from a screenshot of that page (347 x 372 px, the domain is blocked in this build environment).
   No booking links, per the client's 7 Nov request. Fethi's bio kept as the client's CPR-trainer text.
+- Inner-page banners, option B (12 Nov 2026): style.css v1.12.x draws the diagonal photo (existing .rcr-banner-photo /
+  .rcr-faq-photo layer, clip-path) and the red band touching it (::after on the banner). Phones/tablets: photo on top,
+  red band along its slanted bottom edge, text below. Breadcrumb moved above the title; subtitle lines added live
+  (À propos, Services, Équipe, Contact, Politique). pages_fr.py still generates the previous order.
