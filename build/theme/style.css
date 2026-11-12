@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.14.1
+Version: 1.14.2
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -423,3 +423,10 @@ html.rcr-modal-open{overflow:hidden}
 .rcr-modal-close::before,.rcr-modal-close::after{content:"";position:absolute;top:50%;left:50%;width:18px;height:2.5px;border-radius:2px;background:currentColor;transform:translate(-50%,-50%) rotate(45deg)}
 .rcr-modal-close::after{transform:translate(-50%,-50%) rotate(-45deg)}
 @media (max-width:767px){.rcr-modal-close{position:sticky!important;display:block!important}}
+/* FAQ +/− : drawn with two lines so the sign is exactly centred in the circle (the icon-font glyphs sat off-centre) */
+.rcr-faqtg .elementor-toggle-icon{position:relative;line-height:0!important;font-size:0!important;padding:0!important;margin:0!important;min-width:32px;box-sizing:border-box}
+.rcr-faqtg .elementor-toggle-icon>span{display:none!important}
+.rcr-faqtg .elementor-toggle-icon::before,.rcr-faqtg .elementor-toggle-icon::after{content:"";position:absolute;top:50%;left:50%;width:12px;height:2px;border-radius:1px;background:#fff;transform:translate(-50%,-50%);transition:transform .3s ease,opacity .3s ease}
+.rcr-faqtg .elementor-toggle-icon::after{transform:translate(-50%,-50%) rotate(90deg)}
+.rcr-faqtg .elementor-tab-title.elementor-active .elementor-toggle-icon::after{transform:translate(-50%,-50%) rotate(0deg);opacity:0}
+@media (max-width:767px){.rcr-faqtg .elementor-toggle-icon{width:30px!important;height:30px;min-width:30px}}
