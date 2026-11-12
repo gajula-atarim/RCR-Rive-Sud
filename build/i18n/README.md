@@ -67,3 +67,7 @@ Contact (510, /contact/). The Blog page was skipped on request.
   .rcr-faq-photo layer, clip-path) and the red band touching it (::after on the banner). Phones/tablets: photo on top,
   red band along its slanted bottom edge, text below. Breadcrumb moved above the title; subtitle lines added live
   (À propos, Services, Équipe, Contact, Politique). pages_fr.py still generates the previous order.
+- Home "Savez-vous que…" (12 Nov 2026): "Lire la suite" opens the article in a pop-up (functions.php, front page only;
+  styles in style.css v1.13.0). The article text still lives in each card's Elementor Toggle (edit it there); the
+  pop-up copies the card's image, label, title, intro and toggle text. Closes with ×, a click outside or Esc;
+  keyboard accessible; on phones it rises from the bottom and fills most of the screen.
