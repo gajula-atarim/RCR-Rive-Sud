@@ -56,7 +56,7 @@ Contact (510, /contact/). The Blog page was skipped on request.
   hours, pricing), matching Home and À propos. `pages_fr.py` does not set these; re-add them if a page is regenerated.
 - Banners were reworked live too (photo panel on the right half, 300/260/200 px tall); `pages_fr.py` matches.
 - FAQ page rebuilt as option B (11 Nov 2026): sticky "Sujets" menu (renamed from "Thèmes" on 12 Nov 2026) (8 themes, client's question order) with a
-  "Vous ne trouvez pas votre réponse ?" card, questions in Elementor Toggle widgets per theme (all closed on load).
+  "Vous ne trouvez pas votre réponse ?" card, questions in Elementor Toggle widgets per theme; no question counts in the menu since 12 Nov 2026; compact 2-column menu on phones ≤420 px (all closed on load).
   functions.php highlights the theme being read and prints one FAQPage JSON-LD built from the toggles
   (class rcr-faqtg), so the toggles' own faq_schema is off to avoid duplicates. Old layout kept in option rcr_backup_509_faq.
 - Équipe: Lucie Bourassa added (11 Nov 2026) below Fethi's profile, laid out as option B (text left, pink profile card right). Bio copied word for word from the client's other site
