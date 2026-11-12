@@ -731,7 +731,7 @@ def page_faq():
         })
 
     themes = [con([
-        heading(f"Thème {k + 1:02d}", "div", 13, RED, "700", MONT, lh=1.4, ls=1.8, tt="uppercase"),
+        heading(f"Sujet {k + 1:02d}", "div", 13, RED, "700", MONT, lh=1.4, ls=1.8, tt="uppercase"),
         heading(name, "h2", 30, INK, "800", MONT, lh=1.2, size_m=26, _margin=dims(0, 0, 10, 0)),
         faq_toggle(FAQ[a:b]),
     ], _element_id=anchor, flex_gap=gap(6), css_classes="rcr-faq-theme") for k, (anchor, name, ic, a, b) in enumerate(FAQ_THEMES)]
@@ -757,7 +757,7 @@ def page_faq():
 
     menu = con([
         con([
-            con([h("Thèmes", "div", 17, "#FFFFFF", "800")], background_background="classic", background_color=DEEP,
+            con([h("Sujets", "div", 17, "#FFFFFF", "800")], background_background="classic", background_color=DEEP,
                 padding=dims(18, 18, 18, 18)),
             con([tab(a_, n_, i_, b - a) for a_, n_, i_, a, b in FAQ_THEMES], css_classes="rcr-faq-tablist"),
         ], background_background="classic", background_color="#FFFFFF", box_shadow_box_shadow_type="yes",
