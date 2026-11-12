@@ -264,3 +264,84 @@ add_action( 'wp_head', function () {
 		echo '<script type="application/ld+json">' . wp_json_encode( array( '@context' => 'https://schema.org', '@type' => 'FAQPage', 'mainEntity' => $questions ), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) . "</script>\n";
 	}
 } );
+
+/**
+ * Home page, "Savez-vous que…": "Lire la suite" opens the full article in a pop-up instead of expanding the card.
+ * The article text stays in each card's Elementor Toggle widget (edited in Elementor); the pop-up only displays it.
+ */
+add_action( 'wp_footer', function () {
+	if ( ! is_front_page() ) {
+		return;
+	}
+	?>
+	<div class="rcr-modal" id="rcr-art-modal" hidden>
+		<div class="rcr-modal-backdrop" data-close></div>
+		<div class="rcr-modal-box" role="dialog" aria-modal="true" aria-labelledby="rcr-modal-title" tabindex="-1">
+			<button type="button" class="rcr-modal-close" data-close aria-label="Fermer">&times;</button>
+			<div class="rcr-modal-media"></div>
+			<div class="rcr-modal-body">
+				<div class="rcr-modal-eyebrow"></div>
+				<h2 class="rcr-modal-title" id="rcr-modal-title"></h2>
+				<div class="rcr-modal-intro"></div>
+				<div class="rcr-modal-text"></div>
+			</div>
+		</div>
+	</div>
+	<script>
+	(function () {
+		var modal = document.getElementById('rcr-art-modal');
+		if (!modal || !document.querySelector('.rcr-art-toggle')) { return; }
+		document.body.classList.add('rcr-art-js');
+		var box = modal.querySelector('.rcr-modal-box'), lastFocus = null;
+		var q = function (sel) { return modal.querySelector(sel); };
+		var open = function (card) {
+			var img = card.querySelector('.elementor-widget-image img');
+			var heads = card.querySelectorAll('.elementor-widget-heading .elementor-heading-title');
+			var title = heads[heads.length - 1], eyebrow = heads.length > 1 ? heads[0] : null;
+			var intro = card.querySelector('.elementor-widget-text-editor');
+			var content = card.querySelector('.rcr-art-toggle .elementor-tab-content');
+			q('.rcr-modal-media').innerHTML = img ? '<img src="' + (img.currentSrc || img.src) + '" alt="' + (img.alt || '').replace(/"/g, '&quot;') + '">' : '';
+			q('.rcr-modal-eyebrow').textContent = eyebrow ? eyebrow.textContent : '';
+			q('.rcr-modal-eyebrow').hidden = !eyebrow;
+			q('.rcr-modal-title').innerHTML = title ? title.innerHTML : '';
+			q('.rcr-modal-intro').innerHTML = intro ? intro.innerHTML : '';
+			q('.rcr-modal-text').innerHTML = content ? content.innerHTML : '';
+			lastFocus = document.activeElement;
+			modal.hidden = false;
+			document.documentElement.classList.add('rcr-modal-open');
+			requestAnimationFrame(function () { modal.classList.add('is-open'); });
+			box.scrollTop = 0;
+			box.focus();
+		};
+		var close = function () {
+			modal.classList.remove('is-open');
+			document.documentElement.classList.remove('rcr-modal-open');
+			setTimeout(function () { modal.hidden = true; }, 250);
+			if (lastFocus && lastFocus.focus) { lastFocus.focus(); }
+		};
+		var trigger = function (e) {
+			var t = e.target.closest('.rcr-art-toggle .elementor-tab-title');
+			if (!t) { return false; }
+			e.preventDefault();
+			e.stopPropagation();
+			e.stopImmediatePropagation();
+			open(t.closest('.rcr-art-card') || t.closest('.e-con'));
+			return true;
+		};
+		document.addEventListener('click', trigger, true);
+		document.addEventListener('keydown', function (e) {
+			if (!modal.hidden && e.key === 'Escape') { close(); return; }
+			if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.rcr-art-toggle .elementor-tab-title')) { trigger(e); }
+			if (!modal.hidden && e.key === 'Tab') {
+				var f = [].slice.call(box.querySelectorAll('button, a[href]'));
+				if (!f.length) { e.preventDefault(); return; }
+				var first = f[0], last = f[f.length - 1];
+				if (e.shiftKey && (document.activeElement === first || document.activeElement === box)) { e.preventDefault(); last.focus(); }
+				else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+			}
+		}, true);
+		modal.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) { close(); } });
+	})();
+	</script>
+	<?php
+}, 99 );

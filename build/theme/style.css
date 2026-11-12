@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.12.1
+Version: 1.13.0
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -379,3 +379,28 @@ box-shadow:0 10px 24px rgba(215,25,31,.28);transition:background .3s ease,transf
 .e-con.rcr-banner,.e-con.rcr-faq-hero{padding-top:226px!important;padding-bottom:34px!important}
 .e-con.rcr-banner-photo,.e-con.rcr-faq-photo{height:200px!important}
 .e-con.rcr-banner::after,.e-con.rcr-faq-hero::after{height:198px}}
+/* Savez-vous que… : "Lire la suite" opens a pop-up (script in functions.php); the card itself no longer expands */
+.rcr-art-js .rcr-art-toggle .elementor-tab-content{display:none!important}
+.rcr-art-js .rcr-art-toggle .elementor-toggle-icon-opened{display:none!important}
+.rcr-art-js .rcr-art-toggle .elementor-toggle-icon-closed{display:block!important}
+.rcr-art-js .rcr-art-toggle .elementor-tab-title.elementor-active{color:inherit}
+html.rcr-modal-open{overflow:hidden}
+.rcr-modal{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .25s ease}
+.rcr-modal[hidden]{display:none}
+.rcr-modal.is-open{opacity:1}
+.rcr-modal-backdrop{position:absolute;inset:0;background:rgba(7,37,83,.72)}
+.rcr-modal-box{position:relative;width:100%;max-width:760px;max-height:calc(100vh - 48px);overflow-y:auto;background:#fff;box-shadow:0 30px 70px rgba(0,0,0,.35);outline:none;transform:translateY(16px) scale(.98);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.rcr-modal.is-open .rcr-modal-box{transform:none}
+.rcr-modal-close{position:sticky;top:12px;float:right;margin:12px 12px -56px 0;z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:var(--rcr-ink);font:400 30px/1 Arial,sans-serif;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);transition:background .2s,color .2s}
+.rcr-modal-close:hover,.rcr-modal-close:focus-visible{background:var(--rcr-red);color:#fff}
+.rcr-modal-media img{display:block;width:100%;max-height:340px;object-fit:contain;background:#F5F7FB}
+.rcr-modal-body{padding:30px 36px 36px;display:flex;flex-direction:column;gap:12px}
+.rcr-modal-eyebrow{font:700 13px/1.4 Montserrat,sans-serif;letter-spacing:1.8px;text-transform:uppercase;color:var(--rcr-red)}
+.rcr-modal-title{margin:0;font:800 24px/1.3 Montserrat,sans-serif;color:var(--rcr-ink)}
+.rcr-modal-intro{font:600 17px/1.6 'Source Sans 3',sans-serif;color:var(--rcr-ink)}
+.rcr-modal-intro p{margin:0}
+.rcr-modal-text{font:400 16px/1.7 'Source Sans 3',sans-serif;color:#3F4B63;border-top:1px solid #EEF1F6;padding-top:16px;margin-top:4px}
+.rcr-modal-text p{margin:0 0 12px}.rcr-modal-text p:last-child{margin-bottom:0}
+.rcr-modal-text ul{margin:0 0 14px;padding-left:1.2em}.rcr-modal-text li{margin:4px 0}
+@media (max-width:767px){.rcr-modal{padding:0;align-items:flex-end}.rcr-modal-box{max-height:92vh}.rcr-modal-body{padding:22px 20px 28px}.rcr-modal-title{font-size:20px}.rcr-modal-media img{max-height:220px}}
+@media (prefers-reduced-motion:reduce){.rcr-modal,.rcr-modal-box{transition:none}}
