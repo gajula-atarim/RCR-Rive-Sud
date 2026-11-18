@@ -32,25 +32,90 @@ add_filter( 'upload_mimes', function ( $mimes ) {
 } );
 
 /**
- * The site is French only: declare the page language as French (fr-CA) on every front-end page so
- * browsers, screen readers and search engines read it correctly, and add an "rcr-lang-fr" body class
- * used by style.css for French typography rules.
+ * Languages (Polylang): French is the main language (/), English lives under /en/.
+ * rcr_lang() returns "fr" or "en" for the page being shown; the <html lang> attribute and an
+ * "rcr-lang-fr" / "rcr-lang-en" body class follow it (style.css uses the class for typography rules).
  */
+function rcr_lang() {
+	if ( function_exists( 'pll_current_language' ) ) {
+		$l = pll_current_language( 'slug' );
+		if ( $l ) {
+			return $l;
+		}
+	}
+	return 'fr';
+}
 function rcr_is_french_page() {
-	return ! is_admin();
+	return ! is_admin() && 'en' !== rcr_lang();
+}
+/** True on the page with this (French) ID or on its English translation. */
+function rcr_is_page_tr( $fr_id ) {
+	if ( ! is_page() ) {
+		return false;
+	}
+	$id = get_queried_object_id();
+	if ( (int) $id === (int) $fr_id ) {
+		return true;
+	}
+	return function_exists( 'pll_get_post' ) && (int) pll_get_post( $fr_id, 'en' ) === (int) $id;
 }
 add_filter( 'language_attributes', function ( $output ) {
-	if ( rcr_is_french_page() ) {
-		$output = preg_replace( '/lang="[^"]*"/', 'lang="fr-CA"', $output );
+	if ( is_admin() ) {
+		return $output;
 	}
-	return $output;
+	$lang = 'en' === rcr_lang() ? 'en-CA' : 'fr-CA';
+	return preg_match( '/lang="[^"]*"/', $output ) ? preg_replace( '/lang="[^"]*"/', 'lang="' . $lang . '"', $output ) : $output . ' lang="' . $lang . '"';
 } );
 add_filter( 'body_class', function ( $classes ) {
-	if ( rcr_is_french_page() ) {
-		$classes[] = 'rcr-lang-fr';
+	if ( ! is_admin() ) {
+		$classes[] = 'en' === rcr_lang() ? 'rcr-lang-en' : 'rcr-lang-fr';
 	}
 	return $classes;
 } );
+
+/** English tagline (the site title "RCR Rive-Sud" is the same in both languages). */
+add_filter( 'option_blogdescription', function ( $value ) {
+	return ( ! is_admin() && 'en' === rcr_lang() ) ? 'CPR training on Montreal’s South Shore' : $value;
+} );
+
+/**
+ * Image alt texts: media items are shared by both languages and hold the French alt text; on English
+ * pages the English alt text saved in the "rcr_en_alts" option (media ID => text) is used instead.
+ */
+add_filter( 'get_post_metadata', function ( $value, $object_id, $meta_key ) {
+	if ( '_wp_attachment_image_alt' !== $meta_key || is_admin() || 'en' !== rcr_lang() ) {
+		return $value;
+	}
+	$alts = get_option( 'rcr_en_alts' );
+	return ( is_array( $alts ) && ! empty( $alts[ $object_id ] ) ) ? array( $alts[ $object_id ] ) : $value;
+}, 10, 3 );
+
+/**
+ * Header FR / EN buttons: point each one to the same page in that language (Polylang prints the
+ * addresses as <link rel="alternate" hreflang> tags); without a translation they go to that language's home.
+ */
+add_action( 'wp_footer', function () {
+	?>
+	<script>
+	(function () {
+		var homes = { fr: '<?php echo esc_js( home_url( '/' ) ); ?>', en: '<?php echo esc_js( home_url( '/en/' ) ); ?>' };
+		var alt = {};
+		document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(function (l) {
+			var h = (l.getAttribute('hreflang') || '').slice(0, 2).toLowerCase();
+			if (homes[h]) { alt[h] = l.href; }
+		});
+		document.querySelectorAll('.elementor-location-header a, header a, .ehf-header a').forEach(function (a) {
+			var t = (a.textContent || '').trim().toLowerCase();
+			if (t === 'fr' || t === 'en') {
+				a.setAttribute('href', alt[t] || homes[t]);
+				a.setAttribute('hreflang', t);
+				a.setAttribute('lang', t);
+			}
+		});
+	})();
+	</script>
+	<?php
+}, 99 );
 
 /**
  * "Ce que vous apprendrez" (home page): clicking or pressing Enter on a round image opens the
@@ -70,7 +135,7 @@ add_action( 'wp_footer', function () {
 			var label = (col.querySelector('h3') || {}).textContent || '';
 			el.setAttribute('role', 'button');
 			el.setAttribute('tabindex', '0');
-			el.setAttribute('aria-label', 'En savoir plus : ' + label.trim());
+			el.setAttribute('aria-label', <?php echo wp_json_encode( 'en' === rcr_lang() ? 'Learn more: ' : 'En savoir plus : ' ); ?> + label.trim());
 			var open = function () { title.click(); };
 			el.addEventListener('click', open);
 			el.addEventListener('keydown', function (e) {
@@ -88,7 +153,7 @@ add_action( 'wp_footer', function () {
  * (#cardio-secours, #sir, #anaphylaxie, #sur-place, #tarifs); without this script they are all shown.
  */
 add_action( 'wp_footer', function () {
-	if ( ! is_page( 'services' ) ) {
+	if ( ! rcr_is_page_tr( 507 ) ) {
 		return;
 	}
 	?>
@@ -177,7 +242,7 @@ add_action( 'wp_footer', function () {
  * Also publishes one FAQPage structured-data block (all questions of the page) for search engines.
  */
 add_action( 'wp_footer', function () {
-	if ( ! is_page( 'faq' ) ) {
+	if ( ! rcr_is_page_tr( 509 ) ) {
 		return;
 	}
 	?>
@@ -233,7 +298,7 @@ add_action( 'wp_footer', function () {
 }, 99 );
 
 add_action( 'wp_head', function () {
-	if ( ! is_page( 'faq' ) ) {
+	if ( ! rcr_is_page_tr( 509 ) ) {
 		return;
 	}
 	$data = json_decode( (string) get_post_meta( get_queried_object_id(), '_elementor_data', true ), true );
@@ -266,7 +331,7 @@ add_action( 'wp_head', function () {
 } );
 
 /**
- * Home page, "Savez-vous que…": "Lire la suite" opens the full article in a pop-up instead of expanding the card.
+ * Home page, "Savez-vous que…" / "Did you know…": "Lire la suite" / "Read more" opens the full article in a pop-up instead of expanding the card.
  * The article text stays in each card's Elementor Toggle widget (edited in Elementor); the pop-up only displays it.
  */
 add_action( 'wp_footer', function () {
@@ -277,7 +342,7 @@ add_action( 'wp_footer', function () {
 	<div class="rcr-modal" id="rcr-art-modal" hidden>
 		<div class="rcr-modal-backdrop" data-close></div>
 		<div class="rcr-modal-box" role="dialog" aria-modal="true" aria-labelledby="rcr-modal-title" tabindex="-1">
-			<button type="button" class="rcr-modal-close" data-close aria-label="Fermer">&times;</button>
+			<button type="button" class="rcr-modal-close" data-close aria-label="<?php echo esc_attr( 'en' === rcr_lang() ? 'Close' : 'Fermer' ); ?>">&times;</button>
 			<div class="rcr-modal-side">
 				<div class="rcr-modal-media"></div>
 				<div class="rcr-modal-eyebrow"></div>
@@ -350,86 +415,297 @@ add_action( 'wp_footer', function () {
 	<?php
 }, 99 );
 
-/** TEMPORARY one-shot exporter: lists every visible text of the French site for translation (removed after use). */
+/**
+ * TEMPORARY one-shot English builder (removed right after it runs).
+ * ?rcr_i18n=lang   creates the Polylang languages (French default at /, English at /en/)
+ * ?rcr_i18n=assign marks every existing post, page and term as French
+ * ?rcr_i18n=build  creates the English pages, header, footer, menu and contact form from the French ones
+ * Each step writes a short report to wp-content/uploads/rcr-i18n/log.txt.
+ */
 add_action( 'wp_loaded', function () {
-	if ( ! isset( $_GET['rcr_i18n_export'] ) || get_option( 'rcr_i18n_export_done' ) ) {
+	$step = isset( $_GET['rcr_i18n'] ) ? sanitize_key( $_GET['rcr_i18n'] ) : '';
+	if ( ! in_array( $step, array( 'lang', 'assign', 'build' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
-	$skip_key = '/(^_|css|class|color|colour|typography|font|animation|align|position|size|width|height|padding|margin|gap|border|shadow|background|direction|justify|wrap|overflow|html_tag|header_size|layout|icon|link|url|id$|^view$|^skin$|^type$|^tag$|mode$|unit$|_tablet$|_mobile$)/';
-	$out      = array( 'posts' => array(), 'other_keys' => array() );
-	$walk     = function ( $node, $path ) use ( &$walk, &$out, $skip_key ) {
-		$found = array();
-		if ( is_array( $node ) ) {
-			foreach ( $node as $k => $v ) {
-				$p = $path . '/' . $k;
-				if ( is_array( $v ) ) {
-					$found = array_merge( $found, $walk( $v, $p ) );
-				} elseif ( is_string( $v ) && preg_match( '/\p{L}/u', $v ) && ! preg_match( '#^(https?:)?//|^[\#/.]|^[a-z0-9_-]+$#', $v ) ) {
-					if ( is_string( $k ) && preg_match( $skip_key, $k ) ) {
-						$out['other_keys'][ $k ] = mb_substr( $v, 0, 80 );
-						continue;
-					}
-					$found[] = $v;
-				}
-			}
-		}
-		return $found;
-	};
-	foreach ( array( 203, 506, 507, 508, 509, 510, 382, 380, 381, 297, 298 ) as $id ) {
-		$data = json_decode( (string) get_post_meta( $id, '_elementor_data', true ), true );
-		$out['posts'][ $id ] = array(
-			'title'    => get_the_title( $id ),
-			'slug'     => get_post_field( 'post_name', $id ),
-			'type'     => get_post_type( $id ),
-			'meta'     => array_keys( get_post_meta( $id ) ),
-			'strings'  => array_values( array_unique( $walk( $data, '' ) ) ),
-			'links'    => array(),
-		);
-		// links and shortcodes
-		$raw = (string) get_post_meta( $id, '_elementor_data', true );
-		preg_match_all( '#"url":"([^"]*)"#', $raw, $m );
-		$out['posts'][ $id ]['links'] = array_values( array_unique( array_map( 'stripslashes', $m[1] ) ) );
-		preg_match_all( '#\[contact-form-7[^\]]*\]|\[[a-z_-]+[^\]]*\]#', stripslashes( $raw ), $m );
-		$out['posts'][ $id ]['shortcodes'] = array_values( array_unique( $m[0] ) );
-		preg_match_all( '#"menu":"([^"]*)"#', $raw, $m );
-		$out['posts'][ $id ]['menus'] = array_values( array_unique( $m[1] ) );
-		preg_match_all( '#"image":\{"url":"[^"]*","id":(\d+)#', $raw, $m );
-		$out['posts'][ $id ]['images'] = array_values( array_unique( $m[1] ) );
-	}
-	$alts = array();
-	foreach ( get_posts( array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => 'inherit' ) ) as $a ) {
-		$alt = get_post_meta( $a->ID, '_wp_attachment_image_alt', true );
-		if ( $alt ) {
-			$alts[ $a->ID ] = $alt;
-		}
-	}
-	$out['alts'] = $alts;
-	foreach ( array( 14, 202, 505 ) as $f ) {
-		$out['forms'][ $f ] = array(
-			'title'    => get_the_title( $f ),
-			'form'     => get_post_meta( $f, '_form', true ),
-			'mail'     => get_post_meta( $f, '_mail', true ),
-			'messages' => get_post_meta( $f, '_messages', true ),
-		);
-	}
-	foreach ( wp_get_nav_menus() as $menu ) {
-		$items = array();
-		foreach ( (array) wp_get_nav_menu_items( $menu->term_id ) as $it ) {
-			$items[] = array( $it->ID, $it->title, $it->url, $it->menu_item_parent );
-		}
-		$out['nav'][ $menu->term_id ] = array( 'name' => $menu->name, 'items' => $items );
-	}
-	$out['hfe_meta'] = array();
-	foreach ( array( 297, 298 ) as $id ) {
-		foreach ( get_post_meta( $id ) as $k => $v ) {
-			if ( 0 === strpos( $k, 'ehf_' ) ) {
-				$out['hfe_meta'][ $id ][ $k ] = maybe_unserialize( $v[0] );
-			}
-		}
-	}
-	$out['site'] = array( 'locale' => get_locale(), 'front' => get_option( 'page_on_front' ), 'permalinks' => get_option( 'permalink_structure' ), 'polylang' => defined( 'POLYLANG_VERSION' ) ? POLYLANG_VERSION : null );
 	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
 	wp_mkdir_p( $dir );
-	file_put_contents( $dir . '/export.json', wp_json_encode( $out, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) );
-	update_option( 'rcr_i18n_export_done', current_time( 'mysql' ), false );
+	$log = array();
+	$say = function ( $m ) use ( &$log ) {
+		$log[] = is_string( $m ) ? $m : wp_json_encode( $m, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+	};
+	try {
+		if ( 'lang' === $step ) {
+			$langs = array(
+				array( 'name' => 'Français', 'slug' => 'fr', 'locale' => 'fr_CA', 'rtl' => false, 'term_group' => 0, 'flag' => 'ca' ),
+				array( 'name' => 'English', 'slug' => 'en', 'locale' => 'en_CA', 'rtl' => false, 'term_group' => 1, 'flag' => 'ca' ),
+			);
+			$model = null;
+			if ( isset( $GLOBALS['polylang'] ) && isset( $GLOBALS['polylang']->model ) ) {
+				$model = $GLOBALS['polylang']->model;
+				$say( 'model from PLL(): ' . get_class( $model ) );
+			}
+			if ( ! $model && class_exists( 'PLL_Admin_Model' ) ) {
+				$opt   = class_exists( '\WP_Syntex\Polylang\Options\Options' ) ? new \WP_Syntex\Polylang\Options\Options() : get_option( 'polylang' );
+				$model = new PLL_Admin_Model( $opt );
+				$say( 'model built: PLL_Admin_Model' );
+			}
+			foreach ( $langs as $l ) {
+				$exists = $model && method_exists( $model, 'get_language' ) ? $model->get_language( $l['slug'] ) : false;
+				if ( $exists ) {
+					$say( 'exists ' . $l['slug'] );
+					continue;
+				}
+				if ( isset( $model->languages ) && is_object( $model->languages ) && method_exists( $model->languages, 'add' ) ) {
+					$r = $model->languages->add( $l );
+					$say( 'languages->add ' . $l['slug'] . ': ' . ( is_wp_error( $r ) ? $r->get_error_message() : wp_json_encode( $r ) ) );
+				} elseif ( method_exists( $model, 'add_language' ) ) {
+					$r = $model->add_language( $l );
+					$say( 'add_language ' . $l['slug'] . ': ' . ( is_wp_error( $r ) ? $r->get_error_message() : wp_json_encode( $r ) ) );
+				} else {
+					$say( 'no API to add a language' );
+				}
+			}
+			$o = get_option( 'polylang' );
+			if ( is_array( $o ) ) {
+				$o['default_lang']  = 'fr';
+				$o['force_lang']    = 1;
+				$o['hide_default']  = true;
+				$o['rewrite']       = true;
+				$o['redirect_lang'] = true;
+				$o['browser']       = false;
+				update_option( 'polylang', $o );
+			}
+			delete_transient( 'pll_languages_list' );
+			flush_rewrite_rules( false );
+			$say( array( 'options' => get_option( 'polylang' ) ) );
+			$say( array( 'terms' => wp_list_pluck( get_terms( array( 'taxonomy' => 'language', 'hide_empty' => false ) ), 'slug' ) ) );
+		}
+
+		if ( 'assign' === $step ) {
+			if ( ! function_exists( 'pll_set_post_language' ) ) {
+				throw new Exception( 'Polylang functions not loaded (no languages yet?)' );
+			}
+			$n = 0;
+			foreach ( get_posts( array( 'post_type' => array( 'page', 'post' ), 'post_status' => 'any', 'numberposts' => -1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => false ) ) as $id ) {
+				if ( ! pll_get_post_language( $id ) ) {
+					pll_set_post_language( $id, 'fr' );
+					$n++;
+				}
+			}
+			$t = 0;
+			foreach ( get_terms( array( 'taxonomy' => array( 'category', 'post_tag' ), 'hide_empty' => false, 'fields' => 'ids', 'lang' => '' ) ) as $tid ) {
+				if ( ! pll_get_term_language( $tid ) ) {
+					pll_set_term_language( $tid, 'fr' );
+					$t++;
+				}
+			}
+			$say( "posts set to fr: $n, terms: $t" );
+			$say( array( 'front' => get_option( 'page_on_front' ), 'front_lang' => pll_get_post_language( (int) get_option( 'page_on_front' ) ) ) );
+		}
+
+		if ( 'build' === $step ) {
+			if ( ! function_exists( 'pll_save_post_translations' ) ) {
+				throw new Exception( 'Polylang functions not loaded' );
+			}
+			$res = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/2096d40f21a340fc045ae79b68e605b4448c64b8/build/i18n/out/en_map.json', array( 'timeout' => 30 ) );
+			$map = json_decode( is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res ), true );
+			if ( ! is_array( $map ) || empty( $map['strings'] ) ) {
+				throw new Exception( 'map not loaded' );
+			}
+			$ids  = (array) get_option( 'rcr_en_ids', array() );
+			$home = untrailingslashit( home_url() );
+			$url  = function ( $u ) use ( $map, $home ) {
+				if ( ! is_string( $u ) || '' === $u ) {
+					return $u;
+				}
+				$rel = 0 === strpos( $u, $home ) ? substr( $u, strlen( $home ) ) : $u;
+				if ( '' === $rel ) {
+					$rel = '/';
+				}
+				$hash = '';
+				if ( false !== ( $p = strpos( $rel, '#' ) ) ) {
+					$hash = substr( $rel, $p + 1 );
+					$rel  = substr( $rel, 0, $p );
+				}
+				if ( '' !== $rel && '/' !== $rel[0] ) {
+					return $u; // external, mailto:, tel:
+				}
+				if ( '' !== $rel ) {
+					if ( ! isset( $map['paths'][ $rel ] ) ) {
+						return $u; // uploads and other files
+					}
+					$rel = $map['paths'][ $rel ];
+				}
+				if ( '' !== $hash && isset( $map['anchors'][ $hash ] ) ) {
+					$hash = $map['anchors'][ $hash ];
+				}
+				return $rel . ( '' !== $hash ? '#' . $hash : '' );
+			};
+			$cf7_contact = isset( $ids['cf7_contact'] ) ? (int) $ids['cf7_contact'] : 0;
+			if ( ! $cf7_contact && class_exists( 'WPCF7_ContactForm' ) ) {
+				$src  = WPCF7_ContactForm::get_instance( 505 );
+				$mail = $src->prop( 'mail' );
+				$mail['body']    = $map['cf7_contact']['mail_body'];
+				$mail['subject'] = $map['cf7_contact']['mail_subject'];
+				$cf = WPCF7_ContactForm::get_template( array( 'title' => $map['cf7_contact']['title'], 'locale' => 'en_US' ) );
+				$cf->set_properties( array(
+					'form'     => $map['cf7_contact']['form'],
+					'mail'     => $mail,
+					'messages' => array_merge( $cf->prop( 'messages' ), $map['cf7_contact']['messages'] ),
+				) );
+				$cf7_contact = (int) $cf->save();
+				$ids['cf7_contact'] = $cf7_contact;
+				$say( 'cf7 contact EN: ' . $cf7_contact );
+			}
+			$menu_slug = 'main-menu-en';
+			$menu      = wp_get_nav_menu_object( $menu_slug );
+			if ( ! $menu ) {
+				$menu_id = wp_create_nav_menu( 'Main menu (EN)' );
+				wp_update_term( $menu_id, 'nav_menu', array( 'slug' => $menu_slug ) );
+				foreach ( $map['menu'] as $i => $it ) {
+					wp_update_nav_menu_item( $menu_id, 0, array(
+						'menu-item-title'    => $it[0],
+						'menu-item-url'      => home_url( $it[1] ),
+						'menu-item-type'     => 'custom',
+						'menu-item-status'   => 'publish',
+						'menu-item-position' => $i + 1,
+					) );
+				}
+				$say( 'menu EN: ' . $menu_id );
+			}
+			$tr = function ( $node, $key = '' ) use ( &$tr, $map, $url, $cf7_contact, $menu_slug ) {
+				if ( is_array( $node ) ) {
+					foreach ( $node as $k => $v ) {
+						$node[ $k ] = $tr( $v, (string) $k );
+					}
+					return $node;
+				}
+				if ( ! is_string( $node ) ) {
+					return $node;
+				}
+				if ( isset( $map['strings'][ $node ] ) ) {
+					return str_replace( '__CF7_CONTACT_EN__', (string) $cf7_contact, $map['strings'][ $node ] );
+				}
+				if ( 'url' === $key ) {
+					return $url( $node );
+				}
+				if ( '_element_id' === $key && isset( $map['anchors'][ $node ] ) ) {
+					return $map['anchors'][ $node ];
+				}
+				if ( 'menu' === $key && 'menu-principal-fr' === $node ) {
+					return $menu_slug;
+				}
+				return $node;
+			};
+			$copy_meta = array( '_wp_page_template', '_elementor_edit_mode', '_elementor_template_type', '_elementor_version', '_elementor_page_settings' );
+			$created   = array();
+			foreach ( $map['pages'] as $fr_id => $pg ) {
+				$fr_id = (int) $fr_id;
+				$en_id = isset( $ids[ $fr_id ] ) ? (int) $ids[ $fr_id ] : 0;
+				if ( ! $en_id ) {
+					$en_id = wp_insert_post( array(
+						'post_type'   => 'page',
+						'post_status' => 'publish',
+						'post_title'  => $pg['title'],
+						'post_name'   => $pg['slug'],
+						'menu_order'  => (int) get_post_field( 'menu_order', $fr_id ),
+					), true );
+					if ( is_wp_error( $en_id ) ) {
+						$say( "page $fr_id: " . $en_id->get_error_message() );
+						continue;
+					}
+					$ids[ $fr_id ] = $en_id;
+				}
+				pll_set_post_language( $en_id, 'en' );
+				pll_save_post_translations( array( 'fr' => $fr_id, 'en' => $en_id ) );
+				foreach ( $copy_meta as $mk ) {
+					$mv = get_post_meta( $fr_id, $mk, true );
+					if ( '' !== $mv ) {
+						update_post_meta( $en_id, $mk, $mv );
+					}
+				}
+				$data = json_decode( (string) get_post_meta( $fr_id, '_elementor_data', true ), true );
+				update_post_meta( $en_id, '_elementor_data', wp_slash( wp_json_encode( $tr( $data ) ) ) );
+				$created[ $fr_id ] = array( $en_id, get_post_field( 'post_name', $en_id ), get_permalink( $en_id ) );
+			}
+			// UAE header and footer: English copies shown on the English pages; the French ones are hidden there.
+			$en_pages = array();
+			foreach ( $map['pages'] as $fr_id => $pg ) {
+				if ( ! empty( $ids[ (int) $fr_id ] ) ) {
+					$en_pages[] = 'post-' . (int) $ids[ (int) $fr_id ];
+				}
+			}
+			foreach ( $map['templates'] as $fr_id => $title ) {
+				$fr_id = (int) $fr_id;
+				$en_id = isset( $ids[ 't' . $fr_id ] ) ? (int) $ids[ 't' . $fr_id ] : 0;
+				if ( ! $en_id ) {
+					$en_id = wp_insert_post( array( 'post_type' => 'elementor-hf', 'post_status' => 'publish', 'post_title' => $title ), true );
+					if ( is_wp_error( $en_id ) ) {
+						$say( "template $fr_id: " . $en_id->get_error_message() );
+						continue;
+					}
+					$ids[ 't' . $fr_id ] = $en_id;
+				}
+				foreach ( array_merge( $copy_meta, array( 'ehf_template_type', 'ehf_target_user_roles' ) ) as $mk ) {
+					$mv = get_post_meta( $fr_id, $mk, true );
+					if ( '' !== $mv ) {
+						update_post_meta( $en_id, $mk, $mv );
+					}
+				}
+				update_post_meta( $en_id, 'ehf_target_include_locations', array( 'rule' => array( 'specifics' ), 'specific' => $en_pages ) );
+				update_post_meta( $en_id, 'ehf_target_exclude_locations', array() );
+				update_post_meta( $fr_id, 'ehf_target_exclude_locations', array( 'rule' => array( 'specifics' ), 'specific' => $en_pages ) );
+				$data = $tr( json_decode( (string) get_post_meta( $fr_id, '_elementor_data', true ), true ) );
+				if ( 297 === $fr_id ) {
+					// The active language is the one drawn in navy: swap the looks of the FR and EN buttons.
+					$btns = array();
+					$find = function ( &$els ) use ( &$find, &$btns ) {
+						foreach ( $els as &$el ) {
+							$t = isset( $el['settings']['text'] ) ? $el['settings']['text'] : ( isset( $el['settings']['title'] ) ? $el['settings']['title'] : '' );
+							if ( isset( $el['widgetType'] ) && in_array( $t, array( 'FR', 'EN' ), true ) ) {
+								$btns[ $t ][] = &$el;
+							}
+							if ( ! empty( $el['elements'] ) ) {
+								$find( $el['elements'] );
+							}
+						}
+					};
+					$find( $data );
+					$n = min( count( isset( $btns['FR'] ) ? $btns['FR'] : array() ), count( isset( $btns['EN'] ) ? $btns['EN'] : array() ) );
+					for ( $i = 0; $i < $n; $i++ ) {
+						$a = $btns['FR'][ $i ]['settings'];
+						$b = $btns['EN'][ $i ]['settings'];
+						$keep = array( 'text', 'title', 'link', '_element_id' );
+						$na = $b;
+						$nb = $a;
+						foreach ( $keep as $kk ) {
+							unset( $na[ $kk ], $nb[ $kk ] );
+							if ( isset( $a[ $kk ] ) ) {
+								$na[ $kk ] = $a[ $kk ];
+							}
+							if ( isset( $b[ $kk ] ) ) {
+								$nb[ $kk ] = $b[ $kk ];
+							}
+						}
+						$btns['FR'][ $i ]['settings'] = $na;
+						$btns['EN'][ $i ]['settings'] = $nb;
+					}
+					$say( "header FR/EN buttons swapped: $n" );
+				}
+				update_post_meta( $en_id, '_elementor_data', wp_slash( wp_json_encode( $data ) ) );
+				$created[ 't' . $fr_id ] = $en_id;
+			}
+			update_option( 'rcr_en_ids', $ids, false );
+			update_option( 'rcr_en_alts', $map['alts'], false );
+			if ( class_exists( '\Elementor\Plugin' ) ) {
+				\Elementor\Plugin::$instance->files_manager->clear_cache();
+			}
+			flush_rewrite_rules( false );
+			$say( array( 'created' => $created ) );
+		}
+		update_option( 'rcr_i18n_done_' . $step, current_time( 'mysql' ), false );
+	} catch ( Throwable $e ) {
+		$say( 'ERROR ' . get_class( $e ) . ': ' . $e->getMessage() . ' @' . basename( $e->getFile() ) . ':' . $e->getLine() );
+	}
+	file_put_contents( $dir . '/log.txt', $step . ' ' . current_time( 'mysql' ) . "\n" . implode( "\n", $log ) . "\n\n", FILE_APPEND );
 }, 20 );
