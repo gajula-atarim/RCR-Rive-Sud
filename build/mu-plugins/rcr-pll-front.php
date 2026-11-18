@@ -66,3 +66,15 @@ add_filter( 'page_link', function ( $link, $id ) {
 	}
 	return $link;
 }, 99, 2 );
+
+// Language switcher / hreflang links to the English front page use /en/ as well.
+add_filter( 'pll_translation_url', function ( $url, $lang ) {
+	$id = rcr_pll_front_page_for( $lang );
+	if ( $id && is_string( $url ) ) {
+		$slug = get_post_field( 'post_name', $id );
+		if ( $slug && false !== strpos( $url, '/' . $lang . '/' . $slug . '/' ) ) {
+			return untrailingslashit( get_option( 'home' ) ) . '/' . $lang . '/';
+		}
+	}
+	return $url;
+}, 99, 2 );
