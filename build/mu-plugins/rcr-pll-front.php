@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: RCR Rive-Sud – Polylang front page
- * Description: Makes sure Polylang knows the English home page (/en/) as the English front page.
+ * Description: Makes sure Polylang knows the English home page (/en/home/) as the English front page.
  *
  * Polylang stores each language's front page in its languages cache. Requests that do not load
  * Polylang's static-page module (REST calls, for example) can build that cache without it, which
- * turns /en/ into /en/home-2/. This fills in the front page from the French home page's translation
+ * breaks the English home page address. This fills in the front page from the French home page's translation
  * group, both when the cache is built and every time it is read.
  */
 
@@ -53,28 +53,3 @@ add_filter( 'pll_after_languages_cache', function ( $languages ) {
 	}
 	return $languages;
 } );
-
-// The translated front page's own link is its language home (/en/), not its page slug.
-add_filter( 'page_link', function ( $link, $id ) {
-	if ( ! function_exists( 'pll_default_language' ) ) {
-		return $link;
-	}
-	foreach ( array( 'en' ) as $slug ) {
-		if ( (int) $id === rcr_pll_front_page_for( $slug ) && $slug !== pll_default_language() ) {
-			return untrailingslashit( get_option( 'home' ) ) . '/' . $slug . '/';
-		}
-	}
-	return $link;
-}, 99, 2 );
-
-// Language switcher / hreflang links to the English front page use /en/ as well.
-add_filter( 'pll_translation_url', function ( $url, $lang ) {
-	$id = rcr_pll_front_page_for( $lang );
-	if ( $id && is_string( $url ) ) {
-		$slug = get_post_field( 'post_name', $id );
-		if ( $slug && false !== strpos( $url, '/' . $lang . '/' . $slug . '/' ) ) {
-			return untrailingslashit( get_option( 'home' ) ) . '/' . $lang . '/';
-		}
-	}
-	return $url;
-}, 99, 2 );
