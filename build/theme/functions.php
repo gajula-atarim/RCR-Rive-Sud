@@ -718,6 +718,11 @@ add_action( 'wp_loaded', function () {
 					pll_set_post_language( (int) $ids[ 't' . $fr_id ], 'en' );
 					pll_save_post_translations( array( 'fr' => $fr_id, 'en' => (int) $ids[ 't' . $fr_id ] ) );
 				}
+				// UAE picks the template whose language matches the page, so both can target the entire site.
+				update_post_meta( $fr_id, 'ehf_target_exclude_locations', array() );
+				if ( ! empty( $ids[ 't' . $fr_id ] ) ) {
+					update_post_meta( (int) $ids[ 't' . $fr_id ], 'ehf_target_include_locations', array( 'rule' => array( 'basic-global' ), 'specific' => array() ) );
+				}
 				$say( $fr_id . ' => ' . wp_json_encode( pll_get_post_translations( $fr_id ) ) );
 			}
 			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
