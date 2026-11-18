@@ -424,7 +424,7 @@ add_action( 'wp_footer', function () {
  */
 add_action( 'wp_loaded', function () {
 	$step = isset( $_GET['rcr_i18n'] ) ? sanitize_key( $_GET['rcr_i18n'] ) : '';
-	if ( ! in_array( $step, array( 'lang', 'assign', 'build' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
+	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
 	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
@@ -702,6 +702,30 @@ add_action( 'wp_loaded', function () {
 			}
 			flush_rewrite_rules( false );
 			$say( array( 'created' => $created ) );
+		}
+		if ( 'hf1' === $step ) {
+			// UAE asks Polylang (WPML API) for the header/footer in the current language: make them translatable.
+			$o = get_option( 'polylang' );
+			$o['post_types'] = array_values( array_unique( array_merge( isset( $o['post_types'] ) ? (array) $o['post_types'] : array(), array( 'elementor-hf' ) ) ) );
+			update_option( 'polylang', $o );
+			$say( array( 'post_types' => $o['post_types'] ) );
+		}
+		if ( 'hf2' === $step ) {
+			$ids = (array) get_option( 'rcr_en_ids', array() );
+			foreach ( array( 297, 298 ) as $fr_id ) {
+				pll_set_post_language( $fr_id, 'fr' );
+				if ( ! empty( $ids[ 't' . $fr_id ] ) ) {
+					pll_set_post_language( (int) $ids[ 't' . $fr_id ], 'en' );
+					pll_save_post_translations( array( 'fr' => $fr_id, 'en' => (int) $ids[ 't' . $fr_id ] ) );
+				}
+				$say( $fr_id . ' => ' . wp_json_encode( pll_get_post_translations( $fr_id ) ) );
+			}
+			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
+				$GLOBALS['polylang']->model->clean_languages_cache();
+			}
+			delete_transient( 'pll_languages_list' );
+			flush_rewrite_rules( false );
+			$say( 'en home: ' . pll_home_url( 'en' ) );
 		}
 		update_option( 'rcr_i18n_done_' . $step, current_time( 'mysql' ), false );
 	} catch ( Throwable $e ) {
