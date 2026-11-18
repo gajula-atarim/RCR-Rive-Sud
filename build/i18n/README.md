@@ -82,7 +82,7 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
 
 | French | English |
 |---|---|
-| Accueil 203 `/` | Home 647 `/en/` |
+| Accueil 203 `/` | Home 647 `/en/home/` |
 | À propos 506 | About us 648 `/en/about/` |
 | Services 507 | Services 649 `/en/our-services/` |
 | Équipe 508 | Team 650 `/en/team/` |
@@ -108,8 +108,10 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   English image alt texts (option `rcr_en_alts`, media ID ⇒ text), FR/EN header buttons pointing to the same page in
   the other language (from Polylang's hreflang links), scripts for Services/FAQ on both languages (`rcr_is_page_tr()`),
   English aria labels. `style.css` 1.15.0: "Showing" label on English Services, typography rules for both languages.
-- `wp-content/mu-plugins/rcr-pll-front.php` (source `build/mu-plugins/`): keeps `/en/` as the English front page
-  (Polylang's languages cache could otherwise lose it and show `/en/home-2/`).
+- English home address: `/en/home/` (client's choice, 18 Nov 2026). Polylang option "front page URL contains the language code
+  instead of the page name" is off; the old English draft Home (15) slug was renamed `home-old` to free `home`.
+- `wp-content/mu-plugins/rcr-pll-front.php` (source `build/mu-plugins/`): keeps the English home as the English front page in
+  Polylang's languages cache (requests such as REST calls could otherwise rebuild the cache without it).
 - Footer/hours in English use the short format "9 am – 7 pm" so they stay on one line.
 - Not translated (image content): the four "Did you know…" article images have French text inside the pictures.
 - Editing later: change French text in the French page and English text in the English page (Elementor, as usual);

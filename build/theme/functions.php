@@ -414,30 +414,3 @@ add_action( 'wp_footer', function () {
 	</script>
 	<?php
 }, 99 );
-
-/** TEMPORARY one-shot: English home page at /en/home/ (removed right after it runs). */
-add_action( 'wp_loaded', function () {
-	if ( ! isset( $_GET['rcr_enhome'] ) || get_option( 'rcr_enhome_done' ) || ! function_exists( 'PLL' ) ) {
-		return;
-	}
-	$log = array();
-	$res = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/c1772b0f2095c489604c1bc90414567d104be408/build/mu-plugins/rcr-pll-front.php', array( 'timeout' => 30 ) );
-	$php = is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res );
-	if ( 0 === strpos( $php, '<?php' ) && false !== strpos( $php, 'pll_after_languages_cache' ) ) {
-		file_put_contents( WPMU_PLUGIN_DIR . '/rcr-pll-front.php', $php );
-		$log[] = 'mu-plugin updated';
-	}
-	if ( 'home' === get_post_field( 'post_name', 15 ) ) {
-		wp_update_post( array( 'ID' => 15, 'post_name' => 'home-old' ) );
-	}
-	wp_update_post( array( 'ID' => 647, 'post_name' => 'home' ) );
-	$o = get_option( 'polylang' );
-	$o['redirect_lang'] = false;
-	update_option( 'polylang', $o );
-	PLL()->model->clean_languages_cache();
-	delete_transient( 'pll_languages_list' );
-	flush_rewrite_rules( false );
-	$log[] = 'slugs: 15=' . get_post_field( 'post_name', 15 ) . ' 647=' . get_post_field( 'post_name', 647 );
-	update_option( 'rcr_enhome_done', current_time( 'mysql' ), false );
-	file_put_contents( wp_upload_dir()['basedir'] . '/rcr-i18n/log.txt', 'enhome ' . current_time( 'mysql' ) . "\n" . implode( "\n", $log ) . "\n\n", FILE_APPEND );
-}, 20 );
