@@ -514,7 +514,7 @@ add_action( 'wp_loaded', function () {
 			if ( ! function_exists( 'pll_save_post_translations' ) ) {
 				throw new Exception( 'Polylang functions not loaded' );
 			}
-			$res = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/2096d40f21a340fc045ae79b68e605b4448c64b8/build/i18n/out/en_map.json', array( 'timeout' => 30 ) );
+			$res = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/01cc07a8dc9d16e5042738c500f315916bbebab5/build/i18n/out/en_map.json', array( 'timeout' => 30 ) );
 			$map = json_decode( is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res ), true );
 			if ( ! is_array( $map ) || empty( $map['strings'] ) ) {
 				throw new Exception( 'map not loaded' );
