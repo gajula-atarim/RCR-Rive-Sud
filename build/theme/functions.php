@@ -73,29 +73,6 @@ add_filter( 'body_class', function ( $classes ) {
 	return $classes;
 } );
 
-/**
- * Polylang caches each language's front page. Requests that do not load Polylang's static-page module
- * (REST calls, for example) can rebuild that cache without it, which turns /en/ into /en/home-2/.
- * Fill it in from the front page's translation group when it is missing.
- */
-add_filter( 'pll_additional_language_data', function ( $data, $language ) {
-	if ( ! empty( $data['page_on_front'] ) || 'page' !== get_option( 'show_on_front' ) ) {
-		return $data;
-	}
-	global $wpdb;
-	$front = (int) get_option( 'page_on_front' );
-	// Direct query: this can run before the taxonomies are registered.
-	$desc = $front ? $wpdb->get_var( $wpdb->prepare(
-		"SELECT tt.description FROM {$wpdb->term_relationships} tr INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id WHERE tr.object_id = %d AND tt.taxonomy = 'post_translations' LIMIT 1",
-		$front
-	) ) : '';
-	$tr = $desc ? maybe_unserialize( $desc ) : array();
-	if ( is_array( $tr ) && ! empty( $tr[ $language['slug'] ] ) ) {
-		$data['page_on_front'] = (int) $tr[ $language['slug'] ];
-	}
-	return $data;
-}, 20, 2 );
-
 /** English tagline (the site title "RCR Rive-Sud" is the same in both languages). */
 add_filter( 'option_blogdescription', function ( $value ) {
 	return ( ! is_admin() && 'en' === rcr_lang() ) ? 'CPR training on Montreal’s South Shore' : $value;
@@ -774,12 +751,18 @@ add_action( 'wp_loaded', function () {
 			$say( 'en home: ' . pll_home_url( 'en' ) );
 		}
 		if ( 'front3' === $step ) {
+			$res = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/a0ee252013575cdaffc9586f8fc39f6f13c24593/build/mu-plugins/rcr-pll-front.php', array( 'timeout' => 30 ) );
+			$php = is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res );
+			if ( 0 !== strpos( $php, '<?php' ) || false === strpos( $php, 'pll_additional_language_data' ) ) {
+				throw new Exception( 'mu-plugin not loaded' );
+			}
+			wp_mkdir_p( WPMU_PLUGIN_DIR );
+			file_put_contents( WPMU_PLUGIN_DIR . '/rcr-pll-front.php', $php );
 			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
 				$GLOBALS['polylang']->model->clean_languages_cache();
 			}
 			delete_transient( 'pll_languages_list' );
-			$en = PLL()->model->get_language( 'en' );
-			$say( 'en page_on_front: ' . ( $en ? $en->page_on_front : '?' ) );
+			$say( 'mu-plugin written: ' . WPMU_PLUGIN_DIR . '/rcr-pll-front.php' );
 		}
 		update_option( 'rcr_i18n_done_' . $step, current_time( 'mysql' ), false );
 	} catch ( Throwable $e ) {
