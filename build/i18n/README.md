@@ -118,3 +118,9 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   the top in the cards (object-position top center) so their titles show; the pop-up shows the whole image.
 - Editing later: change French text in the French page and English text in the English page (Elementor, as usual);
   they are separate pages linked by Polylang (Pages list shows the FR/EN columns).
+
+## Home links (18 Nov 2026)
+- "Nos formations" / "Our training courses" Read more buttons now open the Services panels: FR `/services/#cardio-secours`,
+  `/services/#sir`; EN `/en/our-services/#cardiac-first-aid`, `/en/our-services/#sir` (buttons 7977d41, 897455b on 203/647).
+- "Voir l'équipe" / "Meet the team" (6a2dcf8) now goes to `/equipe/` and `/en/team/` (was `#team` on the home page).
+- The older course pages (380, 381, 654, 655) stay published but are no longer linked from the site.
