@@ -82,13 +82,16 @@ add_filter( 'pll_additional_language_data', function ( $data, $language ) {
 	if ( ! empty( $data['page_on_front'] ) || 'page' !== get_option( 'show_on_front' ) ) {
 		return $data;
 	}
+	global $wpdb;
 	$front = (int) get_option( 'page_on_front' );
-	$group = $front ? wp_get_object_terms( $front, 'post_translations' ) : array();
-	if ( ! is_wp_error( $group ) && ! empty( $group[0]->description ) ) {
-		$tr = maybe_unserialize( $group[0]->description );
-		if ( is_array( $tr ) && ! empty( $tr[ $language['slug'] ] ) ) {
-			$data['page_on_front'] = (int) $tr[ $language['slug'] ];
-		}
+	// Direct query: this can run before the taxonomies are registered.
+	$desc = $front ? $wpdb->get_var( $wpdb->prepare(
+		"SELECT tt.description FROM {$wpdb->term_relationships} tr INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id WHERE tr.object_id = %d AND tt.taxonomy = 'post_translations' LIMIT 1",
+		$front
+	) ) : '';
+	$tr = $desc ? maybe_unserialize( $desc ) : array();
+	if ( is_array( $tr ) && ! empty( $tr[ $language['slug'] ] ) ) {
+		$data['page_on_front'] = (int) $tr[ $language['slug'] ];
 	}
 	return $data;
 }, 20, 2 );
@@ -451,7 +454,7 @@ add_action( 'wp_loaded', function () {
 		delete_option( 'rcr_i18n_done_build' );
 		$step = 'build';
 	}
-	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front2' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
+	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front3' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
 	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
@@ -770,7 +773,7 @@ add_action( 'wp_loaded', function () {
 			flush_rewrite_rules( false );
 			$say( 'en home: ' . pll_home_url( 'en' ) );
 		}
-		if ( 'front2' === $step ) {
+		if ( 'front3' === $step ) {
 			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
 				$GLOBALS['polylang']->model->clean_languages_cache();
 			}
