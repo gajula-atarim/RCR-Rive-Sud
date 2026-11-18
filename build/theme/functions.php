@@ -431,7 +431,7 @@ add_action( 'wp_loaded', function () {
 		delete_option( 'rcr_i18n_done_build' );
 		$step = 'build';
 	}
-	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front5', 'front4' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
+	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front6', 'front4' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
 	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
@@ -750,8 +750,8 @@ add_action( 'wp_loaded', function () {
 			flush_rewrite_rules( false );
 			$say( 'en home: ' . pll_home_url( 'en' ) );
 		}
-		if ( 'front5' === $step ) {
-			$res = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/afba67d3c110fb9ae5f68256804fafaf97956f25/build/mu-plugins/rcr-pll-front.php', array( 'timeout' => 30 ) );
+		if ( 'front6' === $step ) {
+			$res = wp_remote_get( 'https://raw.githubusercontent.com/gajula-atarim/RCR-Rive-Sud/279c83f958e6ab39305cc66329ef3b64363845e6/build/mu-plugins/rcr-pll-front.php', array( 'timeout' => 30 ) );
 			$php = is_wp_error( $res ) ? '' : wp_remote_retrieve_body( $res );
 			if ( 0 !== strpos( $php, '<?php' ) || false === strpos( $php, 'pll_additional_language_data' ) ) {
 				throw new Exception( 'mu-plugin not loaded' );
