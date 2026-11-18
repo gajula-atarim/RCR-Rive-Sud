@@ -113,6 +113,8 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
 - `wp-content/mu-plugins/rcr-pll-front.php` (source `build/mu-plugins/`): keeps the English home as the English front page in
   Polylang's languages cache (requests such as REST calls could otherwise rebuild the cache without it).
 - Footer/hours in English use the short format "9 am – 7 pm" so they stay on one line.
-- Not translated (image content): the four "Did you know…" article images have French text inside the pictures.
+- "Did you know…" images on the English home: English versions supplied by the client (18 Nov 2026), media 666 EpiPen,
+  667 Naloxone, 668 Choking, 669 CPR/AED (`assets/media/article-*-en.webp`). The two tall ones (667, 668) are cropped from
+  the top in the cards (object-position top center) so their titles show; the pop-up shows the whole image.
 - Editing later: change French text in the French page and English text in the English page (Elementor, as usual);
   they are separate pages linked by Polylang (Pages list shows the FR/EN columns).
