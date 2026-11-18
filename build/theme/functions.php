@@ -424,6 +424,13 @@ add_action( 'wp_footer', function () {
  */
 add_action( 'wp_loaded', function () {
 	$step = isset( $_GET['rcr_i18n'] ) ? sanitize_key( $_GET['rcr_i18n'] ) : '';
+	if ( 'rebuild' === $step && get_option( 'rcr_i18n_done_rebuild2' ) ) {
+		return;
+	}
+	if ( 'rebuild' === $step ) {
+		delete_option( 'rcr_i18n_done_build' );
+		$step = 'build';
+	}
 	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
@@ -559,20 +566,12 @@ add_action( 'wp_loaded', function () {
 			}
 			$menu_slug = 'main-menu-en';
 			$menu      = wp_get_nav_menu_object( $menu_slug );
+			$menu_id   = $menu ? (int) $menu->term_id : (int) wp_create_nav_menu( 'Main menu (EN)' );
 			if ( ! $menu ) {
-				$menu_id = wp_create_nav_menu( 'Main menu (EN)' );
 				wp_update_term( $menu_id, 'nav_menu', array( 'slug' => $menu_slug ) );
-				foreach ( $map['menu'] as $i => $it ) {
-					wp_update_nav_menu_item( $menu_id, 0, array(
-						'menu-item-title'    => $it[0],
-						'menu-item-url'      => home_url( $it[1] ),
-						'menu-item-type'     => 'custom',
-						'menu-item-status'   => 'publish',
-						'menu-item-position' => $i + 1,
-					) );
-				}
-				$say( 'menu EN: ' . $menu_id );
 			}
+			$menu_fr = array( '/en/' => 203, '/en/about/' => 506, '/en/our-services/' => 507, '/en/team/' => 508, '/en/faqs/' => 509, '/en/contact-us/' => 510 );
+			$menu_new = array();
 			$tr = function ( $node, $key = '' ) use ( &$tr, $map, $url, $cf7_contact, $menu_slug ) {
 				if ( is_array( $node ) ) {
 					foreach ( $node as $k => $v ) {
@@ -628,6 +627,21 @@ add_action( 'wp_loaded', function () {
 				update_post_meta( $en_id, '_elementor_data', wp_slash( wp_json_encode( $tr( $data ) ) ) );
 				$created[ $fr_id ] = array( $en_id, get_post_field( 'post_name', $en_id ), get_permalink( $en_id ) );
 			}
+			foreach ( (array) wp_get_nav_menu_items( $menu_id ) as $old ) {
+				wp_delete_post( $old->ID, true );
+			}
+			foreach ( $map['menu'] as $i => $it ) {
+				$fr = isset( $menu_fr[ $it[1] ] ) ? $menu_fr[ $it[1] ] : 0;
+				$pid = ( $fr && ! empty( $ids[ $fr ] ) ) ? (int) $ids[ $fr ] : 0;
+				$args = array( 'menu-item-title' => $it[0], 'menu-item-status' => 'publish', 'menu-item-position' => $i + 1 );
+				if ( $pid ) {
+					$args += array( 'menu-item-type' => 'post_type', 'menu-item-object' => 'page', 'menu-item-object-id' => $pid );
+				} else {
+					$args += array( 'menu-item-type' => 'custom', 'menu-item-url' => home_url( $it[1] ) );
+				}
+				$menu_new[] = wp_update_nav_menu_item( $menu_id, 0, $args );
+			}
+			$say( array( 'menu' => $menu_id, 'items' => $menu_new ) );
 			// UAE header and footer: English copies shown on the English pages; the French ones are hidden there.
 			$en_pages = array();
 			foreach ( $map['pages'] as $fr_id => $pg ) {
@@ -652,9 +666,13 @@ add_action( 'wp_loaded', function () {
 						update_post_meta( $en_id, $mk, $mv );
 					}
 				}
-				update_post_meta( $en_id, 'ehf_target_include_locations', array( 'rule' => array( 'specifics' ), 'specific' => $en_pages ) );
+				// UAE shows the template whose Polylang language matches the page: both target the entire site.
+				update_post_meta( $en_id, 'ehf_target_include_locations', array( 'rule' => array( 'basic-global' ), 'specific' => array() ) );
 				update_post_meta( $en_id, 'ehf_target_exclude_locations', array() );
-				update_post_meta( $fr_id, 'ehf_target_exclude_locations', array( 'rule' => array( 'specifics' ), 'specific' => $en_pages ) );
+				update_post_meta( $fr_id, 'ehf_target_exclude_locations', array() );
+				pll_set_post_language( $fr_id, 'fr' );
+				pll_set_post_language( $en_id, 'en' );
+				pll_save_post_translations( array( 'fr' => $fr_id, 'en' => $en_id ) );
 				$data = $tr( json_decode( (string) get_post_meta( $fr_id, '_elementor_data', true ), true ) );
 				if ( 297 === $fr_id ) {
 					// The active language is the one drawn in navy: swap the looks of the FR and EN buttons.
