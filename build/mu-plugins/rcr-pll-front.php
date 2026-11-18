@@ -53,3 +53,16 @@ add_filter( 'pll_after_languages_cache', function ( $languages ) {
 	}
 	return $languages;
 } );
+
+// The translated front page's own link is its language home (/en/), not its page slug.
+add_filter( 'page_link', function ( $link, $id ) {
+	if ( ! function_exists( 'pll_default_language' ) ) {
+		return $link;
+	}
+	foreach ( array( 'en' ) as $slug ) {
+		if ( (int) $id === rcr_pll_front_page_for( $slug ) && $slug !== pll_default_language() ) {
+			return untrailingslashit( get_option( 'home' ) ) . '/' . $slug . '/';
+		}
+	}
+	return $link;
+}, 99, 2 );
