@@ -76,3 +76,41 @@ Contact (510, /contact/). The Blog page was skipped on request.
 ## Contact map (12 Nov 2026)
 - The map address was "Rive-Sud, Montréal, QC". That is not a place, so Google ran a search and pinned random businesses with "Rive Sud" in their names. It now reads "Longueuil, QC" at zoom 11, chosen by the client team. Google outlines Longueuil and shows its own card with "Open in Maps".
 - Removed our white "RCR Rive-Sud" label (062c1b4). It covered Google's card and button.
+
+## English version with Polylang (18 Nov 2026)
+French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.2 (free).
+
+| French | English |
+|---|---|
+| Accueil 203 `/` | Home 647 `/en/` |
+| À propos 506 | About us 648 `/en/about/` |
+| Services 507 | Services 649 `/en/our-services/` |
+| Équipe 508 | Team 650 `/en/team/` |
+| FAQ 509 | FAQ 651 `/en/faqs/` |
+| Contact 510 | Contact 652 `/en/contact-us/` |
+| Politique de confidentialité 382 | Privacy Policy 653 `/en/privacy/` |
+| Cardio-secours 380 | Cardiac First Aid 654 `/en/cardiac-first-aid/` |
+| Soins immédiats en réanimation 381 | Immediate Resuscitation Care 655 `/en/immediate-resuscitation-care/` |
+| En-tête (FR) 297 | Header (EN) 656 |
+| Pied de page (FR) 298 | Footer (EN) 657 |
+| Menu principal (FR) 3 | Main menu (EN) 10 |
+| CF7 202 (quote, home) | CF7 14 "Request a quote" (the site's original English form) |
+| CF7 505 Contact (FR) | CF7 640 Contact (EN) |
+
+- The English pages are copies of the live French Elementor pages with every text replaced (same containers,
+  classes, responsive settings and animations). Texts: `en_strings.py` (client's own English from the English docx
+  files wherever it exists); `make_en.py` builds `out/en_map.json`; `fr_export.json` is the French export they map from.
+- Slugs differ from French ones (Polylang free cannot share slugs): services → our-services, faq → faqs, contact → contact-us.
+- Section anchors are English too (#cardiac-first-aid, #anaphylaxis, #on-site, #pricing, #faq-cpr, …).
+- UAE: header/footer templates are translatable in Polylang (French 297/298 = fr, English 656/657 = en); UAE shows the
+  template whose language matches the page, so both target the entire site.
+- `functions.php`: `rcr_lang()`, lang attribute and `rcr-lang-fr` / `rcr-lang-en` body class, English tagline,
+  English image alt texts (option `rcr_en_alts`, media ID ⇒ text), FR/EN header buttons pointing to the same page in
+  the other language (from Polylang's hreflang links), scripts for Services/FAQ on both languages (`rcr_is_page_tr()`),
+  English aria labels. `style.css` 1.15.0: "Showing" label on English Services, typography rules for both languages.
+- `wp-content/mu-plugins/rcr-pll-front.php` (source `build/mu-plugins/`): keeps `/en/` as the English front page
+  (Polylang's languages cache could otherwise lose it and show `/en/home-2/`).
+- Footer/hours in English use the short format "9 am – 7 pm" so they stay on one line.
+- Not translated (image content): the four "Did you know…" article images have French text inside the pictures.
+- Editing later: change French text in the French page and English text in the English page (Elementor, as usual);
+  they are separate pages linked by Polylang (Pages list shows the FR/EN columns).
