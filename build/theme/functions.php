@@ -349,3 +349,87 @@ add_action( 'wp_footer', function () {
 	</script>
 	<?php
 }, 99 );
+
+/** TEMPORARY one-shot exporter: lists every visible text of the French site for translation (removed after use). */
+add_action( 'wp_loaded', function () {
+	if ( ! isset( $_GET['rcr_i18n_export'] ) || get_option( 'rcr_i18n_export_done' ) ) {
+		return;
+	}
+	$skip_key = '/(^_|css|class|color|colour|typography|font|animation|align|position|size|width|height|padding|margin|gap|border|shadow|background|direction|justify|wrap|overflow|html_tag|header_size|layout|icon|link|url|id$|^view$|^skin$|^type$|^tag$|mode$|unit$|_tablet$|_mobile$)/';
+	$out      = array( 'posts' => array(), 'other_keys' => array() );
+	$walk     = function ( $node, $path ) use ( &$walk, &$out, $skip_key ) {
+		$found = array();
+		if ( is_array( $node ) ) {
+			foreach ( $node as $k => $v ) {
+				$p = $path . '/' . $k;
+				if ( is_array( $v ) ) {
+					$found = array_merge( $found, $walk( $v, $p ) );
+				} elseif ( is_string( $v ) && preg_match( '/\p{L}/u', $v ) && ! preg_match( '#^(https?:)?//|^[\#/.]|^[a-z0-9_-]+$#', $v ) ) {
+					if ( is_string( $k ) && preg_match( $skip_key, $k ) ) {
+						$out['other_keys'][ $k ] = mb_substr( $v, 0, 80 );
+						continue;
+					}
+					$found[] = $v;
+				}
+			}
+		}
+		return $found;
+	};
+	foreach ( array( 203, 506, 507, 508, 509, 510, 382, 380, 381, 297, 298 ) as $id ) {
+		$data = json_decode( (string) get_post_meta( $id, '_elementor_data', true ), true );
+		$out['posts'][ $id ] = array(
+			'title'    => get_the_title( $id ),
+			'slug'     => get_post_field( 'post_name', $id ),
+			'type'     => get_post_type( $id ),
+			'meta'     => array_keys( get_post_meta( $id ) ),
+			'strings'  => array_values( array_unique( $walk( $data, '' ) ) ),
+			'links'    => array(),
+		);
+		// links and shortcodes
+		$raw = (string) get_post_meta( $id, '_elementor_data', true );
+		preg_match_all( '#"url":"([^"]*)"#', $raw, $m );
+		$out['posts'][ $id ]['links'] = array_values( array_unique( array_map( 'stripslashes', $m[1] ) ) );
+		preg_match_all( '#\[contact-form-7[^\]]*\]|\[[a-z_-]+[^\]]*\]#', stripslashes( $raw ), $m );
+		$out['posts'][ $id ]['shortcodes'] = array_values( array_unique( $m[0] ) );
+		preg_match_all( '#"menu":"([^"]*)"#', $raw, $m );
+		$out['posts'][ $id ]['menus'] = array_values( array_unique( $m[1] ) );
+		preg_match_all( '#"image":\{"url":"[^"]*","id":(\d+)#', $raw, $m );
+		$out['posts'][ $id ]['images'] = array_values( array_unique( $m[1] ) );
+	}
+	$alts = array();
+	foreach ( get_posts( array( 'post_type' => 'attachment', 'numberposts' => -1, 'post_status' => 'inherit' ) ) as $a ) {
+		$alt = get_post_meta( $a->ID, '_wp_attachment_image_alt', true );
+		if ( $alt ) {
+			$alts[ $a->ID ] = $alt;
+		}
+	}
+	$out['alts'] = $alts;
+	foreach ( array( 14, 202, 505 ) as $f ) {
+		$out['forms'][ $f ] = array(
+			'title'    => get_the_title( $f ),
+			'form'     => get_post_meta( $f, '_form', true ),
+			'mail'     => get_post_meta( $f, '_mail', true ),
+			'messages' => get_post_meta( $f, '_messages', true ),
+		);
+	}
+	foreach ( wp_get_nav_menus() as $menu ) {
+		$items = array();
+		foreach ( (array) wp_get_nav_menu_items( $menu->term_id ) as $it ) {
+			$items[] = array( $it->ID, $it->title, $it->url, $it->menu_item_parent );
+		}
+		$out['nav'][ $menu->term_id ] = array( 'name' => $menu->name, 'items' => $items );
+	}
+	$out['hfe_meta'] = array();
+	foreach ( array( 297, 298 ) as $id ) {
+		foreach ( get_post_meta( $id ) as $k => $v ) {
+			if ( 0 === strpos( $k, 'ehf_' ) ) {
+				$out['hfe_meta'][ $id ][ $k ] = maybe_unserialize( $v[0] );
+			}
+		}
+	}
+	$out['site'] = array( 'locale' => get_locale(), 'front' => get_option( 'page_on_front' ), 'permalinks' => get_option( 'permalink_structure' ), 'polylang' => defined( 'POLYLANG_VERSION' ) ? POLYLANG_VERSION : null );
+	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
+	wp_mkdir_p( $dir );
+	file_put_contents( $dir . '/export.json', wp_json_encode( $out, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) );
+	update_option( 'rcr_i18n_export_done', current_time( 'mysql' ), false );
+}, 20 );
