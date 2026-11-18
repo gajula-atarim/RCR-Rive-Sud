@@ -451,7 +451,7 @@ add_action( 'wp_loaded', function () {
 		delete_option( 'rcr_i18n_done_build' );
 		$step = 'build';
 	}
-	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
+	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front2' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
 	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
@@ -770,7 +770,7 @@ add_action( 'wp_loaded', function () {
 			flush_rewrite_rules( false );
 			$say( 'en home: ' . pll_home_url( 'en' ) );
 		}
-		if ( 'front' === $step ) {
+		if ( 'front2' === $step ) {
 			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
 				$GLOBALS['polylang']->model->clean_languages_cache();
 			}
