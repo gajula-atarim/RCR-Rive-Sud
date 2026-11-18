@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.15.0
+Version: 1.15.1
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -412,7 +412,7 @@ html.rcr-modal-open{overflow:hidden}
 .rcr-modal-box{display:block;height:auto;max-height:92vh;overflow-y:auto;border-radius:16px 16px 0 0}
 .rcr-modal-side{background:#fff;padding:0;gap:10px;overflow:visible}
 .rcr-modal-media{border-bottom:6px solid var(--rcr-red)}
-.rcr-modal-media img{border-radius:0;max-height:240px;object-fit:cover}
+.rcr-modal-media img{border-radius:0;max-height:240px;object-fit:cover;object-position:center top}
 .rcr-modal-eyebrow{color:var(--rcr-red);padding:18px 20px 0}
 .rcr-modal-title{color:var(--rcr-ink);font-size:19px;padding:0 20px}
 .rcr-modal-body{padding:12px 20px 28px;overflow:visible}
