@@ -73,6 +73,26 @@ add_filter( 'body_class', function ( $classes ) {
 	return $classes;
 } );
 
+/**
+ * Polylang caches each language's front page. Requests that do not load Polylang's static-page module
+ * (REST calls, for example) can rebuild that cache without it, which turns /en/ into /en/home-2/.
+ * Fill it in from the front page's translation group when it is missing.
+ */
+add_filter( 'pll_additional_language_data', function ( $data, $language ) {
+	if ( ! empty( $data['page_on_front'] ) || 'page' !== get_option( 'show_on_front' ) ) {
+		return $data;
+	}
+	$front = (int) get_option( 'page_on_front' );
+	$group = $front ? wp_get_object_terms( $front, 'post_translations' ) : array();
+	if ( ! is_wp_error( $group ) && ! empty( $group[0]->description ) ) {
+		$tr = maybe_unserialize( $group[0]->description );
+		if ( is_array( $tr ) && ! empty( $tr[ $language['slug'] ] ) ) {
+			$data['page_on_front'] = (int) $tr[ $language['slug'] ];
+		}
+	}
+	return $data;
+}, 20, 2 );
+
 /** English tagline (the site title "RCR Rive-Sud" is the same in both languages). */
 add_filter( 'option_blogdescription', function ( $value ) {
 	return ( ! is_admin() && 'en' === rcr_lang() ) ? 'CPR training on Montreal’s South Shore' : $value;
@@ -751,17 +771,12 @@ add_action( 'wp_loaded', function () {
 			$say( 'en home: ' . pll_home_url( 'en' ) );
 		}
 		if ( 'front' === $step ) {
-			// Polylang works out each language's front page when the "page_on_front" option is saved.
-			update_option( 'page_on_front', 0 );
-			update_option( 'page_on_front', 203 );
 			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
 				$GLOBALS['polylang']->model->clean_languages_cache();
 			}
 			delete_transient( 'pll_languages_list' );
-			wp_cache_flush();
-			flush_rewrite_rules( false );
 			$en = PLL()->model->get_language( 'en' );
-			$say( 'en page_on_front: ' . ( $en ? $en->page_on_front : '?' ) . ' / ' . get_permalink( 647 ) );
+			$say( 'en page_on_front: ' . ( $en ? $en->page_on_front : '?' ) );
 		}
 		update_option( 'rcr_i18n_done_' . $step, current_time( 'mysql' ), false );
 	} catch ( Throwable $e ) {
