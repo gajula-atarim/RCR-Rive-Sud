@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.14.5
+Version: 1.15.0
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -187,8 +187,8 @@ url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1
 
 /* French page: even line breaks in headings and no single-word last lines in paragraphs
    (browsers without support simply wrap as before) */
-.rcr-lang-fr .elementor-heading-title{text-wrap:balance}
-.rcr-lang-fr .elementor-widget-text-editor p,.rcr-lang-fr .elementor-icon-box-description{text-wrap:pretty}
+.rcr-lang-fr .elementor-heading-title,.rcr-lang-en .elementor-heading-title{text-wrap:balance}
+.rcr-lang-fr .elementor-widget-text-editor p,.rcr-lang-fr .elementor-icon-box-description,.rcr-lang-en .elementor-widget-text-editor p,.rcr-lang-en .elementor-icon-box-description{text-wrap:pretty}
 
 /* ---- 7 Nov update ---- */
 /* Ce que vous apprendrez: click the round image (or "En savoir plus") to reveal the basics */
@@ -281,6 +281,7 @@ transition:background-size .55s cubic-bezier(.16,1,.3,1),color .35s ease,border-
 .rcr-svc-tab.is-active .rcr-svc-num .elementor-heading-title{background:var(--rcr-red)}
 .rcr-svc-tab.is-active .rcr-svc-arrow .elementor-heading-title{color:var(--rcr-red)}
 .rcr-svc-tab.is-active .rcr-svc-arrow .elementor-heading-title::before{content:"Affiché";font-family:Montserrat,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-right:10px;vertical-align:middle}
+.rcr-lang-en .rcr-svc-tab.is-active .rcr-svc-arrow .elementor-heading-title::before{content:"Showing"}
 .e-con.rcr-svc-prev,.e-con.rcr-svc-next{border:1px solid #D9E0EC;text-decoration:none;transition:border-color .25s ease,transform .25s ease}
 .e-con.rcr-svc-prev:hover{border-color:var(--rcr-red);transform:translateX(-4px)}
 .e-con.rcr-svc-next:hover{border-color:var(--rcr-red);transform:translateX(4px)}
