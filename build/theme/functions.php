@@ -431,7 +431,7 @@ add_action( 'wp_loaded', function () {
 		delete_option( 'rcr_i18n_done_build' );
 		$step = 'build';
 	}
-	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front3' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
+	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front3', 'front4' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
 	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
@@ -763,6 +763,14 @@ add_action( 'wp_loaded', function () {
 			}
 			delete_transient( 'pll_languages_list' );
 			$say( 'mu-plugin written: ' . WPMU_PLUGIN_DIR . '/rcr-pll-front.php' );
+		}
+		if ( 'front4' === $step ) {
+			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
+				$GLOBALS['polylang']->model->clean_languages_cache();
+			}
+			delete_transient( 'pll_languages_list' );
+			$en = PLL()->model->get_language( 'en' );
+			$say( 'mu filter: ' . ( has_filter( 'pll_additional_language_data' ) ? 'yes' : 'no' ) . ', en page_on_front: ' . ( $en ? $en->page_on_front : '?' ) );
 		}
 		update_option( 'rcr_i18n_done_' . $step, current_time( 'mysql' ), false );
 	} catch ( Throwable $e ) {
