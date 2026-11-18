@@ -431,7 +431,7 @@ add_action( 'wp_loaded', function () {
 		delete_option( 'rcr_i18n_done_build' );
 		$step = 'build';
 	}
-	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front6', 'front4' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
+	if ( ! in_array( $step, array( 'lang', 'assign', 'build', 'hf1', 'hf2', 'front6', 'diag1' ), true ) || get_option( 'rcr_i18n_done_' . $step ) ) {
 		return;
 	}
 	$dir = wp_upload_dir()['basedir'] . '/rcr-i18n';
@@ -764,13 +764,19 @@ add_action( 'wp_loaded', function () {
 			delete_transient( 'pll_languages_list' );
 			$say( 'mu-plugin written: ' . WPMU_PLUGIN_DIR . '/rcr-pll-front.php' );
 		}
-		if ( 'front4' === $step ) {
-			if ( isset( $GLOBALS['polylang']->model ) && method_exists( $GLOBALS['polylang']->model, 'clean_languages_cache' ) ) {
-				$GLOBALS['polylang']->model->clean_languages_cache();
-			}
-			delete_transient( 'pll_languages_list' );
+		if ( 'diag1' === $step ) {
+			global $wpdb;
 			$en = PLL()->model->get_language( 'en' );
-			$say( 'mu filter: ' . ( has_filter( 'pll_additional_language_data' ) ? 'yes' : 'no' ) . ', en page_on_front: ' . ( $en ? $en->page_on_front : '?' ) );
+			$say( array(
+				'fn'          => function_exists( 'rcr_pll_front_page_for' ) ? rcr_pll_front_page_for( 'en' ) : 'missing',
+				'sof'         => get_option( 'show_on_front' ),
+				'pof'         => get_option( 'page_on_front' ),
+				'raw'         => $wpdb->get_results( $wpdb->prepare( "SELECT tt.taxonomy, tt.description FROM {$wpdb->term_relationships} tr INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id WHERE tr.object_id = %d", 203 ) ),
+				'en_pof'      => $en ? $en->page_on_front : null,
+				'perma647'    => get_permalink( 647 ),
+				'page_link'   => has_filter( 'page_link' ),
+				'translation' => pll_get_post_translations( 203 ),
+			) );
 		}
 		update_option( 'rcr_i18n_done_' . $step, current_time( 'mysql' ), false );
 	} catch ( Throwable $e ) {
