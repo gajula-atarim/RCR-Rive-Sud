@@ -131,3 +131,13 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   Fethi's clinic photo in the pink card (4bf29e6, choice confirmed with the team), Lucie Bourassa section (4cfc7cf).
 - Red line under Fethi's name (7a044b8): "Instructeur agréé par la Fondation des maladies du cœur et de l'AVC du Canada" /
   "Instructor certified by the Heart and Stroke Foundation of Canada".
+### Accueil / Home (203 / 647), 23 Nov 2026
+- Certification titles: "Cardio-secours" / "Cardiac First Aid" (3bdfd69), "Soins immédiats en réanimation (SIR)" /
+  "Immediate Resuscitation Care (SIR)" (5b23c77); 2nd card line (a2874e1) now "Carte d'attestation Cœur + AVC" /
+  "Heart & Stroke course completion card".
+- "RCR Rive-Sud" eyebrow above À propos no longer uppercase (c4e5c4a). Avatar label (4a4265f): "Notre formateur et
+  fondateur" / "Our Instructor and Founder".
+- Savez-vous que…: "L'anaphylaxie" label removed (a2e3098); EpiPen card shows one panel only (media 694 FR / 695 EN,
+  cropped from the green "Administration d'EpiPen" half); Naloxone card image aligned to the top (89f67c5).
+- New choking photo (media 696, desobstruction-adulte.webp) in the À propos section (59a8608) and the
+  "Ce que vous apprendrez" choking circle (dbb8121). English alt texts for 694/696 added to option rcr_en_alts.
