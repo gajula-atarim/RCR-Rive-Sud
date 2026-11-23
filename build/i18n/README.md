@@ -124,3 +124,10 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   `/services/#sir`; EN `/en/our-services/#cardiac-first-aid`, `/en/our-services/#sir` (buttons 7977d41, 897455b on 203/647).
 - "Voir l'équipe" / "Meet the team" (6a2dcf8) now goes to `/equipe/` and `/en/team/` (was `#team` on the home page).
 - The older course pages (380, 381, 654, 655) stay published but are no longer linked from the site.
+
+## Client update of 22 Nov 2026 (docs/WebSiteUpdateRcr22Nov.docx), applied page by page
+### Équipe / Team (508 / 650), 23 Nov 2026
+- Removed: banner subtitle (03f716d), "Domaines d'expertise" (d45a51f), "Expérience et titres" (87a3b73),
+  Fethi's clinic photo in the pink card (4bf29e6, choice confirmed with the team), Lucie Bourassa section (4cfc7cf).
+- Red line under Fethi's name (7a044b8): "Instructeur agréé par la Fondation des maladies du cœur et de l'AVC du Canada" /
+  "Instructor certified by the Heart and Stroke Foundation of Canada".
