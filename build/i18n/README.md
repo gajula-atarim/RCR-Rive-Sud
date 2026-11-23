@@ -141,3 +141,8 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   cropped from the green "Administration d'EpiPen" half); Naloxone card image aligned to the top (89f67c5).
 - New choking photo (media 696, desobstruction-adulte.webp) in the À propos section (59a8608) and the
   "Ce que vous apprendrez" choking circle (dbb8121). English alt texts for 694/696 added to option rcr_en_alts.
+
+### FAQ (509 / 651), 23 Nov 2026
+- Naloxone, "Une seule dose suffit-elle toujours ?" / "Is one dose always enough?" (toggle ae6f0b4, tab 63a7b47):
+  repeat dose now "après 4 à 5 minutes" / "after 4 to 5 minutes" (was 2 à 3 / 2 to 3).
+- Screenshots: docs/screenshots/nov22/faq/.
