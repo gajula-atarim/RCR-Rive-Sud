@@ -158,3 +158,5 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
 - Screenshots: docs/screenshots/nov22/photos/.
 - English image versions: 735 epipen-cuisse-adulte-en (made by build/images/translate_epipen_adult.py: French text
   inpainted, English redrawn in Nunito Sans; logo kept). EN home ebc6d4e -> 735.
+- 738 epipen-enfant-en (build/images/translate_epipen_child.py) on EN Services ddd3649;
+  737 desobstruction-adulte-enfant-en (build/images/translate_choking_adult_child.py) on EN home d90b39b.
