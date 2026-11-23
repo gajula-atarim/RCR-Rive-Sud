@@ -146,3 +146,13 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
 - Naloxone, "Une seule dose suffit-elle toujours ?" / "Is one dose always enough?" (toggle ae6f0b4, tab 63a7b47):
   repeat dose now "après 4 à 5 minutes" / "after 4 to 5 minutes" (was 2 à 3 / 2 to 3).
 - Screenshots: docs/screenshots/nov22/faq/.
+
+### EpiPen and choking technique photos, 23 Nov 2026
+- Media: 718 epipen-cuisse-adulte, 719 epipen-enfant, 720 desobstruction-tapes-dorsales,
+  721 desobstruction-adulte-enfant, 722 desobstruction-nourrisson (source: images 2-6 of the docx, in assets/media/).
+  English alts for 718-722 added to option rcr_en_alts. Same images on FR and EN (French text inside the images).
+- Home (203/647), Savez-vous que… / Did you know…: EpiPen card ebc6d4e -> 718; choking card d90b39b -> 721
+  (object-position top center). The pop-ups reuse the card image.
+- Services (507/649): Module anaphylaxie image ddd3649 -> 719 (rcr-169 class removed so the whole image shows);
+  photo row 322a9e5 -> 720; new image widget in the Niveau C card (899b85c): 17010a1 (FR) / 99cca50 (EN) -> 722.
+- Screenshots: docs/screenshots/nov22/photos/.
