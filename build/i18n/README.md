@@ -156,3 +156,5 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
 - Services (507/649): Module anaphylaxie image ddd3649 -> 719 (rcr-169 class removed so the whole image shows);
   photo row 322a9e5 -> 720; new image widget in the Niveau C card (899b85c): 17010a1 (FR) / 99cca50 (EN) -> 722.
 - Screenshots: docs/screenshots/nov22/photos/.
+- English image versions: 735 epipen-cuisse-adulte-en (made by build/images/translate_epipen_adult.py: French text
+  inpainted, English redrawn in Nunito Sans; logo kept). EN home ebc6d4e -> 735.
