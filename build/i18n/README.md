@@ -160,3 +160,5 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   inpainted, English redrawn in Nunito Sans; logo kept). EN home ebc6d4e -> 735.
 - 738 epipen-enfant-en (build/images/translate_epipen_child.py) on EN Services ddd3649;
   737 desobstruction-adulte-enfant-en (build/images/translate_choking_adult_child.py) on EN home d90b39b.
+- "Ce que vous apprendrez" choking circle (dbb8121, FR + EN) now uses 743 desobstruction-adulte-carre (square crop of
+  696) so it renders as a circle; 696 itself was portrait and showed as an oval. EN alt for 743 added to rcr_en_alts.
