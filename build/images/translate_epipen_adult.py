@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 SRC = '/home/user/RCR-Rive-Sud/assets/media/epipen-cuisse-adulte.webp'
 OUT = 'epipen-cuisse-adulte-en.png'
-FD = 'fonts/'  # Nunito Sans variable fonts from Google Fonts (OFL)
+FD = 'fonts/'  # Nunito, Nunito Sans, Baloo 2 from Google Fonts (OFL)
 
 img = np.array(Image.open(SRC).convert('RGB'))
 H, W = img.shape[:2]
