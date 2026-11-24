@@ -177,3 +177,5 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   hello-elementor-child/style-20261124-061440.css, then replace the theme file.
 - Level A card (abc307c) on 507/649: new image widget 65087b5 (FR) / 16b6c80 (EN), media 784
   desobstruction-adulte-169 (16:9 crop of 696), class rcr-169. EN alt for 784 added to rcr_en_alts.
+- Home card 4647db9 ("Nous nous déplaçons" / "We come to you", 203/647): class rcr-corner-pin added; style.css 1.15.3
+  draws a 64px red corner (56px on phones) with a white map pin. Remove the class to go back to the plain corner.
