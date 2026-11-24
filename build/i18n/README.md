@@ -168,3 +168,10 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   f7574be moved under the Présentation text (b1c8437) and laid out as a row: text group 449a545 (FR) / c0337c9 (EN)
   + button. Name card: red top border, name 26px, red credential line 15px/600, divider above "depuis 2017".
 - Mockups: docs/design-ideas/team/. Screenshots: docs/screenshots/nov22/team-option-b/.
+
+### Services layout (Option C, sticky side column), 24 Nov 2026
+- style.css 1.15.2: the anti-sideways-scroll rule moved from `html,body{overflow-x:hidden|clip}` to
+  `main,#content,.site-main,header,footer{overflow-x:clip}` (hidden fallback when clip is unsupported). On html/body
+  it stopped `.rcr-sticky` (desktop only, top 24px) from working. Affects Services (507/649) and Team (508/650).
+- ROLLBACK: restore the two old lines (git: build/theme/style.css at 19d670d) or the server backup
+  hello-elementor-child/style-20261124-061440.css, then replace the theme file.
