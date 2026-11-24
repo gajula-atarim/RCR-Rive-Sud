@@ -1,7 +1,7 @@
 /*
 Theme Name: Hello Elementor Child
 Template: hello-elementor
-Version: 1.15.2
+Version: 1.15.3
 Description: RCR Rive-Sud child theme. Layout, content and most styling live in Elementor; this file only adds
 decorative artwork and effects the free Elementor controls cannot express (hex patterns, dashed step line,
 crosses, rotating certification ring, card corner, form styling, mobile overlay tweaks).
@@ -31,6 +31,9 @@ background:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" wid
 
 /* 02 Feature cards: red corner on the first card */
 .e-con.rcr-corner::after{content:"";position:absolute;top:0;right:0;width:46px;height:46px;background:var(--rcr-red);clip-path:polygon(0 0,100% 0,100% 100%);pointer-events:none}
+/* Home "Nous nous déplaçons" card only: larger red corner with a white map pin (class rcr-corner-pin on the card) */
+.e-con.rcr-corner.rcr-corner-pin::after{width:64px;height:64px;background:var(--rcr-red) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 22s7-6.6 7-12a7 7 0 1 0-14 0c0 5.4 7 12 7 12z' fill='none' stroke='%23fff' stroke-width='2.2'/%3E%3Ccircle cx='12' cy='10' r='2.7' fill='%23fff'/%3E%3C/svg%3E") no-repeat right 10px top 9px/22px 22px}
+@media (max-width:767px){.e-con.rcr-corner.rcr-corner-pin::after{width:56px;height:56px;background-position:right 8px top 8px;background-size:19px 19px}}
 .rcr-fcard .elementor-icon{transition:transform .35s ease}
 /* Feature cards (Medilab-style): on hover a red line draws in from the left along the card bottom;
    on leave it exits to the right, so moving across the cards the line appears to travel from one card to the next.
