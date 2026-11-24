@@ -1,0 +1,38 @@
+.wrap{width:1280px;padding:0 40px;margin:0}
+.tabs .lbl{font-family:Montserrat;font-weight:700;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin:44px 0 12px}
+.tabs .row{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:22px;border-bottom:1px solid #E3E8F0}
+.tabs span{font-family:Montserrat;font-weight:700;font-size:12px;color:var(--ink);border:1px solid #D5DCE8;border-radius:30px;padding:8px 14px}
+.tabs span.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+h1{font-family:Montserrat;font-weight:800;color:var(--ink);font-size:36px;margin:30px 0 14px}
+.intro{font-size:15px}.intro b{color:var(--ink)}
+.hero{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+h2.s{font-size:22px;margin:0 0 10px}
+.lvl{background:var(--soft);border-top:3px solid var(--navy);padding:20px 22px}
+.lvl.c{border-top-color:var(--red)}
+.lvl h3{font-size:16px;margin-bottom:6px}
+.dur{font-family:Montserrat;font-weight:700;font-size:11px;letter-spacing:.5px;color:var(--red);text-transform:uppercase;margin-bottom:10px}
+.lvl ul{list-style:none;font-size:14px;line-height:1.45}
+.lvl li{padding-left:22px;position:relative;margin-bottom:9px}
+.lvl li:before{content:"✓";position:absolute;left:0;color:var(--red);font-weight:700}
+.cert{background:var(--navy);color:#C9D3E5;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;padding:24px}
+.cert h3{color:#fff;margin-bottom:8px}.cert p{font-size:14px;line-height:1.55}
+.cert img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.acc .it{background:var(--soft);padding:14px 18px;margin-bottom:8px;display:flex;justify-content:space-between;font-family:Montserrat;font-weight:700;font-size:13px;color:var(--ink)}
+.acc .it b{color:var(--red);font-size:18px;line-height:1}
+.acc .open{display:block}.acc .open .t{color:var(--red);display:flex;justify-content:space-between}
+.acc .open p{font-family:'Source Sans 3';font-weight:400;font-size:13px;color:var(--muted);margin-top:8px}
+.next{border:1px solid #E3E8F0;padding:14px 18px;text-align:right;font-family:Montserrat;font-weight:700;font-size:13px;color:var(--ink)}
+.next small{display:block;color:var(--red);font-size:10px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.svcnav{background:#fff;box-shadow:0 14px 36px rgba(11,52,112,.1)}
+.svcnav .hd{background:var(--navy);color:#fff;padding:18px 20px}
+.svcnav .hd b{font-family:Montserrat;font-size:17px;display:block}.svcnav .hd span{font-size:12px;color:#C9D3E5}
+.svcnav .r{display:flex;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid #EEF1F6;font-family:Montserrat;font-weight:700;font-size:13px;color:var(--ink)}
+.svcnav .r i{font-style:normal;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;flex:none}
+.svcnav .r.on{background:var(--pink);color:var(--red);border-left:3px solid var(--red)}.svcnav .r.on i{background:var(--red)}
+.q{background:var(--navy) url(rcr-rive-sud-cpr-instructor.webp) center/cover;position:relative;color:#C9D3E5;padding:24px}
+.q:before{content:"";position:absolute;inset:0;background:rgba(7,37,83,.88)}.q>*{position:relative}
+.q h3{color:#fff;font-size:21px;margin-bottom:6px}.q .ph{font-family:Montserrat;font-weight:800;color:#fff;font-size:19px;margin-top:10px}.q .em{color:#fff;font-size:14px}
+.rq{background:#fff;box-shadow:0 14px 36px rgba(11,52,112,.1);padding:24px}.rq h3{font-size:19px;margin-bottom:6px}.rq p{font-size:14px;line-height:1.5;margin-bottom:14px}
+.tag{top:150px!important}
+.note{position:absolute;background:#fff7d6;border:2px dashed #E0A800;color:#5a4500;font-family:Montserrat;font-weight:700;font-size:13px;padding:6px 10px;border-radius:6px}
