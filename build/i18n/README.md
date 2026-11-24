@@ -175,3 +175,5 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   it stopped `.rcr-sticky` (desktop only, top 24px) from working. Affects Services (507/649) and Team (508/650).
 - ROLLBACK: restore the two old lines (git: build/theme/style.css at 19d670d) or the server backup
   hello-elementor-child/style-20261124-061440.css, then replace the theme file.
+- Level A card (abc307c) on 507/649: new image widget 65087b5 (FR) / 16b6c80 (EN), media 784
+  desobstruction-adulte-169 (16:9 crop of 696), class rcr-169. EN alt for 784 added to rcr_en_alts.
