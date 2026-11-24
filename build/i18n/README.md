@@ -162,3 +162,9 @@ French stays the main language at `/`; English lives under `/en/`. Polylang 3.9.
   737 desobstruction-adulte-enfant-en (build/images/translate_choking_adult_child.py) on EN home d90b39b.
 - "Ce que vous apprendrez" choking circle (dbb8121, FR + EN) now uses 743 desobstruction-adulte-carre (square crop of
   696) so it renders as a circle; 696 itself was portrait and showed as an oval. EN alt for 743 added to rcr_en_alts.
+
+### Team page layout (Option B), 24 Nov 2026
+- 508/650: sidebar 6a03841 (name card + Hours) moved first in grid e56e38e (340px | 1fr); "Une question ?" box
+  f7574be moved under the Présentation text (b1c8437) and laid out as a row: text group 449a545 (FR) / c0337c9 (EN)
+  + button. Name card: red top border, name 26px, red credential line 15px/600, divider above "depuis 2017".
+- Mockups: docs/design-ideas/team/. Screenshots: docs/screenshots/nov22/team-option-b/.
