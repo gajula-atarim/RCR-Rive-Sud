@@ -1,0 +1,12 @@
+## Home: FR 160 blocks, EN 160 blocks
+  image differs ebc6d4e: FR ('image', 718) EN ('image', 735)
+  image differs 89f67c5: FR ('image', 473) EN ('image', 667)
+  image differs d90b39b: FR ('image', 721) EN ('image', 737)
+  image differs 1e1f7a3: FR ('image', 475) EN ('image', 669)
+## Services: FR 143 blocks, EN 143 blocks
+  only in FR: 17010a1 image []
+  only in FR: 65087b5 image []
+  only in EN: 16b6c80 image []
+  only in EN: 99cca50 image []
+  image differs ddd3649: FR ('image', 719) EN ('image', 738)
+## FAQ: FR 80 blocks, EN 80 blocks
